@@ -24,7 +24,7 @@
   const VS = "attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}";
   const FS = [
     "precision highp float;",
-    "uniform vec2 uRes;uniform float uDpr,uTime,uMerge,uMorph,uInk,uGlow,uR,uS,uWob;",
+    "uniform vec2 uRes;uniform float uDpr,uTime,uMerge,uMorph,uInk,uR,uS,uWob;",
     "uniform vec4 uB[10];uniform vec2 uCc,uDot;uniform vec4 uBlob[4];",
     "const vec3 ENCRE=vec3(.114,.114,.122);const vec3 ORANGE=vec3(1.,.416,.2);",
     "float smin(float a,float b,float k){if(k<=.001)return min(a,b);float h=max(k-abs(a-b),0.)/k;return min(a,b)-h*h*k*.25;}",
@@ -46,9 +46,9 @@
     "void main(){vec2 p=vec2(gl_FragCoord.x,uRes.y*uDpr-gl_FragCoord.y)/uDpr;",
     " float dC,dD;forme(p,dC,dD);float d=smin(dC,dD,uMerge*(1.-uMorph));",
     " vec3 bg=fond(p);",
-    // ombre douce sous les bulles, qui devient la lueur orange du logo
+    // ombre douce sous les bulles, qui s'efface quand le verre devient le logo (aucune ombre derrière le logo)
     " vec2 po=p-vec2(0.,12.*uS);float om=0.;\n for(int i=0;i<10;i++){float a=uB[i].w;om=max(om,a*(1.-smoothstep(-8.*a,30.*uS*a+.01,bulle(po,uB[i],float(i)))));}\n if(uMerge>.01)om=1.-smoothstep(-8.,30.*uS,dist(po));",
-    " vec3 dehors=mix(bg*(1.-.13*om*(1.-uInk)),mix(bg,vec3(1.,.55,.32),.3*om),uGlow);",
+    " vec3 dehors=bg*(1.-.13*om*(1.-uInk));",
     " vec3 dedans=dehors;",
     " if(d<1.){",
     "  vec2 g=vec2(dist(p+vec2(1.,0.))-d,dist(p+vec2(0.,1.))-d);g=normalize(g+1e-6);",
@@ -86,7 +86,7 @@
   gl.enableVertexAttribArray(loc);
   gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
   const U = {};
-  ["uRes", "uDpr", "uTime", "uMerge", "uMorph", "uInk", "uGlow", "uR", "uS", "uWob", "uB", "uCc", "uDot", "uBlob"].forEach(function (n) {
+  ["uRes", "uDpr", "uTime", "uMerge", "uMorph", "uInk", "uR", "uS", "uWob", "uB", "uCc", "uDot", "uBlob"].forEach(function (n) {
     U[n] = gl.getUniformLocation(prog, n);
   });
 
@@ -178,7 +178,6 @@
     gl.uniform1f(U.uMerge, lisse(borne((mBrut - .3) / .55)) * 26 * s);
     gl.uniform1f(U.uMorph, lisse(borne((pL - .6) / .12)));
     gl.uniform1f(U.uInk, lisse(borne((pL - .64) / .12)));
-    gl.uniform1f(U.uGlow, borne((pL - .72) / .08));
     gl.uniform1f(U.uR, R0 + (13 * s - R0) * Math.pow(eMoy, 1.8));
     gl.uniform4fv(U.uB, B);
     gl.uniform2f(U.uCc, L / 2 - 13 * s, H / 2 - off);
