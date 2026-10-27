@@ -25,14 +25,14 @@
   const FS = [
     "precision highp float;",
     "uniform vec2 uRes;uniform float uDpr,uTime,uMerge,uMorph,uInk,uGlow,uR,uS,uWob;",
-    "uniform vec3 uB[10];uniform vec2 uCc,uDot;uniform vec4 uBlob[4];",
+    "uniform vec4 uB[10];uniform vec2 uCc,uDot;uniform vec4 uBlob[4];",
     "const vec3 ENCRE=vec3(.114,.114,.122);const vec3 ORANGE=vec3(1.,.416,.2);",
     "float smin(float a,float b,float k){if(k<=.001)return min(a,b);float h=max(k-abs(a-b),0.)/k;return min(a,b)-h*h*k*.25;}",
     // le C du logo : un anneau ouvert à droite (bouts coupés droit, comme le dessin d'origine)
     "float sdC(vec2 p){p-=uCc;p.y=abs(p.y);float rm=52.*uS,th=13.*uS;vec2 dir=vec2(.6871,.7266);",
     " float side=dir.x*p.y-dir.y*p.x;float dr=abs(length(p)-rm)-th;if(side>0.)return max(dr,-side);",
     " vec2 a=dir*(rm-th),b=dir*(rm+th),pa=p-a,ba=b-a;float h=clamp(dot(pa,ba)/dot(ba,ba),0.,1.);return length(pa-ba*h);}",
-    "float bulle(vec2 p,vec3 b,float i){vec2 q=p-b.xy;float an=atan(q.y,q.x);",
+    "float bulle(vec2 p,vec4 b,float i){vec2 q=p-b.xy;float an=atan(q.y,q.x);",
     " float w=1.+uWob*(.02*sin(3.*an+uTime*.9+i*1.7)+.014*sin(2.*an-uTime*1.3+i*2.3));return length(q)-b.z*w;}",
     "void forme(vec2 p,out float dC,out float dD){float c=1e5;",
     " for(int i=0;i<10;i++){if(i==4)continue;c=smin(c,bulle(p,uB[i],float(i)),uMerge);}",
@@ -47,7 +47,7 @@
     " float dC,dD;forme(p,dC,dD);float d=smin(dC,dD,uMerge*(1.-uMorph));",
     " vec3 bg=fond(p);",
     // ombre douce sous les bulles, qui devient la lueur orange du logo
-    " float ds=dist(p-vec2(0.,12.*uS));float om=(1.-smoothstep(-8.,30.*uS,ds));",
+    " vec2 po=p-vec2(0.,12.*uS);float om=0.;\n for(int i=0;i<10;i++){float a=uB[i].w;om=max(om,a*(1.-smoothstep(-8.*a,30.*uS*a+.01,bulle(po,uB[i],float(i)))));}\n if(uMerge>.01)om=1.-smoothstep(-8.,30.*uS,dist(po));",
     " vec3 dehors=mix(bg*(1.-.13*om*(1.-uInk)),mix(bg,vec3(1.,.55,.32),.3*om),uGlow);",
     " vec3 dedans=dehors;",
     " if(d<1.){",
@@ -119,7 +119,7 @@
   }
 
   let visible = false, boucle = 0, pL = -1, avant = 0;
-  const B = new Float32Array(30);
+  const B = new Float32Array(40);
   function image(t) {
     boucle = visible ? requestAnimationFrame(image) : 0;
     const dt = avant ? Math.min(.05, (t - avant) / 1000) : .016;
@@ -147,9 +147,11 @@
       const tour = Math.sin(Math.PI * e) * lg * .2;
       const x = sx + vx * e - vy / lg * tour, y = sy + vy * e + vx / lg * tour;
       const rFin = i === 4 ? 20 * s : 13 * s * 1.3;
-      B[i * 3] = x;
-      B[i * 3 + 1] = y;
-      B[i * 3 + 2] = R0 * a * (1 + (rFin / R0 - 1) * Math.pow(e, 1.8));
+      // une bulle pas encore apparue a un rayon négatif : ni bulle, ni point, ni ombre
+      B[i * 4] = x;
+      B[i * 4 + 1] = y;
+      B[i * 4 + 2] = a > 0 ? R0 * a * (1 + (rFin / R0 - 1) * Math.pow(e, 1.8)) : -4;
+      B[i * 4 + 3] = Math.min(1, a);
       // l'icône et son nom suivent leur bulle, et rapetissent avec elle
       const tl = tailles[i] || [0, 0];
       const el = apps[i];
@@ -178,7 +180,7 @@
     gl.uniform1f(U.uInk, lisse(borne((pL - .64) / .12)));
     gl.uniform1f(U.uGlow, borne((pL - .72) / .08));
     gl.uniform1f(U.uR, R0 + (13 * s - R0) * Math.pow(eMoy, 1.8));
-    gl.uniform3fv(U.uB, B);
+    gl.uniform4fv(U.uB, B);
     gl.uniform2f(U.uCc, L / 2 - 13 * s, H / 2 - off);
     gl.uniform2f(U.uDot, L / 2 + 45 * s, H / 2 - off);
     gl.uniform4fv(U.uBlob, new Float32Array(blob));
