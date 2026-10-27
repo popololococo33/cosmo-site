@@ -2,10 +2,10 @@
 //
 // LES TROIS RÉGLAGES DU SITE SONT ICI :
 //
-// ADRESSE_CALENDLY : le lien de la page Calendly de la démo, par exemple
-//   "https://calendly.com/cosmosoft/demo-cosmo". Tant qu'il est vide, le bloc final affiche
-//   le formulaire de demande de démo. Dès qu'il est rempli, le calendrier Calendly le remplace
-//   (chargé seulement quand le bloc approche de l'écran).
+// LIEN_CAL : le rendez-vous Cal.com de la démo, sous la forme « compte/rendez-vous »
+//   (aujourd'hui cal.com/cosmosoft/demo-cosmo). Tant qu'il est vide, le bloc final affiche
+//   le formulaire de demande de démo. Dès qu'il est rempli, le calendrier Cal.com le remplace,
+//   aux couleurs de Cosmo, chargé un peu avant que le bloc arrive à l'écran.
 // ADRESSE_DEMANDE : adresse qui reçoit la demande de démo en POST JSON (par exemple une fonction
 //   Supabase). Tant qu'elle est vide, le bouton ouvre un e-mail prérempli vers ADRESSE_CONTACT :
 //   rien n'est envoyé sans le visiteur.
@@ -14,7 +14,7 @@
 //
 // Voir README.md, « Réserver une démo ».
 
-const ADRESSE_CALENDLY = "https://calendly.com/cosmosoft/demo-cosmo";
+const LIEN_CAL = "cosmosoft/demo-cosmo";
 const ADRESSE_DEMANDE = "";
 const ADRESSE_CONTACT = "contact@cosmosoft.fr";
 const DUREE_DEMO = "30 minutes en visio";
@@ -31,51 +31,77 @@ const DUREE_DEMO = "30 minutes en visio";
   }
 
   const form = document.getElementById("formulaire-demo");
-  const boiteCalendly = document.getElementById("calendly");
+  const boiteAgenda = document.getElementById("agenda");
 
-  // ---------- Calendly ----------
-  // Paramètres ajoutés au lien : couleur de marque (primary_color, prise en compte seulement
-  // avec une offre payante de Calendly) et provenance (utm_source, utm_medium).
-  // Pas de hide_gdpr_banner : le bandeau cookies de Calendly est le seul moyen de recueillir
-  // l'accord du visiteur pour les cookies de Calendly, ce site n'ayant pas de bandeau à lui.
-  function adresseCalendly() {
-    let u;
-    try { u = new URL(ADRESSE_CALENDLY); } catch (e) { return ""; }
-    if (!/(^|\.)calendly\.com$/.test(u.hostname)) return "";
-    u.searchParams.set("primary_color", "ff5a1f");
-    u.searchParams.set("utm_source", "site");
-    u.searchParams.set("utm_medium", "cta");
-    return u.toString();
-  }
-
-  const lienCalendly = ADRESSE_CALENDLY ? adresseCalendly() : "";
-  if (lienCalendly && boiteCalendly) {
+  // ---------- Cal.com ----------
+  // Le calendrier s'affiche dans la page (thème clair, vue par mois, orange de Cosmo).
+  // Le script de Cal.com n'est chargé qu'à l'approche du bloc (1 500 px avant) : le haut de page
+  // reste léger, et le calendrier est déjà prêt quand on arrive dessus.
+  const lienCal = /^[\w-]+\/[\w-]+$/.test(LIEN_CAL) ? LIEN_CAL : "";
+  if (lienCal && boiteAgenda) {
     if (form) form.hidden = true;
-    boiteCalendly.hidden = false;
-    const widget = document.createElement("div");
-    widget.className = "calendly-inline-widget";
-    widget.setAttribute("data-url", lienCalendly);
-    boiteCalendly.appendChild(widget);
+    boiteAgenda.hidden = false;
+    const zone = document.createElement("div");
+    zone.className = "agenda-cal";
+    zone.id = "agenda-cal";
+    boiteAgenda.appendChild(zone);
     // Secours si le calendrier ne se charge pas (bloqueur, pas de réseau)
     const secours = document.createElement("p");
-    secours.className = "calendly-secours";
-    secours.innerHTML = "Le calendrier ne s'affiche pas&nbsp;? <a href=\"" + lienCalendly + "\" target=\"_blank\" rel=\"noopener\">Ouvrir la page de réservation</a>.";
-    boiteCalendly.appendChild(secours);
+    secours.className = "agenda-secours";
+    secours.innerHTML = "Le calendrier ne s'affiche pas&nbsp;? <a href=\"https://cal.com/" + lienCal + "\" target=\"_blank\" rel=\"noopener\">Ouvrir la page de réservation</a>.";
+    boiteAgenda.appendChild(secours);
 
     let charge = false;
     const charger = function () {
       if (charge) return;
       charge = true;
-      const s = document.createElement("script");
-      s.src = "https://assets.calendly.com/assets/external/widget.js";
-      s.async = true;
-      document.body.appendChild(s);
+      // amorce officielle de Cal.com : met les appels en file jusqu'à l'arrivée de embed.js
+      (function (C, A, L) {
+        const p = function (a, ar) { a.q.push(ar); };
+        const d = C.document;
+        C.Cal = C.Cal || function () {
+          const cal = C.Cal;
+          const ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const ns = ar[1];
+            api.q = api.q || [];
+            if (typeof ns === "string") {
+              cal.ns[ns] = cal.ns[ns] || api;
+              p(cal.ns[ns], ar);
+              p(cal, ["initNamespace", ns]);
+            } else p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+      window.Cal("init", "demo", { origin: "https://app.cal.com" });
+      window.Cal.ns.demo("inline", {
+        elementOrSelector: "#agenda-cal",
+        calLink: lienCal,
+        config: { layout: "month_view", theme: "light" }
+      });
+      window.Cal.ns.demo("ui", {
+        theme: "light",
+        layout: "month_view",
+        hideEventTypeDetails: false,
+        cssVarsPerTheme: { light: { "cal-brand": "#FF5A1F" }, dark: { "cal-brand": "#FF5A1F" } }
+      });
+      // une fois le calendrier prêt, la ligne de secours n'a plus lieu d'être
+      window.Cal.ns.demo("on", { action: "linkReady", callback: function () { secours.hidden = true; } });
     };
     if ("IntersectionObserver" in window) {
       const obs = new IntersectionObserver(function (e) {
         if (e[0].isIntersecting) { charger(); obs.disconnect(); }
-      }, { rootMargin: "800px 0px" });
-      obs.observe(boiteCalendly);
+      }, { rootMargin: "1500px 0px" });
+      obs.observe(boiteAgenda);
     } else {
       charger();
     }
