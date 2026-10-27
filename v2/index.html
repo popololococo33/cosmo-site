@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cosmo – Concentrez-vous sur votre métier</title>
+<meta name="description" content="Devis, factures, relances, comptabilité et TVA : vous le demandez, Cosmo le prépare, vous validez. Pour les artisans et les entreprises du bâtiment, sur ordinateur et sur iPhone.">
+<meta name="theme-color" content="#FFFFFF">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Cosmo par Cosmosoft">
+<meta property="og:title" content="Cosmo – Concentrez-vous sur votre métier. Cosmo fait le reste.">
+<meta property="og:description" content="Un seul outil à la place de tous les logiciels de l'administratif, sur ordinateur et sur iPhone. Démo gratuite sur rendez-vous.">
+<meta property="og:image" content="images/partage.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600&text=cosm&display=swap">
+<link rel="stylesheet" href="style.css?v=36">
+<script>document.documentElement.classList.add("js");</script>
+<script src="page.js?v=30" defer></script>
+<script src="ere-liquide.js?v=3" defer></script>
+<script src="demo.js?v=30" defer></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module" src="ia3d.js?v=30"></script>
+<script type="module" src="recit3d.js?v=30"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="17 35 156 130"><path fill="currentColor" d="M126.882 52.507A65 65 0 1 0 126.882 147.493L109.131 128.496A39 39 0 1 1 109.131 71.504Z"/><circle fill="#FF6A33" cx="140" cy="100" r="20"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 20 20"><path d="M10 4v12M4 10h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-fleche" viewBox="0 0 20 20"><path d="M7.5 4.5L13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-micro" viewBox="0 0 32 32"><rect x="11.5" y="4" width="9" height="15" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 15a8.5 8.5 0 0 0 17 0M16 23.5V28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 32 32"><path d="M8.5 4h10l6 6v17a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18.5 4v6h6M12 16h8M12 21h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 16.5l3.8 3.7 7.2-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-equipe" viewBox="0 0 32 32"><circle cx="11.5" cy="11.5" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="21.5" cy="12.5" r="3.4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 26c.7-4.5 3.6-7 7.5-7s6.8 2.5 7.5 7M18.5 20.5c1-.7 2-1 3-1 3.3 0 5.7 2.1 6.3 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-norme" viewBox="0 0 32 32"><path d="M16 3.5l10 4v7.5c0 6.5-4.2 11.4-10 13.5C10.2 26.4 6 21.5 6 15V7.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M11.5 15.5l3.2 3.2 6-6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cadenas" viewBox="0 0 32 32"><rect x="6.5" y="14" width="19" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 14V10a5 5 0 0 1 10 0v4M16 19.5v3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-cle" viewBox="0 0 32 32"><path d="M21 4.5a6.5 6.5 0 0 0-6.2 8.4L5.3 22.4a2.9 2.9 0 0 0 4.1 4.1l9.5-9.5A6.5 6.5 0 0 0 27.3 11l-3.9 3.9-3.6-.7-.7-3.6 3.9-3.9A6.5 6.5 0 0 0 21 4.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="o-devis" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M8 4h11l5 5v19H8z"/><path d="M19 4v5h5M12 15h8M12 19h8M12 23h4"/></g></symbol>
+  <symbol id="o-compta" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M7 4h18v24H7z"/><path d="M11 8h10v4H11z"/></g><g fill="currentColor"><path d="M10.5 16h3v2.5h-3zM14.5 16h3v2.5h-3zM18.5 16h3v2.5h-3zM10.5 20h3v2.5h-3zM14.5 20h3v2.5h-3zM18.5 20h3v6h-3zM10.5 24h3v2h-3zM14.5 24h3v2h-3z"/></g></symbol>
+  <symbol id="o-banque" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11.5L16 5l12 6.5zM8 15v8M13 15v8M19 15v8M24 15v8M4 26.5h24"/></g></symbol>
+  <symbol id="o-excel" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M5 6h22v20H5zM5 12h22M5 19h22M12.3 6v20M19.6 6v20"/></g></symbol>
+  <symbol id="o-mail" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 7h24v18H4z"/><path d="M4.5 7.8L16 16.5l11.5-8.7"/></g></symbol>
+  <symbol id="o-agenda" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M5 7h22v20H5zM5 13h22M11 4v5M21 4v5"/></g><g fill="currentColor"><path d="M9 16.5h3v3H9zM14.5 16.5h3v3h-3zM20 16.5h3v3h-3zM9 21.5h3v3H9zM14.5 21.5h3v3h-3z"/></g></symbol>
+  <symbol id="o-relance" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M9 22v-8a7 7 0 0 1 14 0v8l2 2H7z"/><path d="M13.5 27.5h5"/></g></symbol>
+  <symbol id="o-vehicule" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M7.5 21H4v-5l3.5-1.5L11 9h10l4 5.5 3 1.5v5h-3.5M12.5 21h7"/><circle cx="10" cy="21" r="2.5"/><circle cx="22" cy="21" r="2.5"/></g></symbol>
+  <symbol id="o-stats" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M5 5v22h22"/><path d="M10 16h3.5v7H10zM16 11h3.5v12H16zM22 7h3.5v16H22z"/></g></symbol>
+  <symbol id="o-sav" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M19.4 5.4a6 6 0 0 0-5.8 8L5 22l5 5 8.6-8.6a6 6 0 0 0 8-5.8l-3.8 3.8-3.7-.6-.6-3.7z"/></g></symbol>
+</svg>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="goutte" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="11" result="flou"/>
+    <feColorMatrix in="flou" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="bulle"/>
+    <feComposite in="SourceGraphic" in2="bulle" operator="atop"/>
+  </filter>
+</svg>
+
+<a class="evitement" href="#contenu">Aller au contenu</a>
+
+<header class="entete" id="entete">
+  <div class="largeur entete-ligne">
+    <a class="marque" href="#haut" aria-label="Cosmo par Cosmosoft, haut de la page">
+      <svg class="marque-c" aria-hidden="true"><use href="#logo"/></svg>
+      <span class="nom">cosm<i>o</i></span>
+    </a>
+    <nav class="entete-liens" aria-label="Sections de la page">
+      <a href="#assistant">L'assistant</a>
+      <a href="#comment">Comment ça marche</a>
+      <a href="#fonctions">Fonctions</a>
+      <a href="#confiance">Confiance</a>
+      <a href="#questions">Questions</a>
+    </nav>
+    <a class="bouton bouton-petit" href="#demo">Réserver une démo</a>
+  </div>
+</header>
+
+<main id="contenu">
+
+<!-- 1. Le haut : un titre, une phrase, un bouton, l'app -->
+<section class="haut" id="haut" aria-labelledby="titre-haut">
+  <div class="largeur haut-texte">
+    <p class="surtitre">Pour les artisans et les entreprises du bâtiment</p>
+    <h1 id="titre-haut"><span class="ligne">Concentrez-vous sur votre métier.</span> <span class="ligne ligne-orange">Cosmo fait le reste.</span></h1>
+    <p class="chapeau">Devis, factures, relances, comptabilité, TVA&nbsp;: vous le demandez, Cosmo le prépare, vous validez. Sur ordinateur et sur iPhone.</p>
+    <div class="actions">
+      <a class="bouton" href="#demo">Réserver une démo</a>
+      <a class="lien" href="#comment">Voir comment ça marche<svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+    </div>
+  </div>
+  <div class="haut-scene" aria-hidden="true" data-scene>
+    <img class="tel-rendu tel-cote tel-g" src="images/rendus/haut-gauche.webp" alt="" width="657" height="1461">
+    <img class="tel-rendu tel-centre" src="images/rendus/haut-centre.webp" alt="" width="702" height="1438" fetchpriority="high">
+    <img class="tel-rendu tel-cote tel-d" src="images/rendus/haut-droite.webp" alt="" width="657" height="1461">
+  </div>
+  <p class="sr">Captures de l'app Cosmo : l'accueil avec les actions à valider, l'écran Factures et l'assistant.</p>
+</section>
+
+<!-- 1 bis. La nouvelle ère : dix outils qui fusionnent en un seul, au défilement (page.js, partie 5 ; verre liquide en WebGL dans ere-liquide.js) -->
+<section class="ere" id="ere" aria-label="Une nouvelle ère : un seul outil à la place de dix" data-ere>
+  <div class="ere-scene">
+    <div class="ere-fond" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="ere-gouttes" aria-hidden="true">
+          <i class="goutte" style="--x:-40;--y:-30;--tx:-58.2;--ty:-24.8;--d:30"></i>
+          <i class="goutte" style="--x:-14;--y:-34;--tx:-40.8;--ty:-43.6;--d:30"></i>
+          <i class="goutte" style="--x:40;--y:-30;--tx:8.7;--ty:-47.5;--d:30"></i>
+          <i class="goutte" style="--x:-44;--y:0;--tx:-64.5;--ty:-0.0;--d:30"></i>
+          <i class="goutte goutte-point" style="--x:44;--y:0;--tx:45.0;--ty:0.0;--d:38"></i>
+          <i class="goutte" style="--x:-40;--y:30;--tx:-58.2;--ty:24.8;--d:30"></i>
+          <i class="goutte" style="--x:-14;--y:34;--tx:-40.8;--ty:43.6;--d:30"></i>
+          <i class="goutte" style="--x:40;--y:30;--tx:8.7;--ty:47.5;--d:30"></i>
+          <i class="goutte" style="--x:14;--y:-34;--tx:-16.6;--ty:-51.8;--d:30"></i>
+          <i class="goutte" style="--x:14;--y:34;--tx:-16.6;--ty:51.8;--d:30"></i>
+    </div>
+    <div class="ere-apps" aria-hidden="true">
+          <span class="app" style="--x:-40;--y:-30;--i:0;--fond:#E8F0FE;--trait:#1A56DB"><span class="app-icone"><svg><use href="#o-devis"/></svg></span><span class="app-nom">Devis</span></span>
+          <span class="app" style="--x:-14;--y:-34;--i:1;--fond:#E7F6EC;--trait:#1B7F3B"><span class="app-icone"><svg><use href="#o-compta"/></svg></span><span class="app-nom">Compta</span></span>
+          <span class="app" style="--x:40;--y:-30;--i:2;--fond:#FFF4E5;--trait:#B45309"><span class="app-icone"><svg><use href="#o-banque"/></svg></span><span class="app-nom">Banque</span></span>
+          <span class="app" style="--x:-44;--y:0;--i:3;--fond:#E6F4EA;--trait:#137333"><span class="app-icone"><svg><use href="#o-excel"/></svg></span><span class="app-nom">Excel</span></span>
+          <span class="app" style="--x:44;--y:0;--i:4;--fond:#EEF2FF;--trait:#4338CA"><span class="app-icone"><svg><use href="#o-mail"/></svg></span><span class="app-nom">Mails</span></span>
+          <span class="app" style="--x:-40;--y:30;--i:5;--fond:#FDECEC;--trait:#B42318"><span class="app-icone"><svg><use href="#o-agenda"/></svg></span><span class="app-nom">Agenda</span></span>
+          <span class="app" style="--x:-14;--y:34;--i:6;--fond:#FFF1EA;--trait:#C2410C"><span class="app-icone"><svg><use href="#o-relance"/></svg></span><span class="app-nom">Relances</span></span>
+          <span class="app" style="--x:40;--y:30;--i:7;--fond:#F1F5F9;--trait:#334155"><span class="app-icone"><svg><use href="#o-vehicule"/></svg></span><span class="app-nom">Véhicules</span></span>
+          <span class="app" style="--x:14;--y:-34;--i:8;--fond:#F5F3FF;--trait:#6D28D9"><span class="app-icone"><svg><use href="#o-stats"/></svg></span><span class="app-nom">Statistiques</span></span>
+          <span class="app" style="--x:14;--y:34;--i:9;--fond:#ECFEFF;--trait:#0E7490"><span class="app-icone"><svg><use href="#o-sav"/></svg></span><span class="app-nom">SAV</span></span>
+    </div>
+    <div class="ere-centre">
+      <span class="ere-logo" aria-hidden="true"><svg viewBox="17 35 156 130"><path d="M126.882 52.507A65 65 0 1 0 126.882 147.493L109.131 128.496A39 39 0 1 1 109.131 71.504Z"/><circle cx="140" cy="100" r="20"/></svg></span>
+      <div class="ere-textes">
+          <p class="ere-ligne" data-de="0" data-a="0.16">Avant, il fallait un logiciel pour chaque chose.</p>
+          <p class="ere-ligne" data-de="0.16" data-a="0.24">Un logiciel de devis.</p>
+          <p class="ere-ligne" data-de="0.24" data-a="0.32">Un logiciel de compta.</p>
+          <p class="ere-ligne" data-de="0.32" data-a="0.40">Les relevés de la banque.</p>
+          <p class="ere-ligne" data-de="0.40" data-a="0.48">Des tableaux Excel.</p>
+          <p class="ere-ligne" data-de="0.48" data-a="0.62">Ce ne sont pas dix outils.</p>
+          <p class="ere-ligne" data-de="0.62" data-a="0.82">C'est un seul.</p>
+          <p class="ere-ligne" data-de="0.82" data-a="1.01">Bienvenue dans une <span>nouvelle ère.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 1 ter. L'assistant : une IA à qui on demande tout. Démo à toucher (ia3d.js) : un iPhone en vraie 3D
+     dont l'écran reproduit l'assistant de l'app ; on touche une demande, Cosmo s'en occupe. Données d'exemple. -->
+<section class="bloc ia" id="assistant" aria-labelledby="titre-ia">
+  <div class="largeur ia-grille">
+    <div class="ia-gauche">
+      <h2 class="ia-titre apparait" id="titre-ia">Demandez.<br><span>Cosmo s'en occupe.</span></h2>
+      <p class="ia-chapeau apparait">Comme à un collaborateur, à la voix ou par écrit. Cosmo connaît vos clients, vos prix et vos chiffres. Il prépare, vous validez&nbsp;: rien ne part sans votre accord.</p>
+      <p class="ia-consigne apparait">Touchez une demande, et regardez Cosmo s'en occuper :</p>
+      <div class="ia-demandes apparait" role="group" aria-label="Exemples de demandes" data-ia-demandes></div>
+    </div>
+    <div class="ia-droite">
+      <div class="ia-tel" data-ia3d aria-hidden="true"></div>
+      <p class="ia-legende">Reproduction de l'assistant de l'app, avec des données d'exemple.</p>
+      <p class="ia-annonce" aria-live="polite" data-ia-annonce></p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Comment ça marche : trois étapes qu'on fait défiler, chacune avec son iPhone en vraie 3D (recit3d.js).
+     À l'arrivée de chaque étape, l'iPhone se retourne au fil du défilement, puis son écran passe la vidéo de la vraie app :
+     la dictée, le devis qui arrive, la validation. -->
+<section class="bloc bloc-gris" id="comment" aria-labelledby="titre-comment">
+  <div class="largeur">
+    <h2 class="titre-bloc apparait" id="titre-comment">Vous le dites. C'est prêt.</h2>
+    <p class="chapeau centre apparait">Fini le devis tapé le soir, après le chantier. Une phrase suffit.</p>
+    <ol class="etapes3">
+      <li class="etape3 apparait">
+        <div class="etape3-texte">
+          <p class="etape3-num">1</p>
+          <h3>Vous parlez</h3>
+          <p>Comme à un collègue. Cosmo écoute et écrit pour vous.</p>
+        </div>
+        <div class="etape3-tel" aria-hidden="true" data-iphone3d>
+          <video class="recit-video" data-recit-video src="images/recit-1.mp4" muted playsinline preload="auto"></video>
+        </div>
+      </li>
+      <li class="etape3 apparait">
+        <div class="etape3-texte">
+          <p class="etape3-num">2</p>
+          <h3>Cosmo prépare</h3>
+          <p>Le devis est prêt en quelques secondes, avec vos prix et la TVA.</p>
+        </div>
+        <div class="etape3-tel" aria-hidden="true" data-iphone3d>
+          <video class="recit-video" data-recit-video src="images/recit-2.mp4" muted playsinline preload="auto"></video>
+        </div>
+      </li>
+      <li class="etape3 apparait">
+        <div class="etape3-texte">
+          <p class="etape3-num">3</p>
+          <h3>Vous validez</h3>
+          <p>Rien ne se fait sans votre accord. Un geste, et le devis est prêt à envoyer.</p>
+        </div>
+        <div class="etape3-tel" aria-hidden="true" data-iphone3d>
+          <video class="recit-video" data-recit-video src="images/recit-3.mp4" muted playsinline preload="auto"></video>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 2 bis. Cosmo remplace tout : ce qu'on n'a plus besoin de payer ni d'ouvrir, et la version ordinateur (maquette en HTML) -->
+<section class="bloc" id="tout" aria-labelledby="titre-tout">
+  <div class="largeur">
+    <h2 class="titre-bloc apparait" id="titre-tout">Tout.<br><span class="orange-texte">Vraiment tout.</span></h2>
+    <p class="chapeau centre apparait">Un seul outil à la place de tous les autres. Et tout communique&nbsp;: le devis devient facture, le paiement se range en compta.</p>
+
+    <div class="mur apparait" aria-label="Tout ce que fait Cosmo">
+      <ul class="mur-ligne mur-g"><li>Devis</li><li>Commandes</li><li>Factures</li><li>Acomptes</li><li>Avoirs</li><li>Relances</li><li>Modèles à votre logo</li><li>Devis accepté en ligne</li><li>Facture électronique</li><li>Abonnements</li><li>Prélèvements SEPA</li><li>Mandat signé en ligne</li><li aria-hidden="true">Devis</li><li aria-hidden="true">Commandes</li><li aria-hidden="true">Factures</li><li aria-hidden="true">Acomptes</li><li aria-hidden="true">Avoirs</li><li aria-hidden="true">Relances</li><li aria-hidden="true">Modèles à votre logo</li><li aria-hidden="true">Devis accepté en ligne</li><li aria-hidden="true">Facture électronique</li><li aria-hidden="true">Abonnements</li><li aria-hidden="true">Prélèvements SEPA</li><li aria-hidden="true">Mandat signé en ligne</li></ul>
+      <ul class="mur-ligne mur-d"><li>Comptabilité</li><li>Grand livre</li><li>Balance</li><li>Lettrage</li><li>Déclaration de TVA</li><li>Bilan</li><li>Compte de résultat</li><li>Clôtures</li><li>Immobilisations</li><li>Banque connectée</li><li>Rapprochement</li><li>Export comptable</li><li aria-hidden="true">Comptabilité</li><li aria-hidden="true">Grand livre</li><li aria-hidden="true">Balance</li><li aria-hidden="true">Lettrage</li><li aria-hidden="true">Déclaration de TVA</li><li aria-hidden="true">Bilan</li><li aria-hidden="true">Compte de résultat</li><li aria-hidden="true">Clôtures</li><li aria-hidden="true">Immobilisations</li><li aria-hidden="true">Banque connectée</li><li aria-hidden="true">Rapprochement</li><li aria-hidden="true">Export comptable</li></ul>
+      <ul class="mur-ligne mur-g"><li>Chantiers</li><li>Métrés</li><li>Articles et stock</li><li>Factures fournisseurs</li><li>Notes de frais</li><li>Véhicules</li><li>Location de matériel</li><li>Planning</li><li>Agenda</li><li>SAV</li><li>Statistiques</li><li aria-hidden="true">Chantiers</li><li aria-hidden="true">Métrés</li><li aria-hidden="true">Articles et stock</li><li aria-hidden="true">Factures fournisseurs</li><li aria-hidden="true">Notes de frais</li><li aria-hidden="true">Véhicules</li><li aria-hidden="true">Location de matériel</li><li aria-hidden="true">Planning</li><li aria-hidden="true">Agenda</li><li aria-hidden="true">SAV</li><li aria-hidden="true">Statistiques</li></ul>
+      <ul class="mur-ligne mur-d"><li>Boîte mail avec IA</li><li>Suivi des e-mails ouverts</li><li>Clients et contacts</li><li>Recherche du SIREN</li><li>Ma journée</li><li>Rendez-vous</li><li>Équipe et droits</li><li>Dictée à la voix</li><li>Sauvegarde chaque jour</li><li>Tableau de bord</li><li>Trésorerie</li><li>Pièces jointes et photos</li><li aria-hidden="true">Boîte mail avec IA</li><li aria-hidden="true">Suivi des e-mails ouverts</li><li aria-hidden="true">Clients et contacts</li><li aria-hidden="true">Recherche du SIREN</li><li aria-hidden="true">Ma journée</li><li aria-hidden="true">Rendez-vous</li><li aria-hidden="true">Équipe et droits</li><li aria-hidden="true">Dictée à la voix</li><li aria-hidden="true">Sauvegarde chaque jour</li><li aria-hidden="true">Tableau de bord</li><li aria-hidden="true">Trésorerie</li><li aria-hidden="true">Pièces jointes et photos</li></ul>
+    </div>
+
+    <div class="tout-grille">
+      <figure class="portable apparait">
+        <div class="portable-ecran">
+          <div class="bureau" aria-label="Aperçu de Cosmo sur ordinateur : tableau de bord, actions à valider et banque connectée">
+            <aside class="bureau-menu" aria-hidden="true">
+              <p class="bureau-marque"><svg><use href="#logo"/></svg><span class="nom">cosm<i>o</i></span></p>
+              <p class="actif">Accueil</p><p>Devis</p><p>Factures</p><p>Achats</p><p>Banque</p><p>Compta et TVA</p><p>Véhicules</p><p>Agenda</p>
+            </aside>
+            <div class="bureau-corps" aria-hidden="true">
+              <div class="bureau-tete"><div><p class="bureau-date">Mardi 27 octobre</p><p class="bureau-bonjour">Bonjour Sophie</p></div><p class="bureau-demande">Demandez à Cosmo…<i></i></p></div>
+              <div class="bureau-chiffres">
+                <div><span>À encaisser</span><b>12 450 €</b></div>
+                <div><span>En retard</span><b class="orange">1 250 €</b></div>
+                <div><span>TVA du mois</span><b>2 310 €</b></div>
+                <div><span>Trésorerie</span><b>18 920 €</b></div>
+              </div>
+              <div class="bureau-colonnes">
+                <div class="bureau-carte">
+                  <p class="bureau-carte-titre">À valider <em>3</em></p>
+                  <p class="bureau-ligne"><span>Relancer la facture F-2026-0042</span><b class="bouton-mini">Envoyer</b></p>
+                  <p class="bureau-ligne"><span>Devis D-2026-0012 · Julie Petit</span><b class="bouton-mini">Envoyer</b></p>
+                  <p class="bureau-ligne"><span>Facture fournisseur · Point P</span><b class="bouton-mini clair">Classer</b></p>
+                </div>
+                <div class="bureau-carte">
+                  <p class="bureau-carte-titre">Banque <em class="vert">connectée</em></p>
+                  <p class="bureau-ligne"><span>Virement Julie Petit</span><b class="plus">+1 196,80 €</b></p>
+                  <p class="bureau-ligne"><span>Point P · Peinture</span><b>−412,30 €</b></p>
+                  <p class="bureau-ligne"><span>Total Énergies · Kangoo</span><b>−86,40 €</b></p>
+                  <p class="bureau-note">Paiements reconnus et rapprochés automatiquement</p>
+                </div>
+              </div>
+              <div class="bureau-carte bureau-ca">
+                <p class="bureau-carte-titre">Chiffre d'affaires <em class="vert">+18 % sur un an</em></p>
+                <div class="bureau-barres"><i style="--h:48%"><span>mai</span></i><i style="--h:62%"><span>juin</span></i><i style="--h:55%"><span>juil.</span></i><i style="--h:38%"><span>août</span></i><i style="--h:71%"><span>sept.</span></i><i style="--h:84%"><span>oct.</span></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="portable-base" aria-hidden="true"><i></i></div>
+        <figcaption>Aperçu de la version ordinateur, avec des données d'exemple.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 2 ter. Ce que coûtent les autres logiciels : une scène au défilement (page.js, partie 5 ter).
+     Les logiciels montent comme des bulles de verre, chacune avec son prix ; un trait de lumière
+     les barre et elles éclatent en gouttes, l'une après l'autre ; puis la phrase finale. -->
+<section class="eco" id="economies" aria-labelledby="titre-eco" data-eco>
+  <div class="eco-scene">
+    <div class="eco-halo" aria-hidden="true"></div>
+    <div class="eco-monde">
+      <div class="eco-textes">
+        <h2 class="eco-ligne" id="titre-eco" data-de="-1" data-a=".44">Un logiciel pour chaque chose. <span>Et chacun a son prix.</span></h2>
+        <p class="eco-ligne" data-de=".44" data-a=".72">Avec Cosmo, vous n'en avez <span>plus besoin.</span></p>
+      </div>
+      <ul class="eco-cartes">
+          <li class="eco-carte" data-montant="1300">
+            <div class="eco-bulle">
+              <svg class="eco-icone" aria-hidden="true"><use href="#o-devis"/></svg>
+              <p class="eco-nom">Logiciel du bâtiment</p>
+              <p class="eco-prix">1 300 €<small> /an</small></p>
+              <i class="eco-trait" aria-hidden="true"></i>
+            </div>
+            <span class="eco-eclats" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </li>
+          <li class="eco-carte" data-montant="1400">
+            <div class="eco-bulle">
+              <svg class="eco-icone" aria-hidden="true"><use href="#o-compta"/></svg>
+              <p class="eco-nom">Comptabilité pro</p>
+              <p class="eco-prix">1 400 €<small> /an</small></p>
+              <i class="eco-trait" aria-hidden="true"></i>
+            </div>
+            <span class="eco-eclats" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </li>
+          <li class="eco-carte" data-montant="350">
+            <div class="eco-bulle">
+              <svg class="eco-icone" aria-hidden="true"><use href="#i-equipe"/></svg>
+              <p class="eco-nom">CRM clients</p>
+              <p class="eco-prix">350 €<small> /an</small></p>
+              <i class="eco-trait" aria-hidden="true"></i>
+            </div>
+            <span class="eco-eclats" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </li>
+          <li class="eco-carte" data-montant="140">
+            <div class="eco-bulle">
+              <svg class="eco-icone" aria-hidden="true"><use href="#o-excel"/></svg>
+              <p class="eco-nom">Excel et Office</p>
+              <p class="eco-prix">140 €<small> /an</small></p>
+              <i class="eco-trait" aria-hidden="true"></i>
+            </div>
+            <span class="eco-eclats" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </li>
+          <li class="eco-carte" data-montant="4500">
+            <div class="eco-bulle">
+              <svg class="eco-icone" aria-hidden="true"><use href="#i-cle"/></svg>
+              <p class="eco-nom">Installation</p>
+              <p class="eco-prix">4 500 €<small> une fois</small></p>
+              <i class="eco-trait" aria-hidden="true"></i>
+            </div>
+            <span class="eco-eclats" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </li>
+      </ul>
+      <div class="eco-final">
+        <p class="eco-final-1">Des milliers d'euros perdus.</p>
+        <p class="eco-final-2">Cosmo les remplace <span>tous.</span></p>
+        <p class="eco-final-3">Un seul abonnement, tout compris. Sans installation.</p>
+      </div>
+      <p class="eco-note">Prix HT relevés en 2026 pour une petite entreprise, un utilisateur : Batappli Entreprise, Sage 100 Comptabilité Standard, Sellsy, Microsoft 365. Installation : exemple d'un intégrateur Sage 100 (souvent 3 000 à 8 000 € la première année).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Déjà dans Cosmo : tout ce qui marche aujourd'hui, rangé en six familles -->
+<section class="bloc" id="fonctions" aria-labelledby="titre-fonctions">
+  <div class="largeur">
+    <h2 class="titre-bloc apparait" id="titre-fonctions">Déjà dans Cosmo.<br><span class="orange-texte">Aujourd'hui.</span></h2>
+    <p class="chapeau centre apparait">Ce n'est pas une promesse&nbsp;: tout fonctionne déjà. L'essentiel sur iPhone, l'intégralité sur ordinateur. Et vous pouvez tout demander à l'assistant.</p>
+    <div class="deja">
+      <article class="deja-bloc apparait">
+        <h3>Ventes</h3>
+        <ul><li>Devis et factures</li><li>Acomptes et avoirs</li><li>Devis accepté en ligne</li><li>Relances des impayés</li><li>Abonnements et prélèvements SEPA</li></ul>
+      </article>
+      <article class="deja-bloc apparait">
+        <h3>Compta et TVA</h3>
+        <ul><li>Écritures et grand livre</li><li>Balance et lettrage</li><li>Déclaration de TVA</li><li>Bilan et compte de résultat</li><li>Export pour le comptable (FEC)</li></ul>
+      </article>
+      <article class="deja-bloc apparait">
+        <h3>Banque</h3>
+        <ul><li>Banque connectée</li><li>Paiements reconnus tout seuls</li><li>Rapprochement</li><li>Trésorerie</li><li>Factures fournisseurs</li></ul>
+      </article>
+      <article class="deja-bloc apparait">
+        <h3>Chantiers</h3>
+        <ul><li>Chantiers et métrés</li><li>Articles et stock</li><li>Location de matériel</li><li>Réserves de chantier</li><li>SAV</li></ul>
+      </article>
+      <article class="deja-bloc apparait">
+        <h3>Frais et véhicules</h3>
+        <ul><li>Notes de frais</li><li>Pleins et entretiens</li><li>Coût au kilomètre</li><li>Immobilisations</li><li>Statistiques</li></ul>
+      </article>
+      <article class="deja-bloc apparait">
+        <h3>Organisation</h3>
+        <ul><li>Agenda et rendez-vous</li><li>Planning</li><li>Équipe et droits</li><li>Boîte mail avec IA</li><li>Sauvegarde chaque jour</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Confiance : trois points courts.
+     Tout ce qui est écrit ici est vérifié dans l'app : profils (Model/Profils.swift), Factur-X (Model/FacturX*.swift),
+     sauvegarde quotidienne (Model/Sauvegarde.swift), export FEC pour le comptable, demandes relayées vers Mistral
+     sans être gardées (server/README.md). Version ordinateur et connexion bancaire : d'après Maxime (27/10/2026). -->
+<section class="bloc bloc-gris" id="confiance" aria-labelledby="titre-confiance">
+  <div class="largeur">
+    <h2 class="titre-bloc apparait" id="titre-confiance">Vous gardez la main.</h2>
+    <ul class="confiance apparait">
+      <li>
+        <svg class="ico" aria-hidden="true"><use href="#i-equipe"/></svg>
+        <h3>Cosmo ne remplace personne</h3>
+        <p>Il enlève la saisie. C'est toujours une personne qui décide.</p>
+      </li>
+      <li id="facture-electronique">
+        <svg class="ico" aria-hidden="true"><use href="#i-norme"/></svg>
+        <h3>Vos factures aux normes</h3>
+        <p>Elles sortent déjà au format Factur-X, la facture électronique. <a href="#q-facturx">Le détail</a></p>
+      </li>
+      <li>
+        <svg class="ico" aria-hidden="true"><use href="#i-cadenas"/></svg>
+        <h3>Vos données à vous</h3>
+        <p>Sauvegardées chaque jour, et exportables à tout moment pour votre comptable.</p>
+      </li>
+      <li>
+        <svg class="ico" aria-hidden="true"><use href="#i-ok"/></svg>
+        <h3>Une vraie personne vous répond</h3>
+        <p>Cosmo est conçu en France par Cosmosoft. Une question&nbsp;? <a href="mailto:contact@cosmosoft.fr">Écrivez-nous</a>, on vous répond.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 5. Questions -->
+<section class="bloc" id="questions" aria-labelledby="titre-faq">
+  <div class="largeur largeur-texte">
+    <h2 class="titre-bloc apparait" id="titre-faq">Vos questions.</h2>
+    <div class="faq apparait">
+      <details>
+        <summary>Est-ce que ça remplace mon logiciel de compta ?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq-reponse"><p>Oui. Devis, factures, achats, banque, TVA et écritures jusqu'au bilan : tout est dans Cosmo. Plus besoin d'un logiciel de devis, d'un logiciel de compta ni de tableaux Excel à côté. Votre comptable reçoit le fichier FEC, prêt à importer.</p></div>
+      </details>
+      <details>
+        <summary>Faut-il une installation ?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq-reponse"><p>Non, rien à installer chez vous et pas de mise en place à plusieurs milliers d'euros. Deux minutes suffisent : avec votre SIRET, Cosmo retrouve votre entreprise et se règle pour votre métier, puis vous connectez votre banque. Les boutons sont grands et les écrans simples.</p></div>
+      </details>
+      <details>
+        <summary>Combien ça coûte&nbsp;?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq-reponse"><p>Un seul abonnement mensuel, tout compris&nbsp;: pas de module en plus, pas de frais d'installation. Le tarif de lancement vous est présenté pendant la démo, gratuite et sans engagement.</p></div>
+      </details>
+      <details>
+        <summary>Sur quoi ça marche ?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq-reponse"><p>Sur ordinateur et sur iPhone (iOS 26). Vous commencez une facture au bureau et vous la validez sur le chantier. L'app iPhone n'est pas encore sur l'App Store : vous pouvez la voir marcher pendant une démo. Pas de version Android pour l'instant.</p></div>
+      </details>
+      <details>
+        <summary>Et si mon métier n'est pas prévu&nbsp;?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq-reponse"><p>Cosmo est pensé d'abord pour le bâtiment&nbsp;: peinture, échafaudage, maîtrise d'œuvre… Il a aussi des réglages pour l'immobilier, l'informatique et les services. Pour les autres métiers, il démarre avec le réglage «&nbsp;Services et maintenance&nbsp;», et tous les modules sont là.</p></div>
+      </details>
+      <details>
+        <summary>Plusieurs personnes peuvent-elles l'utiliser ?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq-reponse"><p>Oui, chacun avec son profil. Cosmo retient les habitudes de chacun, et c'est toujours une personne qui valide ce qui part.</p></div>
+      </details>
+      <details>
+        <summary>Et ma boîte mail&nbsp;?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq-reponse"><p>Vous la connectez si vous le souhaitez&nbsp;: Gmail avec «&nbsp;Se connecter avec Google&nbsp;», iCloud, ou une autre boîte (Orange, Free, SFR, La Poste, OVH, Yahoo…). Vos e-mails sont lus par notre serveur pour vous, sans y être conservés. Les boîtes Outlook et Hotmail ne sont pas encore prises en charge.</p></div>
+      </details>
+      <details>
+        <summary>Où vont mes données ?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq-reponse"><p>Vos clients, devis, factures et comptes sont sauvegardés chaque jour, et vous pouvez tout exporter à tout moment. Ce que vous dites à Cosmo passe par notre serveur, qui ne le garde pas, jusqu'à Mistral AI, une entreprise française.</p></div>
+      </details>
+      <details>
+        <summary>Mon comptable pourra-t-il s'en servir&nbsp;?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq-reponse"><p>Oui. Il reçoit le FEC (le fichier que son logiciel importe), les écritures et la balance, que vous lui envoyez depuis l'app.</p></div>
+      </details>
+      <details id="q-facturx">
+        <summary>Factur-X, ça change quoi pour moi&nbsp;?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq-reponse"><p>Rien à apprendre. Une facture Factur-X est un PDF normal, avec les données de la facture dedans&nbsp;: votre client la lit comme avant, son logiciel la range tout seul. Recevoir des factures électroniques devient obligatoire pour toutes les entreprises le 1<sup>er</sup>&nbsp;septembre 2026, les envoyer le 1<sup>er</sup>&nbsp;septembre 2027 pour les TPE. Pas encore fait dans Cosmo&nbsp;: le branchement à une plateforme agréée. En attendant, vos factures partent par e-mail.</p></div>
+      </details>
+    </div>
+    <p class="faq-contact">Une autre question&nbsp;? Écrivez-nous à <a href="mailto:contact@cosmosoft.fr">contact@cosmosoft.fr</a>.</p>
+  </div>
+</section>
+
+<!-- 6. Réserver une démo (Calendly, réglé en haut de demo.js) -->
+<section class="bloc bloc-gris final" id="demo" aria-labelledby="titre-demo">
+  <div class="largeur">
+    <div class="final-tete apparait">
+      <svg class="final-logo" aria-hidden="true"><use href="#logo"/></svg>
+      <h2 class="titre-bloc" id="titre-demo">Voyez Cosmo en vrai.</h2>
+      <p class="chapeau">Choisissez un créneau. On vous montre Cosmo sur votre métier, et vous posez toutes vos questions.</p>
+      <p class="final-note">Gratuit<span data-duree hidden> · <span class="duree-texte"></span></span> · Sans engagement</p>
+    </div>
+    <div class="reservation" id="reservation">
+      <div class="calendly" id="calendly" hidden></div>
+      <noscript><p class="faq-contact">Pour réserver, écrivez-nous à <a href="mailto:contact@cosmosoft.fr">contact@cosmosoft.fr</a>.</p></noscript>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <div class="largeur pied-grille">
+    <a class="marque" href="#haut" aria-label="Cosmo par Cosmosoft, haut de la page">
+      <svg class="marque-c" aria-hidden="true"><use href="#logo"/></svg>
+      <span class="nom">cosm<i>o</i></span>
+    </a>
+    <nav class="pied-liens" aria-label="Pied de page">
+      <a href="#demo">Réserver une démo</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+      <a href="mailto:contact@cosmosoft.fr">contact@cosmosoft.fr</a>
+    </nav>
+    <p class="petit">© 2026 Cosmosoft. Modèle 3D de l'iPhone : <a href="https://sketchfab.com/3d-models/apple-iphone-15-pro-max-black-df17520841214c1792fb8a44c6783ee7" rel="noopener">polyman</a>, licence <a href="https://creativecommons.org/licenses/by/4.0/deed.fr" rel="noopener">CC BY 4.0</a>. Cosmo n'est pas encore disponible sur l'App Store. iPhone et App Store sont des marques d'Apple Inc.</p>
+  </div>
+</footer>
+
+</body>
+</html>
