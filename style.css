@@ -283,59 +283,35 @@ svg { flex: none; }
 /* ---------- 2. Comment ça marche : trois étapes, chacune avec son iPhone 3D ----------
    Téléphone : texte au-dessus. Dès 700 px : texte et iPhone côte à côte, l'iPhone change de côté à chaque étape. */
 .centre { margin-inline: auto; text-align: center; }
-/* « Comment ça marche » : un seul iPhone fixe (sticky) pendant que les trois étapes défilent (recit3d.js règle
-   .actif et --recit, l'avancement). Ordinateur : étapes à gauche, iPhone à droite. Téléphone : iPhone en haut, l'étape dessous. */
-.recit-tete { padding-top: 88px; }
-.recit { position: relative; height: 360vh; height: 360svh; }
-.recit-scene { position: sticky; top: 0; height: 100vh; height: 100svh; padding-top: 56px; box-sizing: border-box; display: grid; align-items: center; }
-.recit-grille { display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; justify-items: center; gap: 14px; height: 100%; }
-.recit-tel { order: -1; position: relative; width: 100%; height: 54svh; }
-.recit-tel canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: 0; transition: opacity .8s ease; }
-.recit-tel.pret canvas { opacity: 1; }
+.etapes3 { display: flex; flex-direction: column; gap: 56px; margin-top: 56px; }
+.etape3 { display: grid; gap: 24px; align-items: center; }
+.etape3-texte { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.etape3-num { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--orange); color: #fff; font-size: 22px; font-weight: 700; }
+.etape3-texte h3 { margin-top: 6px; font-size: 30px; line-height: 1.1; font-weight: 700; letter-spacing: -0.025em; }
+.etape3-texte p:last-child { max-width: 360px; color: var(--texte); font-size: 18px; }
+.etape3-tel { position: relative; height: min(68vh, 560px); }
+.etape3-tel canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: 0; transition: opacity .8s ease; }
+.etape3-tel.pret canvas { opacity: 1; }
 .recit-video { position: absolute; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
-.recit-tel.sans-3d .recit-video.actif { position: static; display: block; width: auto; height: 100%; margin: 0 auto; opacity: 1; border-radius: 36px; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .4); }
-.recit-gauche { display: flex; flex-direction: column; align-items: center; width: 100%; }
-.recit-etapes { display: grid; width: 100%; max-width: 420px; margin: 0; padding: 0; list-style: none; }
-.recit-etape { grid-area: 1 / 1; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .6s var(--lent); }
-/* l'étape qui part s'efface vite, la nouvelle arrive juste après : jamais deux textes l'un sur l'autre */
-.recit-etape { transition: opacity .2s ease, transform .2s ease; }
-.recit-etape.actif { opacity: 1; transform: none; transition: opacity .45s ease .2s, transform .6s var(--lent) .2s; }
-.recit-etape h3 { margin: 4px 0 0; font-size: 26px; line-height: 1.1; font-weight: 700; letter-spacing: -0.025em; }
-.recit-etape p { margin: 4px 0 0; color: var(--texte); font-size: 17px; }
-.etape3-num { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--orange); color: #fff; font-size: 20px; font-weight: 700; }
-.recit-points { display: flex; gap: 8px; }
-.recit-points i { width: 7px; height: 7px; border-radius: 50%; background: rgba(29, 29, 31, .18); transition: background .3s ease, width .4s var(--lent); }
-/* la pastille de l'étape en cours se remplit au rythme de la vidéo (--prog, réglé par recit3d.js) */
-.recit-points i.actif { width: 26px; border-radius: 4px; background: linear-gradient(90deg, var(--orange) calc(var(--prog, 0) * 100%), rgba(255, 90, 31, .25) 0); }
-.recit-suite { display: inline-flex; align-items: center; gap: 4px; margin: 0; font-size: 14px; font-weight: 600; color: var(--gris); opacity: 0; transition: opacity .5s ease; }
-.recit-suite svg { width: 14px; height: 14px; transform: rotate(90deg); animation: recit-suite 1.6s ease-in-out infinite; }
-.recit-suite.visible { opacity: 1; }
-@keyframes recit-suite { 50% { translate: 0 4px; } }
-@media (min-width: 900px) {
-  .recit-tete { padding-top: 120px; }
-  .recit-grille { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 48px; }
-  .recit-tel { order: 0; grid-column: 2; height: min(80svh, 720px); }
-  /* sur ordinateur, les trois étapes sont visibles : celle en cours est nette, avec son trait orange */
-  .recit-gauche { grid-column: 1; grid-row: 1 / span 2; align-self: center; }
-  .recit-etapes { max-width: 460px; gap: 6px; }
-  .recit-etape { grid-area: auto; flex-direction: row; align-items: flex-start; gap: 18px; padding: 18px 0 18px 22px; text-align: left; opacity: .3; transform: none;
-    border-left: 2px solid rgba(29, 29, 31, .1); transition: opacity .5s ease, border-color .5s ease; }
-  /* le trait de l'étape en cours se remplit au rythme de la vidéo */
-  .recit-etape { position: relative; }
-  .recit-etape::before { content: ""; position: absolute; left: -2px; top: 0; width: 2px; height: calc(var(--prog, 0) * 100%); background: var(--orange); }
-  .recit-etape:not(.actif)::before { height: 0; }
-  .recit-etape.actif { border-left-color: rgba(255, 90, 31, .22); }
-  .recit-suite { margin: 22px 0 0 24px; }
-  .recit-etape h3 { font-size: 34px; }
-  .recit-etape p { font-size: 19px; }
-  .recit-points { display: none; }
-  .recit-tel { grid-row: 1 / span 2; }
+/* Sans WebGL : la vidéo s'affiche simplement, dans un cadre arrondi */
+.etape3-tel.sans-3d .recit-video { position: static; display: block; width: auto; height: 100%; margin: 0 auto; opacity: 1; border-radius: 36px; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .4); }
+
+@media (min-width: 700px) {
+  .etapes3 { gap: 40px; margin-top: 64px; }
+  .etape3 { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .etape3-texte { align-items: flex-start; text-align: left; }
+  .etape3:nth-child(2) .etape3-texte { order: 2; }
+  .etape3-texte h3 { font-size: 40px; }
+  .etape3-texte p:last-child { font-size: 20px; }
+  .etape3-tel { height: min(80vh, 660px); }
 }
-@media (min-width: 1200px) { .recit-etape h3 { font-size: 40px; } }
-@media (prefers-reduced-motion: reduce) { .recit-etape { transition: none; } .recit-suite svg { animation: none; } }
-html:not(.js) .recit { height: auto; }
-html:not(.js) .recit-scene { position: relative; height: auto; }
-html:not(.js) .recit-etape { grid-area: auto; opacity: 1; transform: none; }
+@media (min-width: 1024px) {
+  .etape3 { gap: 80px; }
+  .etape3-num { width: 52px; height: 52px; font-size: 26px; }
+  .etape3-texte h3 { font-size: 52px; }
+  .etape3-texte p:last-child { font-size: 22px; max-width: 420px; }
+  .etape3-tel { height: min(84vh, 720px); }
+}
 
 /* ---------- 2 bis. Un seul outil à la place de tous les autres ---------- */
 .orange-texte { color: var(--orange); }

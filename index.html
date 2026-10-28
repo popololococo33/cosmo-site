@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600&text=cosm&display=swap">
-<link rel="stylesheet" href="style.css?v=65">
+<link rel="stylesheet" href="style.css?v=66">
 <script>document.documentElement.classList.add("js");</script>
 <script src="page.js?v=32" defer></script>
 <script src="ere-liquide.js?v=5" defer></script>
@@ -30,7 +30,7 @@
 <script src="demo.js?v=33" defer></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module" src="ia3d.js?v=31"></script>
-<script type="module" src="recit3d.js?v=33"></script>
+<script type="module" src="recit3d.js?v=34"></script>
 </head>
 <body>
 
@@ -77,8 +77,8 @@
     </a>
     <nav class="entete-liens" id="menu-sections" aria-label="Sections de la page">
       <a href="#assistant">L'assistant IA</a>
+      <a href="#tout">Tout ce qu'il fait</a>
       <a href="#facture-electronique">Facture électronique</a>
-      <a href="#fonctions">Tout ce qu'il fait</a>
       <a href="#economies">Vos économies</a>
       <a href="#questions">Questions</a>
     </nav>
@@ -173,62 +173,45 @@
   </div>
 </section>
 
-<!-- 3 bis. La facture électronique : l'enjeu, en une animation (le petit document circule de vous à votre client
-     en passant par la plateforme agréée ; animé seulement quand la section est à l'écran, voir style.css « 3 bis »).
-     Dates : réception obligatoire pour toutes les entreprises au 1er septembre 2026, émission au 1er septembre 2027
-     pour les TPE et PME. Cosmo (version ordinateur, Cosmo GC) est relié à la plateforme agréée Super PDP :
-     émission, réception, statuts et encaissements (code dans cosmogc, src/lib/pdp/). -->
-<section class="bloc fe" id="facture-electronique" aria-labelledby="titre-fe">
+<!-- 2. Comment ça marche : trois étapes qu'on fait défiler, chacune avec son iPhone en vraie 3D (recit3d.js).
+     À l'arrivée de chaque étape, l'iPhone se retourne au fil du défilement, puis son écran passe la vidéo de la vraie app :
+     la dictée, le devis qui arrive, la validation. -->
+<section class="bloc bloc-gris" id="comment" aria-labelledby="titre-comment">
   <div class="largeur">
-    <h2 class="titre-bloc apparait" id="titre-fe">La facture électronique<br><span class="orange-texte">devient obligatoire.</span></h2>
-    <p class="chapeau centre apparait">Fini la facture PDF envoyée par e-mail&nbsp;: entre entreprises, tout passe par une plateforme agréée par l'État.</p>
-    <div class="fe-piste" data-fe>
-      <div class="fe-scene" data-mode="reception">
-        <!-- la phrase qui accompagne l'animation : d'abord la réception (obligatoire maintenant), puis l'envoi (2027) -->
-        <div class="fe-legende apparait">
-          <p class="fe-legende-reception"><span class="fe-date">Depuis septembre 2026</span><b>Vos fournisseurs vous envoient leurs factures par la plateforme.</b><span class="fe-sous">Elles arrivent toutes seules dans Cosmo.</span></p>
-          <p class="fe-legende-envoi"><span class="fe-date">À partir de septembre 2027</span><b>Vous envoyez les vôtres de la même façon.</b><span class="fe-sous">Cosmo s'en charge pour vous.</span></p>
-        </div>
-        <div class="fe-schema apparait">
-          <div class="fe-noeud fe-debut"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:0"><svg><use href="#o-devis"/></svg></span></span><b>Vous</b></div>
-          <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
-          <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><span class="app-icone fe-logo" style="--i:3"><svg><use href="#logo"/></svg></span></span><b>Plateforme agréée</b><small>reliée à Cosmo</small></div>
-          <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
-          <div class="fe-noeud fe-fin"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:6"><svg><use href="#o-entreprises"/></svg></span></span><b class="fe-alterne"><span>Votre fournisseur</span><span>Votre client</span></b></div>
-        </div>
-      </div>
-    </div>
-    <p class="fe-cosmo apparait"><b>Avec Cosmo, c'est déjà en place.</b> Il est relié à Super PDP, une plateforme agréée par l'État. Vous n'avez rien à changer.</p>
-  </div>
-</section>
-
-<!-- 2. Comment ça marche : UN seul iPhone en vraie 3D (recit3d.js), fixe à l'écran pendant qu'on fait défiler les
-     trois étapes (à côté sur ordinateur, dessous sur téléphone). À l'arrivée, il se retourne ; à chaque étape, il pivote
-     un peu et son écran passe la vidéo de la vraie app : la dictée, le devis qui arrive, la validation. -->
-<section class="bloc-gris" id="comment" aria-labelledby="titre-comment">
-  <div class="largeur recit-tete">
     <h2 class="titre-bloc apparait" id="titre-comment">Vous le dites. C'est prêt.</h2>
     <p class="chapeau centre apparait">Fini le devis tapé le soir, après la journée. Une phrase suffit.</p>
-  </div>
-  <div class="recit" data-recit>
-    <div class="recit-scene">
-      <div class="largeur recit-grille">
-        <div class="recit-gauche">
-        <ol class="recit-etapes">
-          <li class="recit-etape actif"><span class="etape3-num">1</span><div><h3>Vous parlez</h3><p>Comme à un collègue. Cosmo écoute et écrit pour vous.</p></div></li>
-          <li class="recit-etape"><span class="etape3-num">2</span><div><h3>Cosmo prépare</h3><p>Le devis est prêt en quelques secondes, avec vos prix et la TVA.</p></div></li>
-          <li class="recit-etape"><span class="etape3-num">3</span><div><h3>Vous validez</h3><p>Rien ne se fait sans votre accord. Un geste, et le devis est prêt à envoyer.</p></div></li>
-        </ol>
-        <p class="recit-suite" aria-hidden="true">Faites défiler pour la suite<svg><use href="#i-fleche"/></svg></p>
+    <ol class="etapes3">
+      <li class="etape3 apparait">
+        <div class="etape3-texte">
+          <p class="etape3-num">1</p>
+          <h3>Vous parlez</h3>
+          <p>Comme à un collègue. Cosmo écoute et écrit pour vous.</p>
         </div>
-        <div class="recit-points" aria-hidden="true"><i class="actif"></i><i></i><i></i></div>
-        <div class="recit-tel" aria-hidden="true" data-recit3d>
-          <video class="recit-video actif" data-recit-video src="images/recit-1.mp4" muted playsinline preload="auto"></video>
+        <div class="etape3-tel" aria-hidden="true" data-iphone3d>
+          <video class="recit-video" data-recit-video src="images/recit-1.mp4" muted playsinline preload="auto"></video>
+        </div>
+      </li>
+      <li class="etape3 apparait">
+        <div class="etape3-texte">
+          <p class="etape3-num">2</p>
+          <h3>Cosmo prépare</h3>
+          <p>Le devis est prêt en quelques secondes, avec vos prix et la TVA.</p>
+        </div>
+        <div class="etape3-tel" aria-hidden="true" data-iphone3d>
           <video class="recit-video" data-recit-video src="images/recit-2.mp4" muted playsinline preload="auto"></video>
+        </div>
+      </li>
+      <li class="etape3 apparait">
+        <div class="etape3-texte">
+          <p class="etape3-num">3</p>
+          <h3>Vous validez</h3>
+          <p>Rien ne se fait sans votre accord. Un geste, et le devis est prêt à envoyer.</p>
+        </div>
+        <div class="etape3-tel" aria-hidden="true" data-iphone3d>
           <video class="recit-video" data-recit-video src="images/recit-3.mp4" muted playsinline preload="auto"></video>
         </div>
-      </div>
-    </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -290,6 +273,69 @@
   </div>
 </section>
 
+<!-- 3. Déjà dans Cosmo : tout ce qui marche aujourd'hui, rangé en six familles -->
+<section class="bloc" id="fonctions" aria-labelledby="titre-fonctions">
+  <div class="largeur">
+    <h2 class="titre-bloc apparait" id="titre-fonctions">Déjà dans Cosmo.<br><span class="orange-texte">Aujourd'hui.</span></h2>
+    <p class="chapeau centre apparait">Ce n'est pas une promesse&nbsp;: tout fonctionne déjà, sur ordinateur et sur iPhone. Et vous pouvez tout demander à l'assistant.</p>
+    <div class="deja">
+      <article class="deja-bloc apparait">
+        <h3>Ventes</h3>
+        <ul><li>Devis et factures</li><li>Acomptes et avoirs</li><li>Devis accepté en ligne</li><li>Relances des impayés</li><li>Abonnements et prélèvements automatiques</li></ul>
+      </article>
+      <article class="deja-bloc apparait">
+        <h3>Compta et TVA</h3>
+        <ul><li>Écritures et grand livre</li><li>Balance et lettrage</li><li>Déclaration de TVA</li><li>Bilan et compte de résultat</li><li>Export pour le comptable</li></ul>
+      </article>
+      <article class="deja-bloc apparait">
+        <h3>Banque</h3>
+        <ul><li>Banque connectée</li><li>Paiements reconnus tout seuls</li><li>Rapprochement</li><li>Trésorerie</li><li>Factures fournisseurs</li></ul>
+      </article>
+      <article class="deja-bloc apparait">
+        <h3>Projets et chantiers</h3>
+        <ul><li>Projets, chantiers et métrés</li><li>Articles et stock</li><li>Location de matériel</li><li>Réserves de chantier</li><li>SAV</li></ul>
+      </article>
+      <article class="deja-bloc apparait">
+        <h3>Frais et véhicules</h3>
+        <ul><li>Notes de frais</li><li>Pleins et entretiens</li><li>Coût au kilomètre</li><li>Immobilisations</li><li>Statistiques</li></ul>
+      </article>
+      <article class="deja-bloc apparait">
+        <h3>Organisation</h3>
+        <ul><li>Agenda et rendez-vous</li><li>Planning</li><li>Équipe et droits</li><li>Boîte mail avec IA</li><li>Sauvegarde chaque jour</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 3 bis. La facture électronique : l'enjeu, en une animation (le petit document circule de vous à votre client
+     en passant par la plateforme agréée ; animé seulement quand la section est à l'écran, voir style.css « 3 bis »).
+     Dates : réception obligatoire pour toutes les entreprises au 1er septembre 2026, émission au 1er septembre 2027
+     pour les TPE et PME. Cosmo (version ordinateur, Cosmo GC) est relié à la plateforme agréée Super PDP :
+     émission, réception, statuts et encaissements (code dans cosmogc, src/lib/pdp/). -->
+<section class="bloc fe" id="facture-electronique" aria-labelledby="titre-fe">
+  <div class="largeur">
+    <h2 class="titre-bloc apparait" id="titre-fe">La facture électronique<br><span class="orange-texte">devient obligatoire.</span></h2>
+    <p class="chapeau centre apparait">Fini la facture PDF envoyée par e-mail&nbsp;: entre entreprises, tout passe par une plateforme agréée par l'État.</p>
+    <div class="fe-piste" data-fe>
+      <div class="fe-scene" data-mode="reception">
+        <!-- la phrase qui accompagne l'animation : d'abord la réception (obligatoire maintenant), puis l'envoi (2027) -->
+        <div class="fe-legende apparait">
+          <p class="fe-legende-reception"><span class="fe-date">Depuis septembre 2026</span><b>Vos fournisseurs vous envoient leurs factures par la plateforme.</b><span class="fe-sous">Elles arrivent toutes seules dans Cosmo.</span></p>
+          <p class="fe-legende-envoi"><span class="fe-date">À partir de septembre 2027</span><b>Vous envoyez les vôtres de la même façon.</b><span class="fe-sous">Cosmo s'en charge pour vous.</span></p>
+        </div>
+        <div class="fe-schema apparait">
+          <div class="fe-noeud fe-debut"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:0"><svg><use href="#o-devis"/></svg></span></span><b>Vous</b></div>
+          <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
+          <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><span class="app-icone fe-logo" style="--i:3"><svg><use href="#logo"/></svg></span></span><b>Plateforme agréée</b><small>reliée à Cosmo</small></div>
+          <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
+          <div class="fe-noeud fe-fin"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:6"><svg><use href="#o-entreprises"/></svg></span></span><b class="fe-alterne"><span>Votre fournisseur</span><span>Votre client</span></b></div>
+        </div>
+      </div>
+    </div>
+    <p class="fe-cosmo apparait"><b>Avec Cosmo, c'est déjà en place.</b> Il est relié à Super PDP, une plateforme agréée par l'État. Vous n'avez rien à changer.</p>
+  </div>
+</section>
+
 <!-- 2 ter. Ce que coûtent les autres logiciels : une scène au défilement (page.js, partie 5 ter).
      Les logiciels montent comme des bulles de verre, chacune avec son prix ; un trait de lumière
      les barre et elles éclatent en gouttes, l'une après l'autre ; puis la phrase finale. -->
@@ -298,7 +344,7 @@
     <div class="eco-halo" aria-hidden="true"></div>
     <div class="eco-monde">
       <div class="eco-textes">
-        <h2 class="eco-ligne" id="titre-eco" data-de="-1" data-a=".44">Un logiciel pour chaque chose. <span>Et chacun a son prix.</span></h2>
+        <h2 class="eco-ligne" id="titre-eco" data-de="-1" data-a=".44">Et ces logiciels, <span>vous les payez tous.</span></h2>
         <p class="eco-ligne" data-de=".44" data-a=".72">Avec Cosmo, vous n'en avez <span>plus besoin.</span></p>
       </div>
       <ul class="eco-cartes">
@@ -359,40 +405,6 @@
   </div>
 </section>
 
-<!-- 3. Déjà dans Cosmo : tout ce qui marche aujourd'hui, rangé en six familles -->
-<section class="bloc" id="fonctions" aria-labelledby="titre-fonctions">
-  <div class="largeur">
-    <h2 class="titre-bloc apparait" id="titre-fonctions">Déjà dans Cosmo.<br><span class="orange-texte">Aujourd'hui.</span></h2>
-    <p class="chapeau centre apparait">Ce n'est pas une promesse&nbsp;: tout fonctionne déjà, sur ordinateur et sur iPhone. Et vous pouvez tout demander à l'assistant.</p>
-    <div class="deja">
-      <article class="deja-bloc apparait">
-        <h3>Ventes</h3>
-        <ul><li>Devis et factures</li><li>Acomptes et avoirs</li><li>Devis accepté en ligne</li><li>Relances des impayés</li><li>Abonnements et prélèvements automatiques</li></ul>
-      </article>
-      <article class="deja-bloc apparait">
-        <h3>Compta et TVA</h3>
-        <ul><li>Écritures et grand livre</li><li>Balance et lettrage</li><li>Déclaration de TVA</li><li>Bilan et compte de résultat</li><li>Export pour le comptable</li></ul>
-      </article>
-      <article class="deja-bloc apparait">
-        <h3>Banque</h3>
-        <ul><li>Banque connectée</li><li>Paiements reconnus tout seuls</li><li>Rapprochement</li><li>Trésorerie</li><li>Factures fournisseurs</li></ul>
-      </article>
-      <article class="deja-bloc apparait">
-        <h3>Projets et chantiers</h3>
-        <ul><li>Projets, chantiers et métrés</li><li>Articles et stock</li><li>Location de matériel</li><li>Réserves de chantier</li><li>SAV</li></ul>
-      </article>
-      <article class="deja-bloc apparait">
-        <h3>Frais et véhicules</h3>
-        <ul><li>Notes de frais</li><li>Pleins et entretiens</li><li>Coût au kilomètre</li><li>Immobilisations</li><li>Statistiques</li></ul>
-      </article>
-      <article class="deja-bloc apparait">
-        <h3>Organisation</h3>
-        <ul><li>Agenda et rendez-vous</li><li>Planning</li><li>Équipe et droits</li><li>Boîte mail avec IA</li><li>Sauvegarde chaque jour</li></ul>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- 4. Confiance : trois points courts.
      Tout ce qui est écrit ici est vérifié dans l'app : profils (Model/Profils.swift), Factur-X (Model/FacturX*.swift),
      sauvegarde quotidienne (Model/Sauvegarde.swift), export FEC pour le comptable, demandes relayées vers Mistral
@@ -425,6 +437,20 @@
     </ul>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- 5. Questions -->
 <section class="bloc" id="questions" aria-labelledby="titre-faq">
