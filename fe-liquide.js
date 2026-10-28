@@ -5,9 +5,9 @@
 //                        plateforme ; puis une autre part de la plateforme et fond dans « Vous » (obligatoire depuis 2026).
 //   ENVOYER  (0,5 → 1) : le même chemin à l'envers, vers « Votre client » (obligatoire en 2027).
 //   La phrase au-dessus (data-mode sur .fe-scene) et le nom de droite changent au milieu.
-// Avant l'animation, un premier écran plein (« Septembre 2026 : la facture électronique devient obligatoire ») recule
-// et se floute au défilement (--sortie) pendant que l'animation arrive (--entree). La barre du haut s'efface pendant
-// toute la séquence, comme pour la scène des bulles.
+// Les phrases (.fe-ligne) passent une à une au centre, comme dans la scène des bulles (data-de / data-a : leur plage
+// d'avancement) ; à la phrase « Cosmo est prêt », elles remontent et le schéma arrive (--entree). L'aller-retour se joue
+// sur la fin de la piste. La barre du haut s'efface pendant toute la séquence.
 // Les trois bulles et la mini-bulle sont des distances signées (cercles) ; la mini-bulle est fondue aux autres par un
 // minimum lissé, d'où le pont de liquide au départ et à l'arrivée. Le verre réfracte un fond doux (orange, lilas, bleu),
 // le même que le halo du schéma. Icônes, textes et fil restent en HTML ; ce script lit leurs places à chaque image.
@@ -19,6 +19,7 @@
   if (!section || !piste || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const scene = piste.querySelector(".fe-scene");
   const entete = document.getElementById("entete");
+  const lignes = Array.prototype.slice.call(piste.querySelectorAll(".fe-ligne"));
   const schema = piste.querySelector(".fe-schema");
   const icos = Array.prototype.slice.call(schema.querySelectorAll(".fe-ico"));
   const bulles = Array.prototype.slice.call(schema.querySelectorAll(".app-icone"));
@@ -139,11 +140,11 @@
     const p = total > 0 ? borne(-piste.getBoundingClientRect().top / total) : 0;
     // le défilement est suivi avec un léger amorti : même une molette par crans donne un mouvement continu
     pL = pL < 0 ? p : pL + (p - pL) * (1 - Math.exp(-dt * 8));
-    // écran 1 → écran 2, puis l'aller-retour sur le reste de la piste (q)
-    const sortie = doux(etape(pL, .08, .2)), entree = doux(etape(pL, .15, .27));
-    scene.style.setProperty("--sortie", sortie.toFixed(3));
+    // les phrases, l'arrivée du schéma, puis l'aller-retour sur la fin de la piste (q)
+    lignes.forEach(function (l) { l.classList.toggle("est-la", pL >= Number(l.dataset.de) && pL < Number(l.dataset.a)); });
+    const entree = doux(etape(pL, .36, .46));
     scene.style.setProperty("--entree", entree.toFixed(3));
-    const q = etape(pL, .28, 1);
+    const q = etape(pL, .47, 1);
     if (entete) {
       const r = piste.getBoundingClientRect();
       entete.classList.toggle("efface-fe", r.top <= 0 && r.bottom > window.innerHeight && !document.querySelector(".entete-liens.ouvert"));

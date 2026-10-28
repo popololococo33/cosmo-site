@@ -541,27 +541,23 @@ html:not(.js) .eco-final p, html:not(.js) .eco-note { opacity: 1; translate: non
 @keyframes fe-teinte-fin { 0%, 35%, 60%, 100% { color: var(--encre); } 39%, 54% { color: #E8501A; } }
 /* Version liquide (fe-liquide.js, classe .fe-gl) : le schéma reste fixe pendant le défilement, qui pilote l'aller-retour ;
    les bulles et la mini-bulle qui voyage sont dessinées en verre liquide (WebGL) ; icônes, textes et fil restent en HTML. */
-.fe { overflow-x: clip; padding-bottom: 88px; }
-/* écran 1 : le choc. Sans WebGL, il s'affiche simplement au-dessus de l'animation */
-.fe-intro { padding: 88px 0 24px; text-align: center; }
-.fe-intro-date { margin: 0 0 14px; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: var(--orange); }
-.fe-intro-titre { margin: 0; font-size: 42px; line-height: 1.04; font-weight: 700; letter-spacing: -0.035em; text-wrap: balance; }
-.fe-intro-sous { max-width: 640px; margin: 20px auto 0; font-size: 19px; color: var(--texte); text-wrap: balance; }
-.fe-rassure { margin: 0 0 26px; text-align: center; font-size: 19px; font-weight: 600; color: var(--texte); }
-.fe-rassure span { color: var(--orange-fonce); }
-@media (min-width: 760px) {
-  .fe-intro-date { font-size: 34px; }
-  .fe-intro-titre { font-size: 72px; }
-  .fe-intro-sous { font-size: 23px; }
-  .fe-rassure { font-size: 23px; }
-}
-@media (min-width: 1200px) { .fe-intro-titre { font-size: 88px; } }
-/* version liquide : les deux écrans se superposent dans la scène fixe ; fe-liquide.js règle --sortie (l'écran 1 recule)
-   et --entree (l'animation arrive) */
-.fe-gl .fe-piste { height: 360vh; height: 360svh; }
-.fe-gl .fe-intro { position: absolute; inset: 56px 0 0; z-index: 3; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 24px 40px; pointer-events: none;
-  opacity: calc(1 - var(--sortie, 0)); transform: translateY(calc(var(--sortie, 0) * -70px)) scale(calc(1 - var(--sortie, 0) * .08)); filter: blur(calc(var(--sortie, 0) * 10px)); }
-.fe-gl .fe-anim { opacity: var(--entree, 0); transform: translateY(calc((1 - var(--entree, 0)) * 50px)) scale(calc(.94 + var(--entree, 0) * .06)); }
+.fe { overflow-x: clip; }
+/* les phrases : la même taille et la même transition que la scène des bulles ; sans WebGL, elles s'affichent l'une sous l'autre */
+.fe-textes { display: grid; gap: 18px; padding: 88px 0 32px; text-align: center; }
+.fe-ligne { margin: 0; font-size: 32px; line-height: 1.08; font-weight: 700; letter-spacing: -0.03em; text-wrap: balance; }
+.fe-ligne span { color: var(--orange); }
+.fe-anim { padding-bottom: 88px; }
+@media (min-width: 700px) { .fe-ligne { font-size: 54px; } }
+@media (min-width: 1200px) { .fe-ligne { font-size: 64px; } }
+/* version liquide : une phrase à la fois au centre de la scène fixe ; à l'arrivée du schéma (--entree), elles remontent */
+.fe-gl .fe-piste { height: 460vh; height: 460svh; }
+.fe-gl .fe-textes { position: absolute; inset: 56px 0 0; z-index: 3; align-content: center; gap: 0; padding: 0 0 6vh; pointer-events: none;
+  transform: translateY(calc(var(--entree, 0) * -24vh)); }
+.fe-gl .fe-ligne { grid-area: 1 / 1; opacity: 0; translate: 0 18px; filter: blur(8px); transition: opacity .45s ease, translate .7s var(--lent), filter .5s ease; }
+.fe-gl .fe-ligne.est-la { opacity: 1; translate: 0 0; filter: blur(0); }
+.fe-gl .fe-anim { position: absolute; left: 0; right: 0; top: 50%; padding: 0; opacity: var(--entree, 0); transform: translateY(calc((1 - var(--entree, 0)) * 60px)) scale(calc(.94 + var(--entree, 0) * .06)); }
+@media (max-width: 699px) { .fe-gl .fe-anim { top: 44%; } .fe-gl .fe-textes { transform: translateY(calc(var(--entree, 0) * -26vh)); } }
+@media (prefers-reduced-motion: reduce) { .fe-ligne { transition: none; } }
 .fe-gl .fe-scene { position: sticky; top: 0; height: 100vh; height: 100svh; padding-top: 56px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
 /* la toile déborde un peu du schéma : les ombres et lueurs ne sont jamais coupées net */
 /* la facture qui voyage : une petite icône posée sur la mini-bulle (fe-liquide.js la place à chaque image) */
@@ -579,25 +575,9 @@ html:not(.js) .eco-final p, html:not(.js) .eco-note { opacity: 1; translate: non
 .fe-gl [data-mode="envoi"] .fe-alterne span:first-child { opacity: 0; }
 .fe-gl [data-mode="envoi"] .fe-alterne span:last-child { opacity: 1; }
 /* la phrase au-dessus de l'animation, avec sa date ; sans WebGL, les deux phrases l'une sous l'autre */
-/* la phrase au-dessus de l'animation : la date en orange, une grande phrase (à la taille des titres du site),
-   puis une ligne courte ; sans WebGL, les deux phrases l'une sous l'autre */
-.fe-legende { display: grid; gap: 36px; max-width: 860px; margin: 40px auto 0; text-align: center; }
-.fe-legende p { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 0; transition: opacity .45s ease, transform .6s var(--lent); }
-.fe-legende b { font-size: 28px; line-height: 1.12; font-weight: 700; letter-spacing: -0.025em; color: var(--encre); text-wrap: balance; }
-.fe-sous { font-size: 18px; color: var(--texte); }
-.fe-date { font-size: 17px; font-weight: 700; color: var(--orange); letter-spacing: -0.01em; }
-.fe-gl .fe-legende { margin-top: 0; }
-.fe-gl .fe-legende p { grid-area: 1 / 1; transition: opacity .45s ease .2s, transform .6s var(--lent) .2s; }
 /* la phrase qui part s'efface vite et sans attendre : jamais deux phrases l'une sur l'autre */
-.fe-gl [data-mode="reception"] .fe-legende-envoi, .fe-gl [data-mode="envoi"] .fe-legende-reception { transition: opacity .18s ease, transform .18s ease; }
-.fe-gl [data-mode="reception"] .fe-legende-envoi { opacity: 0; transform: translateY(14px); }
-.fe-gl [data-mode="envoi"] .fe-legende-reception { opacity: 0; transform: translateY(-14px); }
 @media (min-width: 760px) {
-  .fe-legende b { font-size: 44px; }
-  .fe-sous { font-size: 21px; }
-  .fe-date { font-size: 20px; }
 }
-@media (min-width: 1200px) { .fe-legende b { font-size: 52px; } }
 /* téléphone : une frise verticale — les bulles à gauche, le texte à droite, le fil relie les bulles directement
    (la mini-bulle ne passe plus sur les textes) */
 @media (max-width: 759px) {
@@ -607,12 +587,11 @@ html:not(.js) .eco-final p, html:not(.js) .eco-note { opacity: 1; translate: non
   .fe-noeud b { margin: 0; align-self: end; }
   .fe-noeud small { align-self: start; }
   .fe-lien { margin-left: 32px; }
-  .fe-gl .fe-schema { margin-top: 10px; padding: 6px 0; }
+  .fe-gl .fe-schema { margin-top: 0; padding: 6px 0; }
   .fe-gl .fe-lien { height: 40px; }
   .fe-gl .fe-noeud b { margin-top: 10px; }
 }
 
-.fe-cosmo { max-width: 620px; margin: 32px auto 0; text-align: center; font-size: 17px; color: var(--texte); }
 
 @media (min-width: 760px) {
   .fe-schema { grid-template-columns: minmax(0, 1fr) minmax(60px, .7fr) minmax(0, 1fr) minmax(60px, .7fr) minmax(0, 1fr); align-items: start; padding: 36px 0; }
@@ -632,7 +611,6 @@ html:not(.js) .eco-final p, html:not(.js) .eco-note { opacity: 1; translate: non
   .fe-schema.vu .fe-lien:nth-child(2) .fe-retour { animation-name: fe-h-retour-1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .fe-schema.vu .fe-lien i, .fe-schema.vu .fe-ico::before, .fe-schema.vu .app-icone, .fe-legende p, .fe-alterne span { animation: none; transition: none; }
 }
 
 .deja { display: grid; gap: 44px 40px; margin-top: 56px; }

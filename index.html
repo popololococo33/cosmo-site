@@ -22,11 +22,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600&text=cosm&display=swap">
-<link rel="stylesheet" href="style.css?v=68">
+<link rel="stylesheet" href="style.css?v=69">
 <script>document.documentElement.classList.add("js");</script>
 <script src="page.js?v=32" defer></script>
 <script src="ere-liquide.js?v=5" defer></script>
-<script src="fe-liquide.js?v=5" defer></script>
+<script src="fe-liquide.js?v=6" defer></script>
 <script src="demo.js?v=33" defer></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module" src="ia3d.js?v=31"></script>
@@ -313,33 +313,27 @@
      pour les TPE et PME. Cosmo (version ordinateur, Cosmo GC) est relié à la plateforme agréée Super PDP :
      émission, réception, statuts et encaissements (code dans cosmogc, src/lib/pdp/). -->
 <section class="fe" id="facture-electronique" aria-labelledby="titre-fe">
-  <div class="largeur">
-    <div class="fe-piste" data-fe>
-      <div class="fe-scene" data-mode="reception">
-        <!-- écran 1 : le choc (plein écran) ; au défilement, il recule et laisse place à l'écran 2 : l'animation -->
-        <div class="fe-intro">
-          <p class="fe-intro-date">Septembre 2026</p>
-          <h2 class="fe-intro-titre" id="titre-fe">La facture électronique<br><span class="orange-texte">devient obligatoire.</span></h2>
-          <p class="fe-intro-sous">Le PDF envoyé par e-mail, c'est fini. Entre entreprises, tout passe par une plateforme agréée par l'État.</p>
-        </div>
-        <div class="fe-anim">
-        <p class="fe-rassure">Pas d'inquiétude&nbsp;: <span>Cosmo est déjà prêt.</span></p>
-        <!-- la phrase qui accompagne l'animation : d'abord la réception (obligatoire maintenant), puis l'envoi (2027) -->
-        <div class="fe-legende apparait">
-          <p class="fe-legende-reception"><span class="fe-date">Depuis septembre 2026</span><b>Vos fournisseurs vous envoient leurs factures par la plateforme.</b><span class="fe-sous">Elles arrivent toutes seules dans Cosmo.</span></p>
-          <p class="fe-legende-envoi"><span class="fe-date">À partir de septembre 2027</span><b>Vous envoyez les vôtres de la même façon.</b><span class="fe-sous">Cosmo s'en charge pour vous.</span></p>
-        </div>
-        <div class="fe-schema apparait">
+  <div class="fe-piste" data-fe>
+    <div class="fe-scene" data-mode="reception">
+      <!-- une phrase à la fois, au centre, comme la scène des bulles ; à la phrase 4, elle remonte et le schéma apparaît -->
+      <div class="fe-textes largeur">
+        <h2 class="fe-ligne" id="titre-fe" data-de="0" data-a=".1">Septembre 2026.</h2>
+        <p class="fe-ligne" data-de=".1" data-a=".2">La facture électronique devient <span>obligatoire.</span></p>
+        <p class="fe-ligne" data-de=".2" data-a=".3">Le PDF par e-mail, <span>c'est fini.</span></p>
+        <p class="fe-ligne" data-de=".3" data-a=".47">Pas d'inquiétude&nbsp;: <span>Cosmo est prêt.</span></p>
+        <p class="fe-ligne" data-de=".47" data-a=".74">Vos fournisseurs vous envoient leurs factures <span>par la plateforme.</span></p>
+        <p class="fe-ligne" data-de=".74" data-a="1.01">Dès 2027, vous envoyez les vôtres. <span>Cosmo s'en charge.</span></p>
+      </div>
+      <div class="fe-anim largeur">
+        <div class="fe-schema">
           <div class="fe-noeud fe-debut"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:0"><svg><use href="#o-devis"/></svg></span></span><b>Vous</b></div>
           <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
-          <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><span class="app-icone fe-logo" style="--i:3"><svg><use href="#logo"/></svg></span></span><b>Plateforme agréée</b><small>reliée à Cosmo</small></div>
+          <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><span class="app-icone fe-logo" style="--i:3"><svg><use href="#logo"/></svg></span></span><b>Plateforme agréée</b></div>
           <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
           <div class="fe-noeud fe-fin"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:6"><svg><use href="#o-entreprises"/></svg></span></span><b class="fe-alterne"><span>Votre fournisseur</span><span>Votre client</span></b></div>
         </div>
-        </div>
       </div>
     </div>
-    <p class="fe-cosmo apparait"><b>Avec Cosmo, c'est déjà en place.</b> Il est relié à Super PDP, une plateforme agréée par l'État. Vous n'avez rien à changer.</p>
   </div>
 </section>
 
