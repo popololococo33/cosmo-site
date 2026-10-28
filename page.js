@@ -114,6 +114,11 @@
       lignes.forEach(function (l) {
         l.classList.toggle("est-la", p >= Number(l.dataset.de) && p < Number(l.dataset.a));
       });
+      // pendant la scène, la barre du haut s'efface (plein écran) ; elle revient dès qu'on en sort
+      if (entete) {
+        const r = ere.getBoundingClientRect();
+        entete.classList.toggle("efface", r.top <= 0 && r.bottom > window.innerHeight && !document.querySelector(".entete-liens.ouvert"));
+      }
     };
     window.addEventListener("scroll", function () {
       if (!attenteEre) { attenteEre = true; requestAnimationFrame(suivreEre); }

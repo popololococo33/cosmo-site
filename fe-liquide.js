@@ -88,6 +88,12 @@
   ["uRes", "uDpr", "uTime", "uK", "uB", "uM", "uG"].forEach(function (n) { U[n] = gl.getUniformLocation(prog, n); });
 
   schema.insertBefore(toile, schema.firstChild);
+  // la facture qui voyage : l'icône du document, posée sur la mini-bulle
+  const mini = document.createElement("span");
+  mini.className = "fe-mini";
+  mini.setAttribute("aria-hidden", "true");
+  mini.innerHTML = '<svg><use href="#o-devis"/></svg>';
+  schema.appendChild(mini);
   section.classList.add("fe-gl");
 
   const borne = function (x) { return Math.min(1, Math.max(0, x)); };
@@ -137,7 +143,7 @@
       return [r.left + r.width / 2 - base.left, r.top + r.height / 2 - base.top, bulles[i].offsetWidth / 2];
     });
     // la mini-bulle du trajet en cours
-    let m = [0, 0, -1], k = 0;
+    let m = [0, 0, -1], k = 0, voit = 0;
     trajets.forEach(function (tr) {
       const x = etape(pL, tr.debut, tr.fin);
       if (x <= 0 || x >= 1) return;
@@ -145,12 +151,22 @@
       const rm = A[2] * .46;
       m = [A[0] + (Bb[0] - A[0]) * e, A[1] + (Bb[1] - A[1]) * e, rm];
       k = rm * 1.5;
+      // l'icône se montre une fois la bulle détachée, et s'efface quand elle fond dans l'autre
+      voit = borne((x - .12) / .14) * (1 - borne((x - .78) / .14));
       // la bulle de départ cède un peu de liquide, celle d'arrivée en reçoit
       const cede = Math.sin(Math.PI * Math.min(1, x * 1.6)) * .07;
       const recoit = Math.sin(Math.PI * Math.max(0, (x - .55) / .45)) * .07;
       centres[tr.de] = [A[0], A[1], A[2] * (1 - cede)];
       centres[tr.a] = [Bb[0], Bb[1], Bb[2] * (1 + recoit)];
     });
+    // la toile déborde de 40 px autour du schéma : on recale l'icône dans le repère du schéma
+    if (voit > 0.01) {
+      const taille = m[2] * 1.05;
+      mini.style.transform = "translate(" + (m[0] - 40 - 15).toFixed(1) + "px," + (m[1] - 40 - 15).toFixed(1) + "px) scale(" + (taille / 30).toFixed(3) + ")";
+      mini.style.opacity = voit.toFixed(3);
+    } else if (mini.style.opacity !== "0") {
+      mini.style.opacity = "0";
+    }
     for (let i = 0; i < 3; i++) { B[i * 3] = centres[i][0]; B[i * 3 + 1] = centres[i][1]; B[i * 3 + 2] = centres[i][2]; }
 
     // les lueurs : au départ et à l'arrivée de chaque trajet

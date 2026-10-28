@@ -50,6 +50,10 @@ svg { flex: none; }
 /* ---------- Barre du haut ---------- */
 .entete { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, .8); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid transparent; transition: border-color .3s ease; }
 .entete:not(.au-sommet) { border-bottom-color: rgba(0, 0, 0, .08); }
+/* scène « nouvelle ère » : la barre glisse vers le haut pour laisser tout l'écran à l'animation (page.js) */
+.entete { transition: border-color .3s ease, transform .5s var(--lent), opacity .4s ease; }
+.entete.efface { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .entete { transition: none; } }
 .entete-ligne { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
 .marque { display: inline-flex; align-items: center; gap: 8px; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; text-decoration: none; color: var(--encre); }
 .marque-c { width: 26px; height: 22px; color: var(--encre); }
@@ -82,12 +86,10 @@ svg { flex: none; }
 .haut { overflow: hidden; padding-top: 56px; text-align: center; }
 .haut-texte { display: flex; flex-direction: column; align-items: center; }
 .surtitre { font-size: 17px; font-weight: 600; color: var(--orange-fonce); margin-bottom: 10px; }
-/* badge de l'accueil : la facture électronique, l'argument du moment */
-.badge-fe { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; padding: 6px 12px 6px 10px; border-radius: 999px; text-decoration: none;
-  font-size: 14px; font-weight: 600; color: var(--orange-fonce); background: rgba(255, 255, 255, .7); box-shadow: inset 0 0 0 1px rgba(255, 90, 31, .28), 0 8px 20px -14px rgba(255, 90, 31, .6); }
-.badge-fe i { width: 8px; height: 8px; border-radius: 50%; background: #2BB673; box-shadow: 0 0 0 3px rgba(43, 182, 115, .18); }
-.badge-fe svg { width: 14px; height: 14px; }
-@media (hover: hover) { .badge-fe:hover { background: #fff; } }
+/* l'accroche de l'accueil : une ligne orange, comme un « Nouveau » d'Apple, qui mène à la facture électronique */
+.accroche-fe { display: inline-flex; align-items: center; gap: 4px; margin-bottom: 12px; font-size: 17px; font-weight: 600; color: var(--orange-fonce); text-decoration: none; }
+.accroche-fe svg { width: 16px; height: 16px; transition: transform .25s ease; }
+@media (hover: hover) { .accroche-fe:hover svg { transform: translateX(3px); } }
 .haut h1 { font-size: 44px; line-height: 1.06; letter-spacing: -0.03em; font-weight: 700; }
 .haut h1 .ligne { display: block; text-wrap: balance; }
 .ligne-douce { color: var(--gris); }
@@ -284,7 +286,7 @@ svg { flex: none; }
 /* « Comment ça marche » : un seul iPhone fixe (sticky) pendant que les trois étapes défilent (recit3d.js règle
    .actif et --recit, l'avancement). Ordinateur : étapes à gauche, iPhone à droite. Téléphone : iPhone en haut, l'étape dessous. */
 .recit-tete { padding-top: 88px; }
-.recit { position: relative; height: 300vh; height: 300svh; }
+.recit { position: relative; height: 360vh; height: 360svh; }
 .recit-scene { position: sticky; top: 0; height: 100vh; height: 100svh; padding-top: 56px; box-sizing: border-box; display: grid; align-items: center; }
 .recit-grille { display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; justify-items: center; gap: 14px; height: 100%; }
 .recit-tel { order: -1; position: relative; width: 100%; height: 54svh; }
@@ -292,6 +294,7 @@ svg { flex: none; }
 .recit-tel.pret canvas { opacity: 1; }
 .recit-video { position: absolute; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
 .recit-tel.sans-3d .recit-video.actif { position: static; display: block; width: auto; height: 100%; margin: 0 auto; opacity: 1; border-radius: 36px; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .4); }
+.recit-gauche { display: flex; flex-direction: column; align-items: center; width: 100%; }
 .recit-etapes { display: grid; width: 100%; max-width: 420px; margin: 0; padding: 0; list-style: none; }
 .recit-etape { grid-area: 1 / 1; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .6s var(--lent); }
 /* l'étape qui part s'efface vite, la nouvelle arrive juste après : jamais deux textes l'un sur l'autre */
@@ -302,22 +305,34 @@ svg { flex: none; }
 .etape3-num { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--orange); color: #fff; font-size: 20px; font-weight: 700; }
 .recit-points { display: flex; gap: 8px; }
 .recit-points i { width: 7px; height: 7px; border-radius: 50%; background: rgba(29, 29, 31, .18); transition: background .3s ease, width .4s var(--lent); }
-.recit-points i.actif { width: 22px; border-radius: 4px; background: var(--orange); }
+/* la pastille de l'étape en cours se remplit au rythme de la vidéo (--prog, réglé par recit3d.js) */
+.recit-points i.actif { width: 26px; border-radius: 4px; background: linear-gradient(90deg, var(--orange) calc(var(--prog, 0) * 100%), rgba(255, 90, 31, .25) 0); }
+.recit-suite { display: inline-flex; align-items: center; gap: 4px; margin: 0; font-size: 14px; font-weight: 600; color: var(--gris); opacity: 0; transition: opacity .5s ease; }
+.recit-suite svg { width: 14px; height: 14px; transform: rotate(90deg); animation: recit-suite 1.6s ease-in-out infinite; }
+.recit-suite.visible { opacity: 1; }
+@keyframes recit-suite { 50% { translate: 0 4px; } }
 @media (min-width: 900px) {
   .recit-tete { padding-top: 120px; }
   .recit-grille { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 48px; }
-  .recit-tel { order: 0; grid-column: 2; grid-row: 1 / span 2; height: min(80svh, 720px); }
+  .recit-tel { order: 0; grid-column: 2; height: min(80svh, 720px); }
   /* sur ordinateur, les trois étapes sont visibles : celle en cours est nette, avec son trait orange */
-  .recit-etapes { grid-column: 1; grid-row: 1 / span 2; align-self: center; max-width: 460px; gap: 6px; }
+  .recit-gauche { grid-column: 1; grid-row: 1 / span 2; align-self: center; }
+  .recit-etapes { max-width: 460px; gap: 6px; }
   .recit-etape { grid-area: auto; flex-direction: row; align-items: flex-start; gap: 18px; padding: 18px 0 18px 22px; text-align: left; opacity: .3; transform: none;
     border-left: 2px solid rgba(29, 29, 31, .1); transition: opacity .5s ease, border-color .5s ease; }
-  .recit-etape.actif { border-left-color: var(--orange); }
+  /* le trait de l'étape en cours se remplit au rythme de la vidéo */
+  .recit-etape { position: relative; }
+  .recit-etape::before { content: ""; position: absolute; left: -2px; top: 0; width: 2px; height: calc(var(--prog, 0) * 100%); background: var(--orange); }
+  .recit-etape:not(.actif)::before { height: 0; }
+  .recit-etape.actif { border-left-color: rgba(255, 90, 31, .22); }
+  .recit-suite { margin: 22px 0 0 24px; }
   .recit-etape h3 { font-size: 34px; }
   .recit-etape p { font-size: 19px; }
   .recit-points { display: none; }
+  .recit-tel { grid-row: 1 / span 2; }
 }
 @media (min-width: 1200px) { .recit-etape h3 { font-size: 40px; } }
-@media (prefers-reduced-motion: reduce) { .recit-etape { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .recit-etape { transition: none; } .recit-suite svg { animation: none; } }
 html:not(.js) .recit { height: auto; }
 html:not(.js) .recit-scene { position: relative; height: auto; }
 html:not(.js) .recit-etape { grid-area: auto; opacity: 1; transform: none; }
@@ -505,8 +520,8 @@ html:not(.js) .eco-final p, html:not(.js) .eco-note { opacity: 1; translate: non
 .fe-schema::before { content: ""; position: absolute; inset: 0 8%; z-index: -1; pointer-events: none; filter: blur(34px);
   background: radial-gradient(42% 30% at 50% 15%, rgba(255, 174, 133, .55), transparent 70%), radial-gradient(42% 30% at 50% 50%, rgba(196, 174, 255, .5), transparent 70%), radial-gradient(42% 30% at 50% 85%, rgba(157, 211, 255, .5), transparent 70%); }
 .fe-noeud { display: flex; flex-direction: column; align-items: center; gap: 4px; max-width: 250px; text-align: center; }
-.fe-noeud b { margin-top: 14px; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
-.fe-noeud small { font-size: 15px; color: var(--gris); }
+.fe-noeud b { margin-top: 14px; font-size: 21px; font-weight: 700; letter-spacing: -0.015em; }
+.fe-noeud small { font-size: 16px; color: var(--gris); }
 .fe-logo svg { width: 34px; height: 28px; }
 .fe-ico { position: relative; display: grid; place-items: center; }
 /* la lueur orange derrière la bulle, quand la facture la traverse */
@@ -553,6 +568,9 @@ html:not(.js) .eco-final p, html:not(.js) .eco-note { opacity: 1; translate: non
 .fe-gl .fe-piste { height: 240vh; height: 240svh; }
 .fe-gl .fe-scene { position: sticky; top: 0; height: 100vh; height: 100svh; padding-top: 56px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
 /* la toile déborde un peu du schéma : les ombres et lueurs ne sont jamais coupées net */
+/* la facture qui voyage : une petite icône posée sur la mini-bulle (fe-liquide.js la place à chaque image) */
+.fe-mini { position: absolute; left: 0; top: 0; z-index: 2; width: 30px; height: 30px; color: var(--encre); opacity: 0; pointer-events: none; will-change: transform, opacity; }
+.fe-mini svg { display: block; width: 100%; height: 100%; }
 .fe-toile { position: absolute; left: -40px; top: -40px; z-index: 1; width: calc(100% + 80px); height: calc(100% + 80px); pointer-events: none; }
 .fe-gl .fe-noeud { position: relative; z-index: 2; }
 .fe-gl .fe-lien i, .fe-gl .fe-ico::before { display: none; }
@@ -565,14 +583,25 @@ html:not(.js) .eco-final p, html:not(.js) .eco-note { opacity: 1; translate: non
 .fe-gl [data-mode="envoi"] .fe-alterne span:first-child { opacity: 0; }
 .fe-gl [data-mode="envoi"] .fe-alterne span:last-child { opacity: 1; }
 /* la phrase au-dessus de l'animation, avec sa date ; sans WebGL, les deux phrases l'une sous l'autre */
-.fe-legende { display: grid; gap: 22px; max-width: 600px; margin: 40px auto 0; text-align: center; }
-.fe-legende p { margin: 0; font-size: 19px; line-height: 1.4; font-weight: 500; color: var(--encre); transition: opacity .45s ease, transform .6s var(--lent); }
-.fe-date { display: table; margin: 0 auto 10px; padding: 4px 12px; border-radius: 999px; background: #FFF1EA; color: var(--orange-fonce); font-size: 14px; font-weight: 600; }
+/* la phrase au-dessus de l'animation : la date en orange, une grande phrase (à la taille des titres du site),
+   puis une ligne courte ; sans WebGL, les deux phrases l'une sous l'autre */
+.fe-legende { display: grid; gap: 36px; max-width: 860px; margin: 40px auto 0; text-align: center; }
+.fe-legende p { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 0; transition: opacity .45s ease, transform .6s var(--lent); }
+.fe-legende b { font-size: 28px; line-height: 1.12; font-weight: 700; letter-spacing: -0.025em; color: var(--encre); text-wrap: balance; }
+.fe-sous { font-size: 18px; color: var(--texte); }
+.fe-date { font-size: 17px; font-weight: 700; color: var(--orange); letter-spacing: -0.01em; }
 .fe-gl .fe-legende { margin-top: 0; }
-.fe-gl .fe-legende p { grid-area: 1 / 1; }
-.fe-gl [data-mode="reception"] .fe-legende-envoi { opacity: 0; transform: translateY(10px); }
-.fe-gl [data-mode="envoi"] .fe-legende-reception { opacity: 0; transform: translateY(-10px); }
-@media (min-width: 760px) { .fe-legende p { font-size: 22px; } }
+.fe-gl .fe-legende p { grid-area: 1 / 1; transition: opacity .45s ease .2s, transform .6s var(--lent) .2s; }
+/* la phrase qui part s'efface vite et sans attendre : jamais deux phrases l'une sur l'autre */
+.fe-gl [data-mode="reception"] .fe-legende-envoi, .fe-gl [data-mode="envoi"] .fe-legende-reception { transition: opacity .18s ease, transform .18s ease; }
+.fe-gl [data-mode="reception"] .fe-legende-envoi { opacity: 0; transform: translateY(14px); }
+.fe-gl [data-mode="envoi"] .fe-legende-reception { opacity: 0; transform: translateY(-14px); }
+@media (min-width: 760px) {
+  .fe-legende b { font-size: 44px; }
+  .fe-sous { font-size: 21px; }
+  .fe-date { font-size: 20px; }
+}
+@media (min-width: 1200px) { .fe-legende b { font-size: 52px; } }
 /* téléphone : une frise verticale — les bulles à gauche, le texte à droite, le fil relie les bulles directement
    (la mini-bulle ne passe plus sur les textes) */
 @media (max-width: 759px) {

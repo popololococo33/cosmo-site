@@ -22,15 +22,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600&text=cosm&display=swap">
-<link rel="stylesheet" href="style.css?v=59">
+<link rel="stylesheet" href="style.css?v=65">
 <script>document.documentElement.classList.add("js");</script>
-<script src="page.js?v=31" defer></script>
+<script src="page.js?v=32" defer></script>
 <script src="ere-liquide.js?v=5" defer></script>
-<script src="fe-liquide.js?v=3" defer></script>
+<script src="fe-liquide.js?v=4" defer></script>
 <script src="demo.js?v=33" defer></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module" src="ia3d.js?v=31"></script>
-<script type="module" src="recit3d.js?v=32"></script>
+<script type="module" src="recit3d.js?v=33"></script>
 </head>
 <body>
 
@@ -94,7 +94,7 @@
 <!-- 1. Le haut : un titre, une phrase, un bouton, l'app -->
 <section class="haut" id="haut" aria-labelledby="titre-haut">
   <div class="largeur haut-texte">
-    <a class="badge-fe" href="#facture-electronique"><i aria-hidden="true"></i>Prêt pour la facture électronique<svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+    <a class="accroche-fe" href="#facture-electronique">Facture électronique obligatoire&nbsp;: Cosmo est prêt<svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
     <h1 id="titre-haut"><span class="ligne">Faites votre métier.</span> <span class="ligne ligne-orange">Cosmo fait le reste.</span></h1>
     <p class="chapeau">Devis, factures, relances, comptabilité, TVA&nbsp;: vous le demandez, Cosmo le prépare, vous validez. Sur ordinateur et sur iPhone.</p>
     <div class="actions">
@@ -186,8 +186,8 @@
       <div class="fe-scene" data-mode="reception">
         <!-- la phrase qui accompagne l'animation : d'abord la réception (obligatoire maintenant), puis l'envoi (2027) -->
         <div class="fe-legende apparait">
-          <p class="fe-legende-reception"><span class="fe-date">Depuis septembre 2026</span>Vos fournisseurs vous envoient leurs factures par la plateforme. Elles arrivent toutes seules dans Cosmo.</p>
-          <p class="fe-legende-envoi"><span class="fe-date">À partir de septembre 2027</span>Vous envoyez les vôtres de la même façon. Cosmo s'en charge pour vous.</p>
+          <p class="fe-legende-reception"><span class="fe-date">Depuis septembre 2026</span><b>Vos fournisseurs vous envoient leurs factures par la plateforme.</b><span class="fe-sous">Elles arrivent toutes seules dans Cosmo.</span></p>
+          <p class="fe-legende-envoi"><span class="fe-date">À partir de septembre 2027</span><b>Vous envoyez les vôtres de la même façon.</b><span class="fe-sous">Cosmo s'en charge pour vous.</span></p>
         </div>
         <div class="fe-schema apparait">
           <div class="fe-noeud fe-debut"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:0"><svg><use href="#o-devis"/></svg></span></span><b>Vous</b></div>
@@ -213,11 +213,14 @@
   <div class="recit" data-recit>
     <div class="recit-scene">
       <div class="largeur recit-grille">
+        <div class="recit-gauche">
         <ol class="recit-etapes">
           <li class="recit-etape actif"><span class="etape3-num">1</span><div><h3>Vous parlez</h3><p>Comme à un collègue. Cosmo écoute et écrit pour vous.</p></div></li>
           <li class="recit-etape"><span class="etape3-num">2</span><div><h3>Cosmo prépare</h3><p>Le devis est prêt en quelques secondes, avec vos prix et la TVA.</p></div></li>
           <li class="recit-etape"><span class="etape3-num">3</span><div><h3>Vous validez</h3><p>Rien ne se fait sans votre accord. Un geste, et le devis est prêt à envoyer.</p></div></li>
         </ol>
+        <p class="recit-suite" aria-hidden="true">Faites défiler pour la suite<svg><use href="#i-fleche"/></svg></p>
+        </div>
         <div class="recit-points" aria-hidden="true"><i class="actif"></i><i></i><i></i></div>
         <div class="recit-tel" aria-hidden="true" data-recit3d>
           <video class="recit-video actif" data-recit-video src="images/recit-1.mp4" muted playsinline preload="auto"></video>

@@ -22,6 +22,7 @@ const section = document.querySelector("[data-recit]");
 const boite = section && section.querySelector("[data-recit3d]");
 const etapes = section ? Array.prototype.slice.call(section.querySelectorAll(".recit-etape")) : [];
 const points = section ? Array.prototype.slice.call(section.querySelectorAll(".recit-points i")) : [];
+const suite = section && section.querySelector(".recit-suite");
 const videos = boite ? Array.prototype.slice.call(boite.querySelectorAll("[data-recit-video]")) : [];
 const reduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 if (section && boite && videos.length === 3) demarrer();
@@ -128,6 +129,17 @@ function demarrer() {
     const p = v.play();
     if (p && p.catch) p.catch(function () {});
   }
+  // l'avancement de la vidéo se voit à gauche (trait ou pastille qui se remplit) ; une fois finie, on invite à continuer
+  let progAffiche = -1;
+  function suivreLecture() {
+    const v = videos[actuelle];
+    const prog = v && v.duration ? Math.min(1, v.currentTime / v.duration) : 0;
+    if (Math.abs(prog - progAffiche) > 0.004) {
+      progAffiche = prog;
+      section.style.setProperty("--prog", prog.toFixed(3));
+    }
+    if (suite) suite.classList.toggle("visible", joue === actuelle && (v.ended || prog > 0.98) && actuelle < 2);
+  }
   function arreter() {
     joue = -1;
     videos.forEach(function (v) { v.pause(); v.currentTime = 0; });
@@ -168,7 +180,7 @@ function demarrer() {
     const cible = reduit ? 1 : borne((vh - section.getBoundingClientRect().top) / (vh * 0.5));
     const ecart = cible - rA;
     const bouge = Math.abs(ecart) > 0.0005 || coup > 0.001;
-    if (!bouge && videos[actuelle].paused && !force) return;
+    if (!bouge && videos[actuelle].paused && !force) { suivreLecture(); return; }
     force = false;
     rA = Math.abs(ecart) < 0.0005 ? cible : rA + ecart * (1 - Math.exp(-dt * 8));
     coup = coup > 0.001 ? coup * Math.exp(-dt * 3.2) : 0;
@@ -183,6 +195,7 @@ function demarrer() {
 
     // la vidéo de l'étape part quand l'iPhone est de face
     if (rA > 0.92 && joue !== actuelle) lancer(actuelle);
+    suivreLecture();
   }
 
   const draco = new DRACOLoader();
