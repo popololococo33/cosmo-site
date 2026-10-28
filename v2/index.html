@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600&text=cosm&display=swap">
-<link rel="stylesheet" href="style.css?v=45">
+<link rel="stylesheet" href="style.css?v=50">
 <script>document.documentElement.classList.add("js");</script>
 <script src="page.js?v=31" defer></script>
 <script src="ere-liquide.js?v=3" defer></script>
@@ -55,6 +55,7 @@
   <symbol id="o-stats" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M5 5v22h22"/><path d="M10 16h3.5v7H10zM16 11h3.5v12H16zM22 7h3.5v16H22z"/></g></symbol>
   <symbol id="o-sav" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M19.4 5.4a6 6 0 0 0-5.8 8L5 22l5 5 8.6-8.6a6 6 0 0 0 8-5.8l-3.8 3.8-3.7-.6-.6-3.7z"/></g></symbol>
   <symbol id="o-plateforme" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M16 4l10 4v7c0 6.5-4.3 11.2-10 13-5.7-1.8-10-6.5-10-13V8z"/><path d="M11.5 16l3.3 3.3 6-6.3"/></g></symbol>
+  <symbol id="o-entreprises" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M5 27V8l10-3v22M15 27V13l12 3v11M3 27h26M9 11v1M9 16v1M9 21v1M20 19v1M20 23v1M23 19v1M23 23v1"/></g></symbol>
 </svg>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -74,10 +75,10 @@
       <span class="nom">cosm<i>o</i></span>
     </a>
     <nav class="entete-liens" id="menu-sections" aria-label="Sections de la page">
-      <a href="#assistant">L'assistant</a>
-      <a href="#comment">Comment ça marche</a>
-      <a href="#fonctions">Fonctions</a>
-      <a href="#confiance">Confiance</a>
+      <a href="#assistant">L'assistant IA</a>
+      <a href="#fonctions">Tout ce qu'il fait</a>
+      <a href="#economies">Vos économies</a>
+      <a href="#facture-electronique">Facture électronique</a>
       <a href="#questions">Questions</a>
     </nav>
     <div class="entete-actions">
@@ -384,14 +385,15 @@
 <section class="bloc fe" id="facture-electronique" aria-labelledby="titre-fe">
   <div class="largeur">
     <h2 class="titre-bloc apparait" id="titre-fe">La facture électronique<br><span class="orange-texte">devient obligatoire.</span></h2>
-    <p class="chapeau centre apparait">Entre entreprises, une facture envoyée en PDF par e-mail ne suffira plus. Elle passera par une plateforme agréée par l'État.</p>
+    <p class="chapeau centre apparait">Depuis septembre 2026, toute entreprise doit pouvoir <strong>recevoir</strong> ses factures par une plateforme agréée par l'État. Bientôt, il faudra aussi les <strong>envoyer</strong> ainsi&nbsp;: le PDF par e-mail ne suffira plus.</p>
     <p class="fe-avant apparait"><span class="fe-barre">Un PDF par e-mail</span><svg aria-hidden="true"><use href="#i-fleche"/></svg><b>Une facture électronique</b></p>
+    <div class="fe-modes apparait" aria-hidden="true"><span class="fe-mode-envoi">Envoyer</span><span class="fe-mode-reception">Recevoir</span><i></i></div>
     <div class="fe-schema apparait">
-      <div class="fe-noeud fe-debut"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:0"><svg><use href="#o-devis"/></svg></span></span><b>Vous</b><small>émettez la facture</small></div>
-      <div class="fe-lien" aria-hidden="true"><i></i></div>
-      <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:3"><svg><use href="#o-plateforme"/></svg></span></span><b>La plateforme agréée</b><small>la vérifie et la transmet</small></div>
-      <div class="fe-lien" aria-hidden="true"><i></i></div>
-      <div class="fe-noeud fe-fin"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:6"><svg><use href="#o-mail"/></svg></span></span><b>Votre client</b><small>la reçoit, prête à payer</small></div>
+      <div class="fe-noeud fe-debut"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:0"><svg><use href="#o-devis"/></svg></span></span><b>Vous</b><small class="fe-alterne"><span>envoyez vos factures</span><span>recevez celles de vos fournisseurs</span></small></div>
+      <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
+      <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><span class="app-icone fe-logo" style="--i:3"><svg><use href="#logo"/></svg></span></span><b>Plateforme agréée</b><small>reliée à Cosmo&nbsp;: tout est vérifié et transmis</small></div>
+      <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
+      <div class="fe-noeud fe-fin"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:6"><svg><use href="#o-entreprises"/></svg></span></span><b>Clients et fournisseurs</b><small class="fe-alterne"><span>reçoivent vos factures</span><span>vous envoient les leurs</span></small></div>
     </div>
     <p class="fe-fisc apparait">Au passage, la plateforme transmet aussi les données de la facture à l'administration fiscale.</p>
     <ol class="fe-dates">
