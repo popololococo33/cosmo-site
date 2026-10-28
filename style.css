@@ -378,6 +378,12 @@ svg { flex: none; }
    --h (le halo), --rai (le reflet sur « tous ») et data-phase (a, b, c) sur la section. */
 .eco { position: relative; height: 470vh; height: 470svh; --h: .3; --rai: 100%; }
 @media (max-width: 699px) { .eco { height: 340vh; height: 340svh; } }
+/* moins de vide entre la facture électronique et les économies : le haut de cette scène (vide, la phrase attend au milieu)
+   glisse sous le bas de la précédente (vide aussi, sous le schéma) */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .fe-gl + .eco { margin-top: -46vh; margin-top: -46svh; }
+  @media (max-width: 699px) { html.js .fe-gl + .eco { margin-top: -28vh; margin-top: -28svh; } }
+}
 .eco-scene { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; perspective: 1100px; }
 .eco-halo { position: absolute; left: 50%; top: 52%; width: 90vmin; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(255, 138, 92, .45), rgba(255, 174, 133, .18) 50%, transparent 75%);
