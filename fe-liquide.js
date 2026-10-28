@@ -1,9 +1,10 @@
 // « La facture électronique devient obligatoire » : l'aller-retour en verre liquide, piloté par le défilement (WebGL)
 //
 // Le schéma (.fe-scene) reste fixe pendant qu'on fait défiler la piste (.fe-piste). L'avancement pilote tout :
-//   ENVOYER  (0 → 0,5) : une mini-bulle se détache de « Vous », glisse sur le fil, fond dans la plateforme ;
-//                        puis une autre part de la plateforme et fond chez « Clients et fournisseurs ».
-//   RECEVOIR (0,5 → 1) : le même chemin à l'envers. Le sélecteur « Envoyer / Recevoir » bascule au milieu.
+//   RECEVOIR (0 → 0,5) : une mini-bulle se détache de « Votre fournisseur », glisse sur le fil, fond dans la
+//                        plateforme ; puis une autre part de la plateforme et fond dans « Vous » (obligatoire depuis 2026).
+//   ENVOYER  (0,5 → 1) : le même chemin à l'envers, vers « Votre client » (obligatoire en 2027).
+//   La phrase au-dessus (data-mode sur .fe-scene) et le nom de droite changent au milieu.
 // Les trois bulles et la mini-bulle sont des distances signées (cercles) ; la mini-bulle est fondue aux autres par un
 // minimum lissé, d'où le pont de liquide au départ et à l'arrivée. Le verre réfracte un fond doux (orange, lilas, bleu),
 // le même que le halo du schéma. Icônes, textes et fil restent en HTML ; ce script lit leurs places à chaque image.
@@ -95,12 +96,12 @@
   // un pic autour de l'instant e (largeur l) : la lueur d'une bulle quand la mini-bulle la quitte ou l'atteint
   const pic = function (p, e, l) { const x = (p - e) / l; return Math.exp(-x * x); };
 
-  // les quatre trajets : de quelle bulle à quelle bulle, entre quels avancements
+  // les quatre trajets (0 : vous, 1 : la plateforme, 2 : fournisseur ou client) : la réception, puis l'envoi
   const trajets = [
-    { de: 0, a: 1, debut: .06, fin: .24 },
-    { de: 1, a: 2, debut: .28, fin: .46 },
-    { de: 2, a: 1, debut: .54, fin: .72 },
-    { de: 1, a: 0, debut: .76, fin: .94 }
+    { de: 2, a: 1, debut: .06, fin: .24 },
+    { de: 1, a: 0, debut: .28, fin: .46 },
+    { de: 0, a: 1, debut: .54, fin: .72 },
+    { de: 1, a: 2, debut: .76, fin: .94 }
   ];
 
   let L = 0, H = 0, dpr = 1;
@@ -115,7 +116,7 @@
 
   const B = new Float32Array(9);
   const encre = [29, 29, 31], orange = [232, 80, 26];
-  let visible = false, boucle = 0, pL = -1, avant = 0, mode = "envoi";
+  let visible = false, boucle = 0, pL = -1, avant = 0, mode = "reception";
 
   function image(t) {
     boucle = visible ? requestAnimationFrame(image) : 0;
@@ -163,7 +164,7 @@
       b.style.color = "rgb(" + c.join(",") + ")";
     });
 
-    const m2 = pL < .5 ? "envoi" : "reception";
+    const m2 = pL < .5 ? "reception" : "envoi";
     if (m2 !== mode) { mode = m2; scene.setAttribute("data-mode", mode); }
 
     gl.uniform2f(U.uRes, L, H);

@@ -22,11 +22,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600&text=cosm&display=swap">
-<link rel="stylesheet" href="style.css?v=57">
+<link rel="stylesheet" href="style.css?v=59">
 <script>document.documentElement.classList.add("js");</script>
 <script src="page.js?v=31" defer></script>
 <script src="ere-liquide.js?v=5" defer></script>
-<script src="fe-liquide.js?v=2" defer></script>
+<script src="fe-liquide.js?v=3" defer></script>
 <script src="demo.js?v=33" defer></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module" src="ia3d.js?v=31"></script>
@@ -161,7 +161,7 @@
     <div class="ia-gauche">
       <h2 class="ia-titre apparait" id="titre-ia">Votre assistant,<br><span>Cosmo.</span></h2>
       <p class="ia-chapeau apparait">Comme à un collaborateur, à la voix ou par écrit. Cosmo connaît vos clients, vos prix et vos chiffres. Il prépare, vous validez&nbsp;: rien ne part sans votre accord.</p>
-      <p class="ia-francaise apparait"><i aria-hidden="true"></i>Une IA française&nbsp;: Cosmo s'appuie sur Mistral AI.</p>
+      <p class="ia-francaise apparait">Conçu en France, pour les règles françaises&nbsp;: TVA, comptabilité, facture électronique.</p>
       <p class="ia-consigne apparait">Touchez une demande, et regardez Cosmo s'en occuper :</p>
       <div class="ia-demandes apparait" role="group" aria-label="Exemples de demandes" data-ia-demandes></div>
     </div>
@@ -181,26 +181,24 @@
 <section class="bloc fe" id="facture-electronique" aria-labelledby="titre-fe">
   <div class="largeur">
     <h2 class="titre-bloc apparait" id="titre-fe">La facture électronique<br><span class="orange-texte">devient obligatoire.</span></h2>
-    <p class="chapeau centre apparait">Depuis septembre 2026, toute entreprise doit pouvoir <strong>recevoir</strong> ses factures par une plateforme agréée par l'État. Bientôt, il faudra aussi les <strong>envoyer</strong> ainsi&nbsp;: le PDF par e-mail ne suffira plus.</p>
-    <p class="fe-avant apparait"><span class="fe-barre">Un PDF par e-mail</span><svg aria-hidden="true"><use href="#i-fleche"/></svg><b>Une facture électronique</b></p>
+    <p class="chapeau centre apparait">Fini la facture PDF envoyée par e-mail&nbsp;: entre entreprises, tout passe par une plateforme agréée par l'État.</p>
     <div class="fe-piste" data-fe>
-    <div class="fe-scene" data-mode="envoi">
-    <div class="fe-modes apparait" aria-hidden="true"><span class="fe-mode-envoi">Envoyer</span><span class="fe-mode-reception">Recevoir</span><i></i></div>
-    <div class="fe-schema apparait">
-      <div class="fe-noeud fe-debut"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:0"><svg><use href="#o-devis"/></svg></span></span><b>Vous</b><small class="fe-alterne"><span>envoyez vos factures</span><span>recevez celles de vos fournisseurs</span></small></div>
-      <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
-      <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><span class="app-icone fe-logo" style="--i:3"><svg><use href="#logo"/></svg></span></span><b>Plateforme agréée</b><small>reliée à Cosmo&nbsp;: tout est vérifié et transmis</small></div>
-      <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
-      <div class="fe-noeud fe-fin"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:6"><svg><use href="#o-entreprises"/></svg></span></span><b>Clients et fournisseurs</b><small class="fe-alterne"><span>reçoivent vos factures</span><span>vous envoient les leurs</span></small></div>
+      <div class="fe-scene" data-mode="reception">
+        <!-- la phrase qui accompagne l'animation : d'abord la réception (obligatoire maintenant), puis l'envoi (2027) -->
+        <div class="fe-legende apparait">
+          <p class="fe-legende-reception"><span class="fe-date">Depuis septembre 2026</span>Vos fournisseurs vous envoient leurs factures par la plateforme. Elles arrivent toutes seules dans Cosmo.</p>
+          <p class="fe-legende-envoi"><span class="fe-date">À partir de septembre 2027</span>Vous envoyez les vôtres de la même façon. Cosmo s'en charge pour vous.</p>
+        </div>
+        <div class="fe-schema apparait">
+          <div class="fe-noeud fe-debut"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:0"><svg><use href="#o-devis"/></svg></span></span><b>Vous</b></div>
+          <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
+          <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><span class="app-icone fe-logo" style="--i:3"><svg><use href="#logo"/></svg></span></span><b>Plateforme agréée</b><small>reliée à Cosmo</small></div>
+          <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
+          <div class="fe-noeud fe-fin"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:6"><svg><use href="#o-entreprises"/></svg></span></span><b class="fe-alterne"><span>Votre fournisseur</span><span>Votre client</span></b></div>
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
-    <p class="fe-fisc apparait">Au passage, la plateforme transmet aussi les données de la facture à l'administration fiscale.</p>
-    <ol class="fe-dates">
-      <li class="fe-date-passee apparait"><span class="fe-quand">1<sup>er</sup>&nbsp;septembre 2026</span><b>Recevoir</b><p>Toutes les entreprises doivent pouvoir recevoir des factures électroniques.</p><em>Déjà en vigueur</em></li>
-      <li class="apparait"><span class="fe-quand">1<sup>er</sup>&nbsp;septembre 2027</span><b>Envoyer</b><p>Les TPE et les PME doivent aussi envoyer leurs factures en électronique.</p></li>
-    </ol>
-    <p class="fe-cosmo apparait"><b>Avec Cosmo, c'est déjà fait.</b> Cosmo est relié à Super PDP, une plateforme agréée par l'État&nbsp;: vos factures partent et arrivent par elle, et vos encaissements sont déclarés tout seuls.</p>
+    <p class="fe-cosmo apparait"><b>Avec Cosmo, c'est déjà en place.</b> Il est relié à Super PDP, une plateforme agréée par l'État. Vous n'avez rien à changer.</p>
   </div>
 </section>
 
@@ -414,7 +412,7 @@
       <li>
         <svg class="ico" aria-hidden="true"><use href="#i-cadenas"/></svg>
         <h3>Vos données</h3>
-        <p>Sauvegardées chaque jour, et exportables à tout moment pour votre comptable. Et l'IA est française&nbsp;: Mistral AI.</p>
+        <p>Sauvegardées chaque jour, et exportables à tout moment pour votre comptable.</p>
       </li>
       <li>
         <svg class="ico" aria-hidden="true"><use href="#i-ok"/></svg>
