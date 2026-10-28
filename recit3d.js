@@ -20,7 +20,15 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
 const boites = Array.prototype.slice.call(document.querySelectorAll("[data-iphone3d]"));
 const reduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (boites.length) demarrer();
+// tout (modèle 3D, vidéos) attend que la section approche : la page s'ouvre plus vite sur téléphone
+if (boites.length) {
+  const bientot = new IntersectionObserver(function (e) {
+    if (!e[0].isIntersecting) return;
+    bientot.disconnect();
+    demarrer();
+  }, { rootMargin: "1200px 0px" });
+  bientot.observe(boites[0]);
+}
 
 function demarrer() {
   // le modèle est compressé (Draco) : le décodeur vient du même endroit que three.js

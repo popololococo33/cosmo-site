@@ -481,4 +481,12 @@ function lancerBoucle(image) {
   }, { threshold: 0.35 }).observe(boite);
 }
 
-if (boite && zone && annonce) demarrer();
+// le modèle 3D (près d'1 Mo) ne se charge qu'à l'approche de la section : la page s'ouvre plus vite sur téléphone
+if (boite && zone && annonce) {
+  const bientot = new IntersectionObserver(function (e) {
+    if (!e[0].isIntersecting) return;
+    bientot.disconnect();
+    demarrer();
+  }, { rootMargin: "1200px 0px" });
+  bientot.observe(boite);
+}
