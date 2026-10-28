@@ -52,7 +52,7 @@ svg { flex: none; }
 .entete:not(.au-sommet) { border-bottom-color: rgba(0, 0, 0, .08); }
 /* scène « nouvelle ère » : la barre glisse vers le haut pour laisser tout l'écran à l'animation (page.js) */
 .entete { transition: border-color .3s ease, transform .5s var(--lent), opacity .4s ease; }
-.entete.efface { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+.entete.efface, .entete.efface-fe { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .entete { transition: none; } }
 .entete-ligne { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
 .marque { display: inline-flex; align-items: center; gap: 8px; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; text-decoration: none; color: var(--encre); }
@@ -441,6 +441,7 @@ svg { flex: none; }
   transition: opacity .6s ease, translate .9s cubic-bezier(.16, 1, .3, 1), filter .7s ease; }
 .eco-final-1 { font-size: 30px; color: var(--gris); }
 .eco-final-2 { margin-top: 10px !important; font-size: 44px; transition-delay: .35s !important; }
+.eco-final-3 strong { color: var(--orange-fonce); font-weight: 700; }
 .eco-final-3 { margin-top: 18px !important; font-size: 19px; font-weight: 500 !important; letter-spacing: -0.01em !important; color: var(--texte); transition-delay: .7s !important; }
 .eco[data-phase="c"] .eco-final p { opacity: 1; translate: 0 0; filter: blur(0); }
 .eco-final-4 { margin-top: 26px !important; transition-delay: 1s !important; }
@@ -540,8 +541,27 @@ html:not(.js) .eco-final p, html:not(.js) .eco-note { opacity: 1; translate: non
 @keyframes fe-teinte-fin { 0%, 35%, 60%, 100% { color: var(--encre); } 39%, 54% { color: #E8501A; } }
 /* Version liquide (fe-liquide.js, classe .fe-gl) : le schéma reste fixe pendant le défilement, qui pilote l'aller-retour ;
    les bulles et la mini-bulle qui voyage sont dessinées en verre liquide (WebGL) ; icônes, textes et fil restent en HTML. */
-.fe { overflow-x: clip; }
-.fe-gl .fe-piste { height: 240vh; height: 240svh; }
+.fe { overflow-x: clip; padding-bottom: 88px; }
+/* écran 1 : le choc. Sans WebGL, il s'affiche simplement au-dessus de l'animation */
+.fe-intro { padding: 88px 0 24px; text-align: center; }
+.fe-intro-date { margin: 0 0 14px; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: var(--orange); }
+.fe-intro-titre { margin: 0; font-size: 42px; line-height: 1.04; font-weight: 700; letter-spacing: -0.035em; text-wrap: balance; }
+.fe-intro-sous { max-width: 640px; margin: 20px auto 0; font-size: 19px; color: var(--texte); text-wrap: balance; }
+.fe-rassure { margin: 0 0 26px; text-align: center; font-size: 19px; font-weight: 600; color: var(--texte); }
+.fe-rassure span { color: var(--orange-fonce); }
+@media (min-width: 760px) {
+  .fe-intro-date { font-size: 34px; }
+  .fe-intro-titre { font-size: 72px; }
+  .fe-intro-sous { font-size: 23px; }
+  .fe-rassure { font-size: 23px; }
+}
+@media (min-width: 1200px) { .fe-intro-titre { font-size: 88px; } }
+/* version liquide : les deux écrans se superposent dans la scène fixe ; fe-liquide.js règle --sortie (l'écran 1 recule)
+   et --entree (l'animation arrive) */
+.fe-gl .fe-piste { height: 360vh; height: 360svh; }
+.fe-gl .fe-intro { position: absolute; inset: 56px 0 0; z-index: 3; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 24px 40px; pointer-events: none;
+  opacity: calc(1 - var(--sortie, 0)); transform: translateY(calc(var(--sortie, 0) * -70px)) scale(calc(1 - var(--sortie, 0) * .08)); filter: blur(calc(var(--sortie, 0) * 10px)); }
+.fe-gl .fe-anim { opacity: var(--entree, 0); transform: translateY(calc((1 - var(--entree, 0)) * 50px)) scale(calc(.94 + var(--entree, 0) * .06)); }
 .fe-gl .fe-scene { position: sticky; top: 0; height: 100vh; height: 100svh; padding-top: 56px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
 /* la toile déborde un peu du schéma : les ombres et lueurs ne sont jamais coupées net */
 /* la facture qui voyage : une petite icône posée sur la mini-bulle (fe-liquide.js la place à chaque image) */

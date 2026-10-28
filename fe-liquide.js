@@ -5,6 +5,9 @@
 //                        plateforme ; puis une autre part de la plateforme et fond dans « Vous » (obligatoire depuis 2026).
 //   ENVOYER  (0,5 → 1) : le même chemin à l'envers, vers « Votre client » (obligatoire en 2027).
 //   La phrase au-dessus (data-mode sur .fe-scene) et le nom de droite changent au milieu.
+// Avant l'animation, un premier écran plein (« Septembre 2026 : la facture électronique devient obligatoire ») recule
+// et se floute au défilement (--sortie) pendant que l'animation arrive (--entree). La barre du haut s'efface pendant
+// toute la séquence, comme pour la scène des bulles.
 // Les trois bulles et la mini-bulle sont des distances signées (cercles) ; la mini-bulle est fondue aux autres par un
 // minimum lissé, d'où le pont de liquide au départ et à l'arrivée. Le verre réfracte un fond doux (orange, lilas, bleu),
 // le même que le halo du schéma. Icônes, textes et fil restent en HTML ; ce script lit leurs places à chaque image.
@@ -15,6 +18,7 @@
   const piste = document.querySelector("[data-fe]");
   if (!section || !piste || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const scene = piste.querySelector(".fe-scene");
+  const entete = document.getElementById("entete");
   const schema = piste.querySelector(".fe-schema");
   const icos = Array.prototype.slice.call(schema.querySelectorAll(".fe-ico"));
   const bulles = Array.prototype.slice.call(schema.querySelectorAll(".app-icone"));
@@ -135,6 +139,15 @@
     const p = total > 0 ? borne(-piste.getBoundingClientRect().top / total) : 0;
     // le défilement est suivi avec un léger amorti : même une molette par crans donne un mouvement continu
     pL = pL < 0 ? p : pL + (p - pL) * (1 - Math.exp(-dt * 8));
+    // écran 1 → écran 2, puis l'aller-retour sur le reste de la piste (q)
+    const sortie = doux(etape(pL, .08, .2)), entree = doux(etape(pL, .15, .27));
+    scene.style.setProperty("--sortie", sortie.toFixed(3));
+    scene.style.setProperty("--entree", entree.toFixed(3));
+    const q = etape(pL, .28, 1);
+    if (entete) {
+      const r = piste.getBoundingClientRect();
+      entete.classList.toggle("efface-fe", r.top <= 0 && r.bottom > window.innerHeight && !document.querySelector(".entete-liens.ouvert"));
+    }
 
     // les bulles, à leur place réelle dans la page (centre des icônes HTML)
     const base = toile.getBoundingClientRect();
@@ -145,7 +158,7 @@
     // la mini-bulle du trajet en cours
     let m = [0, 0, -1], k = 0, voit = 0;
     trajets.forEach(function (tr) {
-      const x = etape(pL, tr.debut, tr.fin);
+      const x = etape(q, tr.debut, tr.fin);
       if (x <= 0 || x >= 1) return;
       const e = doux(x), A = centres[tr.de], Bb = centres[tr.a];
       const rm = A[2] * .46;
@@ -172,15 +185,15 @@
     // les lueurs : au départ et à l'arrivée de chaque trajet
     const g = [0, 0, 0];
     trajets.forEach(function (tr) {
-      g[tr.de] = Math.max(g[tr.de], pic(pL, tr.debut + .01, .035));
-      g[tr.a] = Math.max(g[tr.a], pic(pL, tr.fin, .045));
+      g[tr.de] = Math.max(g[tr.de], pic(q, tr.debut + .01, .035));
+      g[tr.a] = Math.max(g[tr.a], pic(q, tr.fin, .045));
     });
     bulles.forEach(function (b, i) {
       const c = encre.map(function (v, j) { return Math.round(v + (orange[j] - v) * g[i]); });
       b.style.color = "rgb(" + c.join(",") + ")";
     });
 
-    const m2 = pL < .5 ? "reception" : "envoi";
+    const m2 = q < .5 ? "reception" : "envoi";
     if (m2 !== mode) { mode = m2; scene.setAttribute("data-mode", mode); }
 
     gl.uniform2f(U.uRes, L, H);

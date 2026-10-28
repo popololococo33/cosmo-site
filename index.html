@@ -22,11 +22,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600&text=cosm&display=swap">
-<link rel="stylesheet" href="style.css?v=66">
+<link rel="stylesheet" href="style.css?v=68">
 <script>document.documentElement.classList.add("js");</script>
 <script src="page.js?v=32" defer></script>
 <script src="ere-liquide.js?v=5" defer></script>
-<script src="fe-liquide.js?v=4" defer></script>
+<script src="fe-liquide.js?v=5" defer></script>
 <script src="demo.js?v=33" defer></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module" src="ia3d.js?v=31"></script>
@@ -312,12 +312,18 @@
      Dates : réception obligatoire pour toutes les entreprises au 1er septembre 2026, émission au 1er septembre 2027
      pour les TPE et PME. Cosmo (version ordinateur, Cosmo GC) est relié à la plateforme agréée Super PDP :
      émission, réception, statuts et encaissements (code dans cosmogc, src/lib/pdp/). -->
-<section class="bloc fe" id="facture-electronique" aria-labelledby="titre-fe">
+<section class="fe" id="facture-electronique" aria-labelledby="titre-fe">
   <div class="largeur">
-    <h2 class="titre-bloc apparait" id="titre-fe">La facture électronique<br><span class="orange-texte">devient obligatoire.</span></h2>
-    <p class="chapeau centre apparait">Fini la facture PDF envoyée par e-mail&nbsp;: entre entreprises, tout passe par une plateforme agréée par l'État.</p>
     <div class="fe-piste" data-fe>
       <div class="fe-scene" data-mode="reception">
+        <!-- écran 1 : le choc (plein écran) ; au défilement, il recule et laisse place à l'écran 2 : l'animation -->
+        <div class="fe-intro">
+          <p class="fe-intro-date">Septembre 2026</p>
+          <h2 class="fe-intro-titre" id="titre-fe">La facture électronique<br><span class="orange-texte">devient obligatoire.</span></h2>
+          <p class="fe-intro-sous">Le PDF envoyé par e-mail, c'est fini. Entre entreprises, tout passe par une plateforme agréée par l'État.</p>
+        </div>
+        <div class="fe-anim">
+        <p class="fe-rassure">Pas d'inquiétude&nbsp;: <span>Cosmo est déjà prêt.</span></p>
         <!-- la phrase qui accompagne l'animation : d'abord la réception (obligatoire maintenant), puis l'envoi (2027) -->
         <div class="fe-legende apparait">
           <p class="fe-legende-reception"><span class="fe-date">Depuis septembre 2026</span><b>Vos fournisseurs vous envoient leurs factures par la plateforme.</b><span class="fe-sous">Elles arrivent toutes seules dans Cosmo.</span></p>
@@ -329,6 +335,7 @@
           <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><span class="app-icone fe-logo" style="--i:3"><svg><use href="#logo"/></svg></span></span><b>Plateforme agréée</b><small>reliée à Cosmo</small></div>
           <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
           <div class="fe-noeud fe-fin"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:6"><svg><use href="#o-entreprises"/></svg></span></span><b class="fe-alterne"><span>Votre fournisseur</span><span>Votre client</span></b></div>
+        </div>
         </div>
       </div>
     </div>
@@ -397,8 +404,8 @@
       <div class="eco-final">
         <p class="eco-final-1">Des milliers d'euros perdus.</p>
         <p class="eco-final-2">Cosmo les remplace <span>tous.</span></p>
-        <p class="eco-final-3">Un seul abonnement, à la taille de votre entreprise.</p>
-        <p class="eco-final-4"><a class="bouton" href="#demo">Combien pour vous&nbsp;? Parlons-en</a></p>
+        <p class="eco-final-3">Et il vous coûte <strong>moins cher que tous réunis.</strong> Avec tout dedans.</p>
+        <p class="eco-final-4"><a class="bouton" href="#demo">Voir combien j'économise</a></p>
       </div>
       <p class="eco-note">Prix HT relevés en 2026 pour une petite entreprise, un utilisateur : Batappli Entreprise, Sage 100 Comptabilité Standard, Sellsy, Microsoft 365. Installation : exemple d'un intégrateur Sage 100 (souvent 3 000 à 8 000 € la première année).</p>
     </div>
