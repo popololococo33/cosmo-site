@@ -762,6 +762,8 @@ body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-even
   border: 1px solid rgba(255, 255, 255, .78);
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, .95), 0 22px 44px -26px rgba(30, 30, 60, .28); }
 .confiance li { padding: 30px 24px; border-radius: 26px; }
+/* le calendrier de Cal est blanc : un cadre blanc uni autour, pour ne former qu'un seul bloc net */
+.agenda { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; border-color: rgba(29, 29, 31, .07); padding: 10px 6px 0; }
 /* les pastilles du mur bougent sans arrêt : du verre « peint », sans flou, pour rester fluide */
 .mur-ligne li { background: linear-gradient(145deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .5)); border: 1px solid rgba(255, 255, 255, .85); box-shadow: inset 0 1px 1px #fff, 0 10px 22px -16px rgba(30, 30, 60, .35); }
 .mur-ligne li:nth-child(3n+1) { background: linear-gradient(145deg, rgba(255, 236, 226, .95), rgba(255, 220, 200, .55)); }

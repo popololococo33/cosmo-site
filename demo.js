@@ -93,7 +93,11 @@ const DUREE_DEMO = "30 minutes en visio";
         theme: "light",
         layout: "month_view",
         hideEventTypeDetails: false,
-        cssVarsPerTheme: { light: { "cal-brand": "#FF5A1F" }, dark: { "cal-brand": "#FF5A1F" } }
+        // pas de second cadre : la bordure du calendrier de Cal disparaît, seul notre cadre en verre reste
+        cssVarsPerTheme: {
+          light: { "cal-brand": "#FF5A1F", "cal-border-booker": "transparent", "cal-border-booker-width": "0px" },
+          dark: { "cal-brand": "#FF5A1F", "cal-border-booker": "transparent", "cal-border-booker-width": "0px" }
+        }
       });
       // une fois le calendrier prêt, la ligne de secours n'a plus lieu d'être
       window.Cal.ns.demo("on", { action: "linkReady", callback: function () { secours.hidden = true; boiteAgenda.classList.remove("chargement"); } });
