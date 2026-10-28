@@ -22,10 +22,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600&text=cosm&display=swap">
-<link rel="stylesheet" href="style.css?v=53">
+<link rel="stylesheet" href="style.css?v=57">
 <script>document.documentElement.classList.add("js");</script>
 <script src="page.js?v=31" defer></script>
 <script src="ere-liquide.js?v=5" defer></script>
+<script src="fe-liquide.js?v=2" defer></script>
 <script src="demo.js?v=33" defer></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module" src="ia3d.js?v=31"></script>
@@ -182,6 +183,8 @@
     <h2 class="titre-bloc apparait" id="titre-fe">La facture électronique<br><span class="orange-texte">devient obligatoire.</span></h2>
     <p class="chapeau centre apparait">Depuis septembre 2026, toute entreprise doit pouvoir <strong>recevoir</strong> ses factures par une plateforme agréée par l'État. Bientôt, il faudra aussi les <strong>envoyer</strong> ainsi&nbsp;: le PDF par e-mail ne suffira plus.</p>
     <p class="fe-avant apparait"><span class="fe-barre">Un PDF par e-mail</span><svg aria-hidden="true"><use href="#i-fleche"/></svg><b>Une facture électronique</b></p>
+    <div class="fe-piste" data-fe>
+    <div class="fe-scene" data-mode="envoi">
     <div class="fe-modes apparait" aria-hidden="true"><span class="fe-mode-envoi">Envoyer</span><span class="fe-mode-reception">Recevoir</span><i></i></div>
     <div class="fe-schema apparait">
       <div class="fe-noeud fe-debut"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:0"><svg><use href="#o-devis"/></svg></span></span><b>Vous</b><small class="fe-alterne"><span>envoyez vos factures</span><span>recevez celles de vos fournisseurs</span></small></div>
@@ -189,6 +192,8 @@
       <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><span class="app-icone fe-logo" style="--i:3"><svg><use href="#logo"/></svg></span></span><b>Plateforme agréée</b><small>reliée à Cosmo&nbsp;: tout est vérifié et transmis</small></div>
       <div class="fe-lien" aria-hidden="true"><i class="fe-aller"></i><i class="fe-retour"></i></div>
       <div class="fe-noeud fe-fin"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:6"><svg><use href="#o-entreprises"/></svg></span></span><b>Clients et fournisseurs</b><small class="fe-alterne"><span>reçoivent vos factures</span><span>vous envoient les leurs</span></small></div>
+    </div>
+    </div>
     </div>
     <p class="fe-fisc apparait">Au passage, la plateforme transmet aussi les données de la facture à l'administration fiscale.</p>
     <ol class="fe-dates">

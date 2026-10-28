@@ -577,6 +577,40 @@ html:not(.js) .eco-final p, html:not(.js) .eco-note { opacity: 1; translate: non
 @keyframes fe-teinte-debut { 0%, 92%, 100% { color: #E8501A; } 8%, 86% { color: var(--encre); } }
 @keyframes fe-teinte-centre { 0%, 15%, 30%, 64%, 79%, 100% { color: var(--encre); } 19%, 23%, 68%, 72% { color: #E8501A; } }
 @keyframes fe-teinte-fin { 0%, 35%, 60%, 100% { color: var(--encre); } 39%, 54% { color: #E8501A; } }
+/* Version liquide (fe-liquide.js, classe .fe-gl) : le schéma reste fixe pendant le défilement, qui pilote l'aller-retour ;
+   les bulles et la mini-bulle qui voyage sont dessinées en verre liquide (WebGL) ; icônes, textes et fil restent en HTML. */
+.fe { overflow-x: clip; }
+.fe-gl .fe-piste { height: 240vh; height: 240svh; }
+.fe-gl .fe-scene { position: sticky; top: 0; height: 100vh; height: 100svh; padding-top: 56px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+/* la toile déborde un peu du schéma : les ombres et lueurs ne sont jamais coupées net */
+.fe-toile { position: absolute; left: -40px; top: -40px; z-index: 1; width: calc(100% + 80px); height: calc(100% + 80px); pointer-events: none; }
+.fe-gl .fe-noeud { position: relative; z-index: 2; }
+.fe-gl .fe-lien i, .fe-gl .fe-ico::before { display: none; }
+.fe-gl .fe-schema .app-icone { background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; animation: none !important; }
+.fe-gl .fe-schema .app-icone::before, .fe-gl .fe-schema .app-icone::after { content: none; }
+.fe-gl .fe-modes i, .fe-gl .fe-modes span, .fe-gl .fe-alterne span { animation: none !important; }
+.fe-gl .fe-modes i { transition: transform .6s var(--lent); }
+.fe-gl .fe-modes span { transition: color .4s ease; }
+.fe-gl .fe-alterne span { transition: opacity .4s ease; }
+.fe-gl [data-mode="reception"] .fe-modes i { transform: translateX(100%); }
+.fe-gl [data-mode="reception"] .fe-mode-envoi { color: var(--gris); }
+.fe-gl [data-mode="reception"] .fe-mode-reception { color: #fff; }
+.fe-gl [data-mode="reception"] .fe-alterne span:first-child { opacity: 0; }
+.fe-gl [data-mode="reception"] .fe-alterne span:last-child { opacity: 1; }
+/* téléphone : une frise verticale — les bulles à gauche, le texte à droite, le fil relie les bulles directement
+   (la mini-bulle ne passe plus sur les textes) */
+@media (max-width: 759px) {
+  .fe-schema { justify-items: stretch; max-width: 340px; margin-left: auto; margin-right: auto; }
+  .fe-noeud { display: grid; grid-template-columns: 66px minmax(0, 1fr); column-gap: 16px; align-items: center; max-width: none; text-align: left; }
+  .fe-noeud .fe-ico { grid-row: 1 / span 2; }
+  .fe-noeud b { margin: 0; align-self: end; }
+  .fe-noeud small { align-self: start; }
+  .fe-lien { margin-left: 32px; }
+  .fe-gl .fe-modes { margin-top: 0; }
+  .fe-gl .fe-schema { margin-top: 10px; padding: 6px 0; }
+  .fe-gl .fe-lien { height: 40px; }
+  .fe-gl .fe-noeud b { margin-top: 10px; }
+}
 .fe-fisc { max-width: 520px; margin: 22px auto 0; text-align: center; font-size: 16px; color: var(--gris); }
 
 .fe-dates { display: grid; gap: 16px; max-width: 760px; margin: 48px auto 0; padding: 0; list-style: none; }
