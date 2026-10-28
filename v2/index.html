@@ -54,6 +54,7 @@
   <symbol id="o-vehicule" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M7.5 21H4v-5l3.5-1.5L11 9h10l4 5.5 3 1.5v5h-3.5M12.5 21h7"/><circle cx="10" cy="21" r="2.5"/><circle cx="22" cy="21" r="2.5"/></g></symbol>
   <symbol id="o-stats" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M5 5v22h22"/><path d="M10 16h3.5v7H10zM16 11h3.5v12H16zM22 7h3.5v16H22z"/></g></symbol>
   <symbol id="o-sav" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M19.4 5.4a6 6 0 0 0-5.8 8L5 22l5 5 8.6-8.6a6 6 0 0 0 8-5.8l-3.8 3.8-3.7-.6-.6-3.7z"/></g></symbol>
+  <symbol id="o-plateforme" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M16 4l10 4v7c0 6.5-4.3 11.2-10 13-5.7-1.8-10-6.5-10-13V8z"/><path d="M11.5 16l3.3 3.3 6-6.3"/></g></symbol>
 </svg>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -375,25 +376,26 @@
 <!-- 3 bis. La facture électronique : l'enjeu, en une animation (le petit document circule de vous à votre client
      en passant par la plateforme agréée ; animé seulement quand la section est à l'écran, voir style.css « 3 bis »).
      Dates : réception obligatoire pour toutes les entreprises au 1er septembre 2026, émission au 1er septembre 2027
-     pour les TPE et PME. Cosmo crée les factures au bon format, mais n'est pas encore relié à une plateforme agréée. -->
+     pour les TPE et PME. Cosmo (version ordinateur, Cosmo GC) est relié à la plateforme agréée Super PDP :
+     émission, réception, statuts et encaissements (code dans cosmogc, src/lib/pdp/). -->
 <section class="bloc fe" id="facture-electronique" aria-labelledby="titre-fe">
   <div class="largeur">
     <h2 class="titre-bloc apparait" id="titre-fe">La facture électronique<br><span class="orange-texte">devient obligatoire.</span></h2>
     <p class="chapeau centre apparait">Entre entreprises, une facture envoyée en PDF par e-mail ne suffira plus. Elle passera par une plateforme agréée par l'État.</p>
     <p class="fe-avant apparait"><span class="fe-barre">Un PDF par e-mail</span><svg aria-hidden="true"><use href="#i-fleche"/></svg><b>Une facture électronique</b></p>
     <div class="fe-schema apparait">
-      <div class="fe-noeud"><span class="fe-ico" aria-hidden="true"><svg><use href="#o-devis"/></svg></span><b>Vous</b><small>émettez la facture</small></div>
+      <div class="fe-noeud fe-debut"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:0"><svg><use href="#o-devis"/></svg></span></span><b>Vous</b><small>émettez la facture</small></div>
       <div class="fe-lien" aria-hidden="true"><i></i></div>
-      <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><svg><use href="#i-norme"/></svg></span><b>La plateforme agréée</b><small>la vérifie et la transmet</small></div>
+      <div class="fe-noeud fe-centre"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:3"><svg><use href="#o-plateforme"/></svg></span></span><b>La plateforme agréée</b><small>la vérifie et la transmet</small></div>
       <div class="fe-lien" aria-hidden="true"><i></i></div>
-      <div class="fe-noeud fe-fin"><span class="fe-ico" aria-hidden="true"><svg><use href="#o-mail"/></svg></span><b>Votre client</b><small>la reçoit, prête à payer</small></div>
+      <div class="fe-noeud fe-fin"><span class="fe-ico" aria-hidden="true"><span class="app-icone" style="--i:6"><svg><use href="#o-mail"/></svg></span></span><b>Votre client</b><small>la reçoit, prête à payer</small></div>
     </div>
     <p class="fe-fisc apparait">Au passage, la plateforme transmet aussi les données de la facture à l'administration fiscale.</p>
     <ol class="fe-dates">
       <li class="fe-date-passee apparait"><span class="fe-quand">1<sup>er</sup>&nbsp;septembre 2026</span><b>Recevoir</b><p>Toutes les entreprises doivent pouvoir recevoir des factures électroniques.</p><em>Déjà en vigueur</em></li>
       <li class="apparait"><span class="fe-quand">1<sup>er</sup>&nbsp;septembre 2027</span><b>Envoyer</b><p>Les TPE et les PME doivent aussi envoyer leurs factures en électronique.</p></li>
     </ol>
-    <p class="fe-cosmo apparait">Avec Cosmo, vos factures sont déjà créées au format électronique. Le branchement à une plateforme agréée n'est pas encore fait&nbsp;: en attendant, elles partent par e-mail.</p>
+    <p class="fe-cosmo apparait"><b>Avec Cosmo, c'est déjà fait.</b> Cosmo est relié à Super PDP, une plateforme agréée par l'État&nbsp;: vos factures partent et arrivent par elle, et vos encaissements sont déclarés tout seuls.</p>
   </div>
 </section>
 
@@ -409,11 +411,11 @@
       <li>
         <svg class="ico" aria-hidden="true"><use href="#i-norme"/></svg>
         <h3>Vos factures aux normes</h3>
-        <p>Elles sortent déjà au format de la facture électronique. <a href="#facture-electronique">Ce qui change</a></p>
+        <p>Elles passent déjà par une plateforme agréée par l'État. <a href="#facture-electronique">Ce qui change</a></p>
       </li>
       <li>
         <svg class="ico" aria-hidden="true"><use href="#i-cadenas"/></svg>
-        <h3>Vos données à vous</h3>
+        <h3>Vos données</h3>
         <p>Sauvegardées chaque jour, et exportables à tout moment pour votre comptable.</p>
       </li>
       <li>
@@ -468,7 +470,7 @@
       </details>
       <details id="q-facture-electronique">
         <summary>La facture électronique, ça change quoi pour moi&nbsp;?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <div class="faq-reponse"><p>Rien à apprendre. Une facture électronique ressemble à une facture normale, avec ses données lisibles par les logiciels&nbsp;: votre client la lit comme avant, et son logiciel la range tout seul. Recevoir des factures électroniques devient obligatoire pour toutes les entreprises le 1<sup>er</sup>&nbsp;septembre 2026, les envoyer le 1<sup>er</sup>&nbsp;septembre 2027 pour les TPE et les PME. Pas encore fait dans Cosmo&nbsp;: le branchement à une plateforme agréée. En attendant, vos factures partent par e-mail.</p></div>
+        <div class="faq-reponse"><p>Rien à apprendre. Une facture électronique ressemble à une facture normale, avec ses données lisibles par les logiciels&nbsp;: votre client la lit comme avant, et son logiciel la range tout seul. Recevoir des factures électroniques devient obligatoire pour toutes les entreprises le 1<sup>er</sup>&nbsp;septembre 2026, les envoyer le 1<sup>er</sup>&nbsp;septembre 2027 pour les TPE et les PME. Cosmo est déjà relié à Super PDP, une plateforme agréée par l'État&nbsp;: vos factures partent et arrivent par elle, sans rien changer à vos habitudes.</p></div>
       </details>
     </div>
     <p class="faq-contact">Une autre question&nbsp;? Écrivez-nous à <a href="mailto:contact@cosmosoft.fr">contact@cosmosoft.fr</a>.</p>
