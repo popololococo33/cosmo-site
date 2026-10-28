@@ -139,8 +139,13 @@
       const a = rebond(borne((pL - i * .012) / .08));
       const e = doux(borne((mBrut - retard[i]) / .86));
       somme += e;
-      const sx = L / 2 + depart[i][0] * ex * L / 100;
-      const sy = H / 2 + depart[i][1] * H / 100 + Math.sin(temps * 1.2 + i * .9) * 6 * (1 - e);
+      // sur téléphone, les deux bulles du milieu (Excel, Mails) tomberaient sur les phrases : on les place
+      // près du centre, dans les vides au-dessus et au-dessous du texte (sans toucher les autres bulles)
+      const milieu = !large && depart[i][1] === 0;
+      const dx = milieu ? (depart[i][0] < 0 ? -14 : 14) : depart[i][0];
+      const dy = milieu ? (depart[i][0] < 0 ? -17 : 17) : depart[i][1];
+      const sx = L / 2 + dx * ex * L / 100;
+      const sy = H / 2 + dy * H / 100 + Math.sin(temps * 1.2 + i * .9) * 6 * (1 - e);
       const tx = L / 2 + arrivee[i][0] * s, ty = H / 2 - off + arrivee[i][1] * s;
       // trajectoire en tourbillon : un écart perpendiculaire qui naît et s'éteint pendant le trajet
       const vx = tx - sx, vy = ty - sy, lg = Math.hypot(vx, vy) || 1;

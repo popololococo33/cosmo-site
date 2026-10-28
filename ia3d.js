@@ -367,7 +367,18 @@ function demarrer() {
     b.innerHTML = "<b></b><small></small>";
     b.querySelector("b").textContent = d.court;
     b.querySelector("small").textContent = "« " + d.texte + " »";
-    b.addEventListener("click", function () { manuel = true; jouer(i); });
+    b.addEventListener("click", function () {
+      manuel = true;
+      jouer(i);
+      // sur téléphone, l'iPhone est sous les demandes : on le ramène à l'écran pour voir Cosmo répondre
+      if (window.innerWidth < 900) {
+        const r = boite.getBoundingClientRect();
+        if (r.top > window.innerHeight * 0.3 || r.bottom < window.innerHeight * 0.7) {
+          const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          boite.scrollIntoView({ behavior: doux ? "smooth" : "auto", block: "center" });
+        }
+      }
+    });
     zone.appendChild(b);
     return b;
   });

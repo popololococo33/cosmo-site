@@ -262,7 +262,7 @@ svg { flex: none; }
   .ia-demandes { display: flex; overflow-x: auto; margin-inline: -20px; padding: 4px 20px 12px; scroll-snap-type: x proximity; scrollbar-width: none; }
   .ia-demandes::-webkit-scrollbar { display: none; }
   .ia-demande { flex: none; width: 236px; scroll-snap-align: start; }
-  .ia-tel { height: 560px; }
+  .ia-tel { height: 520px; }
 }
 @media (min-width: 900px) {
   .ia-grille { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 56px; }
@@ -712,3 +712,17 @@ body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-even
 .mur-ligne li { background: linear-gradient(145deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .5)); border: 1px solid rgba(255, 255, 255, .85); box-shadow: inset 0 1px 1px #fff, 0 10px 22px -16px rgba(30, 30, 60, .35); }
 .mur-ligne li:nth-child(3n+1) { background: linear-gradient(145deg, rgba(255, 236, 226, .95), rgba(255, 220, 200, .55)); }
 .faq details { border-color: rgba(0, 0, 0, .07); }
+
+/* ---------- Téléphone : plus compact, moins de défilement ---------- */
+@media (max-width: 699px) {
+  .haut .chapeau { font-size: 17px; }
+  .mur-ligne li { padding: 11px 18px; font-size: 16px; }
+  .deja { gap: 32px; }
+  .deja-bloc li { padding: 4px 0; font-size: 17px; }
+  /* « Vous gardez la main » : l'icône à gauche, le texte à droite, des cartes plus basses */
+  .confiance { gap: 12px; margin-top: 36px; text-align: left; }
+  .confiance li { display: grid; grid-template-columns: 34px minmax(0, 1fr); column-gap: 14px; row-gap: 2px; align-items: start; padding: 18px; border-radius: 22px; }
+  .confiance li .ico { grid-row: 1 / span 2; margin-top: 2px; }
+  .confiance h3 { margin: 0; font-size: 18px; }
+  .confiance p { max-width: none; margin: 0; font-size: 16px; }
+}

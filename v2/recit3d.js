@@ -9,6 +9,9 @@
 // - Les vidéos (images/recit-1.mp4, -2, -3) viennent d'un film du simulateur (app lancée avec
 //   « -demo peintre -dicteeFichier phrase.m4a » : la dictée passe par la vraie transcription, sans micro),
 //   avec un doigt ajouté au moment des deux appuis.
+// - Pas d'écran noir : l'écran montre d'abord la première image de la vidéo (images/recit-N-debut.jpg),
+//   la vidéo est mise en mémoire avant que l'étape arrive (play puis pause, ce qu'exige l'iPhone),
+//   et elle ne prend la place de l'image qu'une fois sa lecture vraiment partie.
 
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
@@ -79,11 +82,29 @@ function creer(boite, i) {
   const pivot = new THREE.Group();
   scene.add(pivot);
 
-  // L'écran : la vidéo de l'étape
+  // L'écran : d'abord la première image (tout de suite là), puis la vidéo de l'étape quand elle tourne
   const texture = new THREE.VideoTexture(video);
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.flipY = true;
-  const ecran = new THREE.MeshBasicMaterial({ map: texture, toneMapped: false });
+  const image = new THREE.TextureLoader().load(video.getAttribute("src").replace(/\.mp4$/, "-debut.jpg"), function () { force = true; });
+  image.colorSpace = THREE.SRGBColorSpace;
+  image.flipY = true;
+  const ecran = new THREE.MeshBasicMaterial({ map: image, toneMapped: false });
+  const montrer = function (t) { if (ecran.map !== t) { ecran.map = t; ecran.needsUpdate = true; force = true; } };
+  // la vidéo prend l'écran à sa première vraie image affichée
+  video.addEventListener("playing", function () {
+    if (!joue) return;
+    if (video.requestVideoFrameCallback) video.requestVideoFrameCallback(function () { if (joue) montrer(texture); });
+    else montrer(texture);
+  });
+  // mise en mémoire avant d'arriver : l'iPhone ignore preload, il faut lancer puis arrêter la lecture (vidéo muette)
+  let chauffee = false;
+  const chauffer = function () {
+    if (chauffee) return;
+    chauffee = true;
+    const p = video.play();
+    if (p && p.then) p.then(function () { if (!joue) { video.pause(); video.currentTime = 0; } }).catch(function () {});
+  };
 
   // l'iPhone arrive d'un côté, puis de l'autre, une étape sur deux
   const sens = i % 2 === 0 ? 1 : -1;
@@ -147,6 +168,10 @@ function creer(boite, i) {
 
   // dernière image de la vidéo : un dernier dessin pour qu'elle reste bien à l'écran
   video.addEventListener("ended", function () { force = true; });
+  // un peu avant l'écran : on prépare la vidéo ; à l'écran : on dessine
+  new IntersectionObserver(function (entrees) {
+    if (entrees[0].isIntersecting) chauffer();
+  }, { rootMargin: "900px 0px" }).observe(boite);
   new IntersectionObserver(function (entrees) {
     e.visible = entrees[0].isIntersecting;
     force = true;
@@ -155,6 +180,7 @@ function creer(boite, i) {
       rA = 0;
       video.pause();
       video.currentTime = 0;
+      montrer(image);
     }
   }).observe(boite);
   return e;
