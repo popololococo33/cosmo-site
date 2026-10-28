@@ -142,6 +142,7 @@
     const cartes = Array.prototype.slice.call(eco.querySelectorAll(".eco-carte"));
     const lignesEco = Array.prototype.slice.call(eco.querySelectorAll(".eco-ligne"));
     const monde = eco.querySelector(".eco-monde");
+    const textesEco = eco.querySelector(".eco-textes");
     cartes.forEach(function (c, i) { c.querySelector(".eco-bulle").style.setProperty("--i", i); });
 
     // Où se posent les bulles : en vague sur ordinateur, en 2-1-2 sur téléphone
@@ -164,10 +165,15 @@
       const p = borne(-r.top / (eco.offsetHeight - vh));
       const s = t / 1000;
 
+      // la phrase attend au milieu, en grand ; elle monte à sa place quand les bulles arrivent
+      const m = sortie(borne((p - 0.06) / 0.12));   // un pas devant la première bulle
+      const descente = vh * 0.5 - (textesEco.offsetTop + textesEco.offsetHeight / 2);
+      textesEco.style.transform = "translateY(" + ((1 - m) * descente).toFixed(1) + "px) scale(" + (1 + (1 - m) * (window.innerWidth >= 900 ? 0.3 : window.innerWidth >= 600 ? 0.25 : 0.12)).toFixed(3) + ")";
+
       let eclat = 0;
       cartes.forEach(function (c, i) {
         const pl = places[i];
-        const a = sortie(borne((p - (0.04 + i * 0.06)) / 0.12));          // la bulle monte
+        const a = sortie(borne((p - (0.08 + i * 0.06)) / 0.12));          // la bulle monte
         const d0 = 0.45 + i * 0.05;
         const sl = borne((p - d0) / 0.022);                                // le trait qui la barre
         const e = sortie(borne((p - d0 - 0.026) / 0.05));                  // elle éclate
