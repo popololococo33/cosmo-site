@@ -41,6 +41,7 @@ const DUREE_DEMO = "30 minutes en visio";
   if (lienCal && boiteAgenda) {
     if (form) form.hidden = true;
     boiteAgenda.hidden = false;
+    boiteAgenda.classList.add("chargement");
     const zone = document.createElement("div");
     zone.className = "agenda-cal";
     zone.id = "agenda-cal";
@@ -95,7 +96,7 @@ const DUREE_DEMO = "30 minutes en visio";
         cssVarsPerTheme: { light: { "cal-brand": "#FF5A1F" }, dark: { "cal-brand": "#FF5A1F" } }
       });
       // une fois le calendrier prêt, la ligne de secours n'a plus lieu d'être
-      window.Cal.ns.demo("on", { action: "linkReady", callback: function () { secours.hidden = true; } });
+      window.Cal.ns.demo("on", { action: "linkReady", callback: function () { secours.hidden = true; boiteAgenda.classList.remove("chargement"); } });
     };
     if ("IntersectionObserver" in window) {
       const obs = new IntersectionObserver(function (e) {
