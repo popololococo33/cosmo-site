@@ -570,8 +570,9 @@ html:not(.js) .eco-final p, html:not(.js) .eco-note { opacity: 1; translate: non
   .fe-lien i { width: 45%; height: 100%; }
   .fe-lien .fe-aller { background: linear-gradient(90deg, rgba(255, 90, 31, 0), rgba(255, 90, 31, .95)); }
   .fe-lien .fe-retour { background: linear-gradient(270deg, rgba(255, 90, 31, 0), rgba(255, 90, 31, .95)); }
-  .fe-lien i::after { left: auto; top: 50%; bottom: auto; margin: -4.5px 0 0; }
-  .fe-lien .fe-aller::after { right: -4px; }
+  /* le point lumineux reste sur le fil dans les deux sens (ces règles doivent l'emporter sur celles du téléphone) */
+  .fe-lien .fe-aller::after, .fe-lien .fe-retour::after { top: 50%; bottom: auto; margin: -4.5px 0 0; }
+  .fe-lien .fe-aller::after { left: auto; right: -4px; }
   .fe-lien .fe-retour::after { left: -4px; right: auto; }
   .fe-schema.vu .fe-lien:nth-child(2) .fe-aller { animation-name: fe-h-aller-1; }
   .fe-schema.vu .fe-lien:nth-child(4) .fe-aller { animation-name: fe-h-aller-2; }
