@@ -188,7 +188,7 @@
         c.style.setProperty("--e", e.toFixed(3));
       });
 
-      const ph = p < 0.44 ? "a" : p < 0.72 ? "b" : "c";
+      const ph = p < 0.44 ? "a" : p < 0.76 ? "b" : "c";   // la fin attend que la dernière bulle ait éclaté (0,73)
       if (ph !== phase) { eco.dataset.phase = ph; phase = ph; }
       lignesEco.forEach(function (l) { l.classList.toggle("est-la", p >= Number(l.dataset.de) && p < Number(l.dataset.a)); });
 

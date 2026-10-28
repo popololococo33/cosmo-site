@@ -444,19 +444,24 @@ svg { flex: none; }
 /* la phrase finale */
 .eco-final { position: absolute; left: 0; right: 0; top: 50%; translate: 0 -50%; padding: 0 24px; text-align: center; pointer-events: none; }
 .eco-final p { margin: 0; font-weight: 700; letter-spacing: -0.035em; line-height: 1.04; text-wrap: balance; opacity: 0; translate: 0 30px; filter: blur(10px);
-  transition: opacity .6s ease, translate .9s cubic-bezier(.16, 1, .3, 1), filter .7s ease; }
+  transition: opacity .2s ease, translate .25s ease, filter .2s ease; }
+/* en arrivant, la fin s'écrit ligne après ligne ; en repartant vers le haut, elle s'efface d'un coup, avant que les bulles reviennent */
+.eco[data-phase="c"] .eco-final p { transition: opacity .6s ease, translate .9s cubic-bezier(.16, 1, .3, 1), filter .7s ease; }
+.eco[data-phase="c"] .eco-final p.eco-final-2 { transition-delay: .35s; }
+.eco[data-phase="c"] .eco-final p.eco-final-3 { transition-delay: .7s; }
+.eco[data-phase="c"] .eco-final p.eco-final-4 { transition-delay: 1s; }
 .eco-final-1 { font-size: 30px; color: var(--gris); }
-.eco-final-2 { margin-top: 10px !important; font-size: 44px; transition-delay: .35s !important; }
+.eco-final-2 { margin-top: 10px !important; font-size: 44px; }
 .eco-final-3 strong { color: var(--orange-fonce); font-weight: 700; }
-.eco-final-3 { margin-top: 18px !important; font-size: 19px; font-weight: 500 !important; letter-spacing: -0.01em !important; color: var(--texte); transition-delay: .7s !important; }
+.eco-final-3 { margin-top: 18px !important; font-size: 19px; font-weight: 500 !important; letter-spacing: -0.01em !important; color: var(--texte); }
 .eco[data-phase="c"] .eco-final p { opacity: 1; translate: 0 0; filter: blur(0); }
-.eco-final-4 { margin-top: 26px !important; transition-delay: 1s !important; }
+.eco-final-4 { margin-top: 26px !important; }
 /* le bouton n'est cliquable qu'une fois affiché (phase c) */
 .eco[data-phase="c"] .eco-final-4 .bouton { pointer-events: auto; }
 .eco-final-2 span { color: transparent; background: linear-gradient(100deg, #FF5A1F 40%, #FFD9C7 50%, #FF5A1F 60%) var(--rai) 0 / 300% 100% no-repeat; -webkit-background-clip: text; background-clip: text; }
 .eco-note { position: absolute; left: 0; right: 0; bottom: 18px; max-width: 760px; margin: 0 auto; padding: 0 24px; text-align: center; font-size: 11.5px; color: var(--gris);
-  opacity: 0; transition: opacity .6s ease .5s; }
-.eco[data-phase="c"] .eco-note { opacity: 1; }
+  opacity: 0; transition: opacity .2s ease; }
+.eco[data-phase="c"] .eco-note { opacity: 1; transition: opacity .6s ease .5s; }
 @media (min-width: 900px) {
   .eco-textes { top: 13%; }
   .eco-ligne { font-size: 52px; }
