@@ -26,6 +26,20 @@
     }, { passive: true });
     maj();
   }
+  // menu des sections sur écran étroit : se ferme au choix d'une section, avec Échap ou en touchant ailleurs
+  const menuBouton = document.querySelector(".menu-bouton");
+  const menu = document.getElementById("menu-sections");
+  if (menuBouton && menu) {
+    const regler = function (ouvert) {
+      menu.classList.toggle("ouvert", ouvert);
+      menuBouton.setAttribute("aria-expanded", String(ouvert));
+      menuBouton.setAttribute("aria-label", ouvert ? "Fermer le menu" : "Ouvrir le menu");
+    };
+    menuBouton.addEventListener("click", function () { regler(!menu.classList.contains("ouvert")); });
+    menu.addEventListener("click", function (e) { if (e.target.closest("a")) regler(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") regler(false); });
+    document.addEventListener("click", function (e) { if (!e.target.closest(".entete")) regler(false); });
+  }
 
   // ---------- 2. Apparitions ----------
   const blocs = Array.prototype.slice.call(document.querySelectorAll(".apparait"));
