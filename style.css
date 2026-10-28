@@ -453,6 +453,65 @@ html:not(.js) .eco-final { margin-top: 40px; }
 html:not(.js) .eco-final p, html:not(.js) .eco-note { opacity: 1; translate: none; filter: none; }
 
 /* ---------- 3. Déjà dans Cosmo : six familles, chacune en verre ---------- */
+/* ---------- 3 bis. La facture électronique : un document qui circule de vous à votre client ---------- */
+.fe-avant { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px 14px; margin-top: 36px; font-size: 19px; }
+.fe-avant svg { width: 20px; height: 20px; color: var(--gris); transform: rotate(90deg); }
+.fe-avant b { font-weight: 600; color: var(--orange-fonce); }
+/* « Un PDF par e-mail » : barré d'un trait qui se dessine quand on arrive dessus */
+.fe-barre { position: relative; color: var(--gris); }
+.fe-barre::after { content: ""; position: absolute; left: -4px; right: -4px; top: 52%; height: 2px; border-radius: 2px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .7s var(--lent) .5s; }
+.fe-avant.vu .fe-barre::after { transform: scaleX(1); }
+
+.fe-schema { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; max-width: 980px; margin: 40px auto 0; }
+.fe-noeud { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; max-width: 260px; padding: 22px 18px; border-radius: 24px; text-align: center;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .86), rgba(255, 255, 255, .5)); border: 1px solid rgba(255, 255, 255, .85);
+  box-shadow: inset 0 1px 1px #fff, 0 18px 36px -24px rgba(30, 30, 60, .3); }
+.fe-noeud b { margin-top: 6px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.fe-noeud small { font-size: 15px; color: var(--gris); }
+.fe-ico { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 16px; background: #FFF1EA; color: var(--orange-fonce); }
+.fe-ico svg { width: 28px; height: 28px; }
+/* le trait entre deux étapes, et le petit document orange qui le parcourt */
+.fe-lien { position: relative; width: 2px; height: 56px; background: repeating-linear-gradient(180deg, rgba(29, 29, 31, .22) 0 6px, transparent 6px 12px); }
+.fe-lien i { position: absolute; left: -9px; top: 0; width: 20px; height: 24px; border-radius: 4px; background: var(--orange); opacity: 0;
+  box-shadow: 0 6px 14px -4px rgba(255, 90, 31, .6); }
+.fe-lien i::before { content: ""; position: absolute; left: 5px; right: 5px; top: 7px; height: 8px; background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .9) 0 2px, transparent 2px 4px); }
+.fe-schema.vu .fe-lien:nth-child(2) i { animation: fe-descend-1 5s var(--lent) infinite; }
+.fe-schema.vu .fe-lien:nth-child(4) i { animation: fe-descend-2 5s var(--lent) infinite; }
+.fe-schema.vu .fe-centre .fe-ico { animation: fe-pouls-1 5s ease infinite; }
+.fe-schema.vu .fe-fin .fe-ico { animation: fe-pouls-2 5s ease infinite; }
+@keyframes fe-descend-1 { 0% { top: 0; opacity: 0; } 5% { opacity: 1; } 30% { top: calc(100% - 24px); opacity: 1; } 34%, 100% { top: calc(100% - 24px); opacity: 0; } }
+@keyframes fe-descend-2 { 0%, 38% { top: 0; opacity: 0; } 43% { opacity: 1; } 68% { top: calc(100% - 24px); opacity: 1; } 72%, 100% { top: calc(100% - 24px); opacity: 0; } }
+@keyframes fe-avance-1 { 0% { left: 0; opacity: 0; } 5% { opacity: 1; } 30% { left: calc(100% - 20px); opacity: 1; } 34%, 100% { left: calc(100% - 20px); opacity: 0; } }
+@keyframes fe-avance-2 { 0%, 38% { left: 0; opacity: 0; } 43% { opacity: 1; } 68% { left: calc(100% - 20px); opacity: 1; } 72%, 100% { left: calc(100% - 20px); opacity: 0; } }
+@keyframes fe-pouls-1 { 0%, 30%, 46%, 100% { transform: none; box-shadow: none; } 36% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(255, 90, 31, .14); } }
+@keyframes fe-pouls-2 { 0%, 68%, 84%, 100% { transform: none; box-shadow: none; background: #FFF1EA; color: var(--orange-fonce); }
+  74%, 80% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(255, 90, 31, .14); background: var(--orange); color: #fff; } }
+.fe-fisc { max-width: 520px; margin: 22px auto 0; text-align: center; font-size: 16px; color: var(--gris); }
+
+.fe-dates { display: grid; gap: 16px; max-width: 760px; margin: 48px auto 0; padding: 0; list-style: none; }
+.fe-dates li { position: relative; padding: 24px 24px 22px; border-radius: 24px; background: rgba(255, 255, 255, .7); border: 1px solid rgba(29, 29, 31, .08); }
+.fe-quand { display: block; font-size: 15px; font-weight: 600; color: var(--gris); }
+.fe-dates b { display: block; margin-top: 4px; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+.fe-dates p { margin: 6px 0 0; color: var(--texte); }
+.fe-dates em { position: absolute; top: 22px; right: 22px; padding: 3px 10px; border-radius: 999px; background: #FFF1EA; color: var(--orange-fonce); font-size: 13px; font-style: normal; font-weight: 600; }
+.fe-date-passee { box-shadow: inset 0 0 0 1.5px rgba(255, 90, 31, .45); }
+.fe-cosmo { max-width: 620px; margin: 32px auto 0; text-align: center; font-size: 17px; color: var(--texte); }
+
+@media (min-width: 760px) {
+  .fe-schema { grid-template-columns: minmax(0, 1fr) minmax(40px, .55fr) minmax(0, 1fr) minmax(40px, .55fr) minmax(0, 1fr); align-items: center; }
+  .fe-lien { width: 100%; height: 2px; background: repeating-linear-gradient(90deg, rgba(29, 29, 31, .22) 0 6px, transparent 6px 12px); }
+  .fe-lien i { left: 0; top: -12px; }
+  .fe-schema.vu .fe-lien:nth-child(2) i { animation-name: fe-avance-1; }
+  .fe-schema.vu .fe-lien:nth-child(4) i { animation-name: fe-avance-2; }
+  .fe-dates { grid-template-columns: 1fr 1fr; }
+  .fe-avant { flex-direction: row; }
+  .fe-avant svg { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fe-schema.vu .fe-lien i, .fe-schema.vu .fe-ico { animation: none; }
+  .fe-barre::after { transition: none; }
+}
+
 .deja { display: grid; gap: 44px 40px; margin-top: 56px; }
 .deja-bloc { padding-top: 20px; border-top: 1px solid rgba(29, 29, 31, .14); }
 .deja-bloc h3 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
