@@ -12,7 +12,8 @@
 <meta property="og:site_name" content="Cosmo par Cosmosoft">
 <meta property="og:title" content="Cosmo – Faites votre métier. Cosmo fait le reste.">
 <meta property="og:description" content="Un seul outil à la place de tous les logiciels de l'administratif, sur ordinateur et sur iPhone. Démo gratuite sur rendez-vous.">
-<meta property="og:image" content="images/partage.jpg">
+<meta property="og:url" content="https://popololococo33.github.io/cosmo-site/">
+<meta property="og:image" content="https://popololococo33.github.io/cosmo-site/images/partage.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -22,14 +23,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600&text=cosm&display=swap">
-<link rel="stylesheet" href="style.css?v=77">
+<link rel="stylesheet" href="style.css?v=82">
 <script>document.documentElement.classList.add("js");</script>
 <script src="page.js?v=36" defer></script>
 <script src="ere-liquide.js?v=5" defer></script>
 <script src="fe-liquide.js?v=6" defer></script>
 <script src="demo.js?v=34" defer></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-<script type="module" src="ia3d.js?v=32"></script>
+<script type="module" src="ia3d.js?v=34"></script>
 <script type="module" src="recit3d.js?v=35"></script>
 </head>
 <body>
@@ -76,10 +77,11 @@
       <span class="nom">cosm<i>o</i></span>
     </a>
     <nav class="entete-liens" id="menu-sections" aria-label="Sections de la page">
-      <a href="#assistant">L'assistant IA</a>
-      <a href="#tout">Tout ce qu'il fait</a>
+      <a href="#assistant">L'assistant</a>
+      <a href="#quotidien">Au quotidien</a>
+      <a href="#tout">Fonctions</a>
       <a href="#facture-electronique">Facture électronique</a>
-      <a href="#economies">Vos économies</a>
+      <a href="#economies">Économies</a>
       <a href="#questions">Questions</a>
     </nav>
     <div class="entete-actions">
@@ -103,11 +105,11 @@
     </div>
   </div>
   <div class="haut-scene" aria-hidden="true" data-scene>
-    <img class="tel-rendu tel-cote tel-g" src="images/rendus/haut-gauche.webp" alt="" width="657" height="1461">
-    <img class="tel-rendu tel-centre" src="images/rendus/haut-centre.webp" alt="" width="702" height="1438" fetchpriority="high">
-    <img class="tel-rendu tel-cote tel-d" src="images/rendus/haut-droite.webp" alt="" width="657" height="1461">
+    <img class="tel-rendu tel-cote tel-g" src="images/rendus/haut-gauche.webp?v=2" alt="" width="700" height="1558">
+    <img class="tel-rendu tel-centre" src="images/rendus/haut-centre.webp?v=2" alt="" width="700" height="1438" fetchpriority="high">
+    <img class="tel-rendu tel-cote tel-d" src="images/rendus/haut-droite.webp?v=2" alt="" width="700" height="1558">
   </div>
-  <p class="sr">Captures de l'app Cosmo : l'accueil avec les actions à valider, l'écran Factures et l'assistant.</p>
+  <p class="sr">Captures de l'app Cosmo : l'accueil avec ce qui est encaissé et les relances à faire, l'onglet Factures et la page de Cosmo.</p>
 </section>
 
 <!-- 1 bis. La nouvelle ère : dix outils qui fusionnent en un seul, au défilement (page.js, partie 5 ; verre liquide en WebGL dans ere-liquide.js) -->
@@ -175,7 +177,7 @@
 
 <!-- 2. Comment ça marche : trois étapes qu'on fait défiler, chacune avec son iPhone en vraie 3D (recit3d.js).
      À l'arrivée de chaque étape, l'iPhone se retourne au fil du défilement, puis son écran passe la vidéo de la vraie app :
-     la dictée, le devis qui arrive, la validation. -->
+     la dictée, le devis qui arrive, l'e-mail à valider (filmée le 10/11/2026 sur le build 42, exemples du peintre). -->
 <section class="bloc bloc-gris" id="comment" aria-labelledby="titre-comment">
   <div class="largeur">
     <h2 class="titre-bloc apparait" id="titre-comment">Vous le dites. C'est prêt.</h2>
@@ -205,13 +207,57 @@
         <div class="etape3-texte">
           <p class="etape3-num">3</p>
           <h3>Vous validez</h3>
-          <p>Rien ne se fait sans votre accord. Un geste, et le devis est prêt à envoyer.</p>
+          <p>Cosmo prépare aussi l'e-mail pour votre client. Vous le relisez, et rien ne part sans votre accord.</p>
         </div>
         <div class="etape3-tel" aria-hidden="true" data-iphone3d>
           <video class="recit-video" data-recit-video src="images/recit-3.mp4" muted playsinline preload="none"></video>
         </div>
       </li>
     </ol>
+  </div>
+</section>
+
+<!-- 2 a. Au quotidien : ce que Cosmo suit tout seul (ajouté le 10/11/2026, builds 40 à 42).
+     Six cartes, chacune avec un rendu 3D de l'iPhone sur un vrai écran de l'app (images/rendus/tuile-*.webp, exemples du peintre).
+     Tout est vérifié dans l'app : relances (Model/RelancesRegles.swift), suivi du devis (Model/FriseDevisRegles.swift,
+     serveur cosmo-devis déployé le 06/11), signature sur place (Views/Socle/SignatureSurPlace.swift), papiers
+     (Model/PapiersRegles.swift), équipe (Model/EquipeRegles.swift), conversation à la voix (Model/MainsLibres.swift). -->
+<section class="bloc" id="quotidien" aria-labelledby="titre-quotidien">
+  <div class="largeur">
+    <h2 class="titre-bloc apparait" id="titre-quotidien">Il pense à tout.<br><span class="orange-texte">Même à ce que vous oubliez.</span></h2>
+    <p class="chapeau centre apparait">Les relances, les signatures, les papiers qui expirent, les congés de l'équipe&nbsp;: Cosmo suit tout et vous prévient au bon moment.</p>
+    <ul class="qt-grille">
+      <li class="qt-carte apparait">
+        <h3>Les relances partent à l'heure.</h3>
+        <p>Une facture en retard, un devis sans réponse&nbsp;: la relance est prête au bon moment. Vous n'avez qu'à valider.</p>
+        <div class="qt-tel"><img src="images/rendus/tuile-relances.webp" alt="L'écran « À relancer » de Cosmo : trois relances à faire, avec le montant et le retard de chaque client" width="700" height="1446" loading="lazy"></div>
+      </li>
+      <li class="qt-carte apparait">
+        <h3>Vous savez quand le devis est lu.</h3>
+        <p>Cosmo vous prévient quand votre client ouvre le devis, puis quand il le signe. Vous relancez au bon moment, par e-mail, WhatsApp ou SMS.</p>
+        <div class="qt-tel"><img src="images/rendus/tuile-suivi.webp?v=2" alt="Le suivi d'un devis dans Cosmo : envoyé par e-mail, ouvert 3 fois par le client, en attente de signature" width="700" height="1444" loading="lazy"></div>
+      </li>
+      <li class="qt-carte apparait">
+        <h3>Signé au doigt, sur place.</h3>
+        <p>Votre client signe le devis sur l'iPhone. Le PDF signé est gardé tel quel, avec la date et l'heure.</p>
+        <div class="qt-tel"><img src="images/rendus/tuile-signature.webp" alt="La signature d'un devis au doigt dans Cosmo, avec la mention « Bon pour accord » et la date" width="700" height="1446" loading="lazy"></div>
+      </li>
+      <li class="qt-carte apparait">
+        <h3>Vos papiers toujours à jour.</h3>
+        <p>Kbis, attestation URSSAF, assurances&nbsp;: tout est rangé au même endroit, avec un rappel avant la fin de validité.</p>
+        <div class="qt-tel"><img src="images/rendus/tuile-papiers.webp" alt="Les papiers de l'entreprise dans Cosmo : une attestation URSSAF qui expire dans 12 jours, le Kbis et les assurances à jour" width="700" height="1444" loading="lazy"></div>
+      </li>
+      <li class="qt-carte apparait">
+        <h3>Qui est où, qui est en congé.</h3>
+        <p>Les congés se comptent tout seuls, et vous voyez la semaine de chacun en un coup d'œil.</p>
+        <div class="qt-tel"><img src="images/rendus/tuile-equipe.webp" alt="« Qui est où » dans Cosmo : les absences et les chantiers de l'équipe, jour par jour" width="700" height="1446" loading="lazy"></div>
+      </li>
+      <li class="qt-carte apparait">
+        <h3>Parlez-lui comme au téléphone.</h3>
+        <p>Au volant ou sur un chantier, vous lui parlez à voix haute. Il vous répond, et prépare la suite.</p>
+        <div class="qt-tel"><img src="images/rendus/tuile-mains-libres.webp" alt="Une conversation à la voix avec Cosmo, qui liste les factures en retard" width="700" height="1444" loading="lazy"></div>
+      </li>
+    </ul>
   </div>
 </section>
 
@@ -222,10 +268,10 @@
     <p class="chapeau centre apparait">Un seul outil à la place de tous les autres. Et tout communique&nbsp;: le devis devient facture, le paiement se range en compta.</p>
 
     <div class="mur apparait" aria-label="Tout ce que fait Cosmo">
-      <ul class="mur-ligne mur-g"><li>Devis</li><li>Commandes</li><li>Factures</li><li>Acomptes</li><li>Avoirs</li><li>Relances</li><li>Modèles à votre logo</li><li>Devis accepté en ligne</li><li>Facture électronique</li><li>Abonnements</li><li>Prélèvements automatiques</li><li>Mandat signé en ligne</li><li aria-hidden="true">Devis</li><li aria-hidden="true">Commandes</li><li aria-hidden="true">Factures</li><li aria-hidden="true">Acomptes</li><li aria-hidden="true">Avoirs</li><li aria-hidden="true">Relances</li><li aria-hidden="true">Modèles à votre logo</li><li aria-hidden="true">Devis accepté en ligne</li><li aria-hidden="true">Facture électronique</li><li aria-hidden="true">Abonnements</li><li aria-hidden="true">Prélèvements automatiques</li><li aria-hidden="true">Mandat signé en ligne</li></ul>
+      <ul class="mur-ligne mur-g"><li>Devis</li><li>Commandes</li><li>Factures</li><li>Acomptes</li><li>Avoirs</li><li>Relances automatiques</li><li>Suivi des devis ouverts</li><li>Signature au doigt</li><li>Devis accepté en ligne</li><li>Modèles à votre logo</li><li>Facture électronique</li><li>Abonnements</li><li>Prélèvements automatiques</li><li aria-hidden="true">Devis</li><li aria-hidden="true">Commandes</li><li aria-hidden="true">Factures</li><li aria-hidden="true">Acomptes</li><li aria-hidden="true">Avoirs</li><li aria-hidden="true">Relances automatiques</li><li aria-hidden="true">Suivi des devis ouverts</li><li aria-hidden="true">Signature au doigt</li><li aria-hidden="true">Devis accepté en ligne</li><li aria-hidden="true">Modèles à votre logo</li><li aria-hidden="true">Facture électronique</li><li aria-hidden="true">Abonnements</li><li aria-hidden="true">Prélèvements automatiques</li></ul>
       <ul class="mur-ligne mur-d"><li>Comptabilité</li><li>Grand livre</li><li>Balance</li><li>Lettrage</li><li>Déclaration de TVA</li><li>Bilan</li><li>Compte de résultat</li><li>Clôtures</li><li>Immobilisations</li><li>Banque connectée</li><li>Rapprochement</li><li>Export comptable</li><li aria-hidden="true">Comptabilité</li><li aria-hidden="true">Grand livre</li><li aria-hidden="true">Balance</li><li aria-hidden="true">Lettrage</li><li aria-hidden="true">Déclaration de TVA</li><li aria-hidden="true">Bilan</li><li aria-hidden="true">Compte de résultat</li><li aria-hidden="true">Clôtures</li><li aria-hidden="true">Immobilisations</li><li aria-hidden="true">Banque connectée</li><li aria-hidden="true">Rapprochement</li><li aria-hidden="true">Export comptable</li></ul>
-      <ul class="mur-ligne mur-g"><li>Chantiers</li><li>Métrés</li><li>Articles et stock</li><li>Factures fournisseurs</li><li>Notes de frais</li><li>Véhicules</li><li>Location de matériel</li><li>Planning</li><li>Agenda</li><li>SAV</li><li>Statistiques</li><li aria-hidden="true">Chantiers</li><li aria-hidden="true">Métrés</li><li aria-hidden="true">Articles et stock</li><li aria-hidden="true">Factures fournisseurs</li><li aria-hidden="true">Notes de frais</li><li aria-hidden="true">Véhicules</li><li aria-hidden="true">Location de matériel</li><li aria-hidden="true">Planning</li><li aria-hidden="true">Agenda</li><li aria-hidden="true">SAV</li><li aria-hidden="true">Statistiques</li></ul>
-      <ul class="mur-ligne mur-d"><li>Boîte mail avec IA</li><li>Suivi des e-mails ouverts</li><li>Clients et contacts</li><li>Recherche du SIREN</li><li>Ma journée</li><li>Rendez-vous</li><li>Équipe et droits</li><li>Dictée à la voix</li><li>Sauvegarde chaque jour</li><li>Tableau de bord</li><li>Trésorerie</li><li>Pièces jointes et photos</li><li aria-hidden="true">Boîte mail avec IA</li><li aria-hidden="true">Suivi des e-mails ouverts</li><li aria-hidden="true">Clients et contacts</li><li aria-hidden="true">Recherche du SIREN</li><li aria-hidden="true">Ma journée</li><li aria-hidden="true">Rendez-vous</li><li aria-hidden="true">Équipe et droits</li><li aria-hidden="true">Dictée à la voix</li><li aria-hidden="true">Sauvegarde chaque jour</li><li aria-hidden="true">Tableau de bord</li><li aria-hidden="true">Trésorerie</li><li aria-hidden="true">Pièces jointes et photos</li></ul>
+      <ul class="mur-ligne mur-g"><li>Chantiers</li><li>Métrés</li><li>Articles et stock</li><li>Factures fournisseurs</li><li>Notes de frais</li><li>Tickets lus en photo</li><li>Devis papier repris en photo</li><li>Véhicules</li><li>Location de matériel</li><li>Planning</li><li>Agenda</li><li>SAV</li><li>Statistiques</li><li aria-hidden="true">Chantiers</li><li aria-hidden="true">Métrés</li><li aria-hidden="true">Articles et stock</li><li aria-hidden="true">Factures fournisseurs</li><li aria-hidden="true">Notes de frais</li><li aria-hidden="true">Tickets lus en photo</li><li aria-hidden="true">Devis papier repris en photo</li><li aria-hidden="true">Véhicules</li><li aria-hidden="true">Location de matériel</li><li aria-hidden="true">Planning</li><li aria-hidden="true">Agenda</li><li aria-hidden="true">SAV</li><li aria-hidden="true">Statistiques</li></ul>
+      <ul class="mur-ligne mur-d"><li>Boîte mail avec IA</li><li>Envoi par WhatsApp et SMS</li><li>Clients et contacts</li><li>Contacts de l'iPhone importés</li><li>Recherche du SIREN</li><li>Recherche en langage courant</li><li>Rendez-vous</li><li>Équipe, congés et absences</li><li>Papiers de l'entreprise</li><li>Conversation à la voix</li><li>Widgets et Siri</li><li>Sauvegarde chaque jour</li><li>Tableau de bord</li><li>Trésorerie</li><li aria-hidden="true">Boîte mail avec IA</li><li aria-hidden="true">Envoi par WhatsApp et SMS</li><li aria-hidden="true">Clients et contacts</li><li aria-hidden="true">Contacts de l'iPhone importés</li><li aria-hidden="true">Recherche du SIREN</li><li aria-hidden="true">Recherche en langage courant</li><li aria-hidden="true">Rendez-vous</li><li aria-hidden="true">Équipe, congés et absences</li><li aria-hidden="true">Papiers de l'entreprise</li><li aria-hidden="true">Conversation à la voix</li><li aria-hidden="true">Widgets et Siri</li><li aria-hidden="true">Sauvegarde chaque jour</li><li aria-hidden="true">Tableau de bord</li><li aria-hidden="true">Trésorerie</li></ul>
     </div>
 
     <div class="tout-grille">
@@ -237,7 +283,7 @@
               <p class="actif">Accueil</p><p>Devis</p><p>Factures</p><p>Achats</p><p>Banque</p><p>Compta et TVA</p><p>Véhicules</p><p>Agenda</p>
             </aside>
             <div class="bureau-corps" aria-hidden="true">
-              <div class="bureau-tete"><div><p class="bureau-date">Mardi 27 octobre</p><p class="bureau-bonjour">Bonjour Sophie</p></div><p class="bureau-demande">Demandez à Cosmo…<i></i></p></div>
+              <div class="bureau-tete"><div><p class="bureau-date">Mardi 10 novembre</p><p class="bureau-bonjour">Bonjour Sophie</p></div><p class="bureau-demande">Demandez à Cosmo…<i></i></p></div>
               <div class="bureau-chiffres">
                 <div><span>À encaisser</span><b>12 450 €</b></div>
                 <div><span>En retard</span><b class="orange">1 250 €</b></div>
@@ -281,7 +327,7 @@
     <div class="deja">
       <article class="deja-bloc apparait">
         <h3>Ventes</h3>
-        <ul><li>Devis et factures</li><li>Acomptes et avoirs</li><li>Devis accepté en ligne</li><li>Relances des impayés</li><li>Abonnements et prélèvements automatiques</li></ul>
+        <ul><li>Devis, factures et avoirs</li><li>Signature au doigt</li><li>Suivi&nbsp;: ouvert, signé, payé</li><li>Relances automatiques</li><li>Envoi par e-mail, WhatsApp ou SMS</li><li>Abonnements et prélèvements automatiques</li></ul>
       </article>
       <article class="deja-bloc apparait">
         <h3>Compta et TVA</h3>
@@ -297,11 +343,11 @@
       </article>
       <article class="deja-bloc apparait">
         <h3>Frais et véhicules</h3>
-        <ul><li>Notes de frais</li><li>Pleins et entretiens</li><li>Coût au kilomètre</li><li>Immobilisations</li><li>Statistiques</li></ul>
+        <ul><li>Notes de frais</li><li>Tickets lus en photo</li><li>Pleins et entretiens</li><li>Coût au kilomètre</li><li>Immobilisations</li><li>Statistiques</li></ul>
       </article>
       <article class="deja-bloc apparait">
         <h3>Organisation</h3>
-        <ul><li>Agenda et rendez-vous</li><li>Planning</li><li>Équipe et droits</li><li>Boîte mail avec IA</li><li>Sauvegarde chaque jour</li></ul>
+        <ul><li>Agenda et rendez-vous</li><li>Équipe, congés et absences</li><li>Papiers de l'entreprise</li><li>Boîte mail avec IA</li><li>Import des contacts</li><li>Sauvegarde chaque jour</li></ul>
       </article>
     </div>
   </div>
@@ -476,7 +522,7 @@
       </details>
       <details>
         <summary>Comment on démarre ?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <div class="faq-reponse"><p>Avec votre SIRET, Cosmo retrouve votre entreprise et se règle pour votre métier, puis vous connectez votre banque. Les boutons sont grands et les écrans simples.</p></div>
+        <div class="faq-reponse"><p>Avec votre SIRET, Cosmo retrouve votre entreprise, se règle pour votre métier et prépare votre espace en quelques secondes. Rien à ressaisir&nbsp;: vos contacts de l'iPhone s'importent en un geste, et un ancien devis papier se reprend en photo. Vous pouvez aussi commencer par essayer avec des exemples. Ensuite, vous connectez votre banque.</p></div>
       </details>
       <details>
         <summary>Combien ça coûte&nbsp;?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -484,7 +530,7 @@
       </details>
       <details>
         <summary>Sur quoi ça marche ?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <div class="faq-reponse"><p>Sur ordinateur et sur un iPhone à jour. Vous commencez une facture au bureau et vous la validez sur le chantier. L'app iPhone n'est pas encore sur l'App Store : vous pouvez la voir marcher pendant une démo. Pas de version Android pour l'instant.</p></div>
+        <div class="faq-reponse"><p>Sur ordinateur et sur un iPhone à jour. Vous commencez une facture au bureau et vous la validez sur le chantier. Sur l'iPhone, Cosmo a aussi ses widgets et répond à Siri. L'app iPhone n'est pas encore sur l'App Store : vous pouvez la voir marcher pendant une démo. Pas de version Android pour l'instant.</p></div>
       </details>
       <details>
         <summary>Et si mon métier n'est pas prévu&nbsp;?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -492,7 +538,7 @@
       </details>
       <details>
         <summary>Plusieurs personnes peuvent-elles l'utiliser ?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <div class="faq-reponse"><p>Oui, chacun avec son profil. Cosmo retient les habitudes de chacun, et c'est toujours une personne qui valide ce qui part.</p></div>
+        <div class="faq-reponse"><p>Oui, chacun avec son profil. Cosmo retient les habitudes de chacun, et c'est toujours une personne qui valide ce qui part. Pour vos salariés, il tient aussi les congés, les absences et les documents de chacun.</p></div>
       </details>
       <details>
         <summary>Et ma boîte mail&nbsp;?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -500,7 +546,11 @@
       </details>
       <details>
         <summary>Où vont mes données ?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <div class="faq-reponse"><p>Vos clients, devis, factures et comptes sont sauvegardés chaque jour, et vous pouvez tout exporter à tout moment. Ce que vous dites à Cosmo passe par notre serveur, qui ne le garde pas, jusqu'à Mistral AI, une entreprise française.</p></div>
+        <div class="faq-reponse"><p>Vos clients, devis, factures et comptes sont sauvegardés chaque jour, et vous pouvez tout exporter à tout moment. Ce que vous écrivez ou dictez à Cosmo passe par notre serveur, qui ne le garde pas, jusqu'à Mistral AI, une entreprise française. La conversation à la voix passe par OpenAI&nbsp;: Cosmo vous demande votre accord avant la première fois.</p></div>
+      </details>
+      <details>
+        <summary>Et sans réseau, sur un chantier&nbsp;?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq-reponse"><p>Vos clients, devis et factures sont sur l'iPhone&nbsp;: vous les consultez même sans réseau. Cosmo répond aux demandes simples, et lit vos tickets de caisse directement sur l'iPhone.</p></div>
       </details>
       <details>
         <summary>Mon comptable pourra-t-il s'en servir&nbsp;?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>

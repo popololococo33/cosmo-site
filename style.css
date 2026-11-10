@@ -61,7 +61,7 @@ svg { flex: none; }
 .nom { font-family: "Sora", var(--police); font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
 .nom i { font-style: normal; color: var(--orange); }
 .entete-liens { display: none; gap: 28px; font-size: 13px; }
-.entete-liens a { color: var(--texte); text-decoration: none; transition: color .2s ease; }
+.entete-liens a { color: var(--texte); text-decoration: none; white-space: nowrap; transition: color .2s ease; }
 @media (hover: hover) { .entete-liens a:hover { color: var(--encre); } }
 /* Écrans étroits : les sections passent dans un menu en verre, ouvert par le bouton à deux traits */
 .entete-ligne { position: relative; }
@@ -246,6 +246,8 @@ svg { flex: none; }
 .ia-demande:active { transform: scale(.98); }
 .ia-demande b { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
 .ia-demande small { overflow: hidden; font-size: 13px; line-height: 1.32; color: var(--texte); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+/* nombre impair de demandes : la dernière prend toute la largeur de la grille */
+.ia-demande:last-child:nth-child(odd) { grid-column: 1 / -1; }
 @media (hover: hover) { .ia-demande:hover { transform: translateY(-2px); } }
 .ia-demande.actif { background: radial-gradient(140% 120% at 20% 0%, rgba(255, 255, 255, .75), rgba(255, 200, 175, .32) 60%, rgba(255, 150, 110, .3));
   box-shadow:
@@ -313,7 +315,32 @@ svg { flex: none; }
   .etape3-tel { height: min(84vh, 720px); }
 }
 
+/* ---------- 2 a. Au quotidien : six cartes grises, chacune avec son iPhone 3D qui monte du bas ----------
+   Le téléphone (rendu fixe, images/rendus/tuile-*.webp) est coupé par le bas de la carte, comme chez Apple.
+   Une seule animation : à l'apparition de la carte (.vu, page.js), le téléphone monte de 80 px. */
+.qt-grille { display: grid; gap: 16px; margin-top: 48px; }
+.qt-carte { position: relative; display: flex; flex-direction: column; overflow: hidden; padding: 30px 26px 0; border-radius: 28px; background: var(--fond-gris); }
+.qt-carte h3 { font-size: 24px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+.qt-carte p { margin-top: 10px; font-size: 17px; line-height: 1.42; color: var(--texte); }
+.qt-tel { display: flex; justify-content: center; margin-top: auto; padding-top: 26px; height: 310px; flex: none; }
+.qt-tel img { align-self: flex-start; width: 250px; height: auto; filter: drop-shadow(0 20px 30px rgba(0, 0, 0, .18)); transition: transform 1.4s var(--lent) .25s; }
+.js .qt-carte:not(.vu) .qt-tel img { transform: translateY(80px); }
+@media (min-width: 700px) {
+  .qt-grille { grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
+  .qt-carte { height: 540px; padding: 34px 30px 0; }
+  .qt-tel { height: 320px; }
+  .qt-tel img { width: 270px; }
+}
+@media (min-width: 1024px) {
+  .qt-grille { grid-template-columns: repeat(3, 1fr); }
+  .qt-carte { height: 560px; }
+  .qt-carte h3 { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) { .qt-tel img { transition: none; } .js .qt-carte:not(.vu) .qt-tel img { transform: none; } }
+
 /* ---------- 2 bis. Un seul outil à la place de tous les autres ---------- */
+/* le pied de l'ordinateur et la toile de la facture électronique dépassent un peu : jamais de défilement de côté */
+#tout, .fe { overflow-x: clip; }
 .orange-texte { color: var(--orange); }
 /* Le mur : tout ce que fait Cosmo, sur trois lignes qui défilent lentement en sens contraires */
 .mur { display: flex; flex-direction: column; gap: 14px; margin: 48px calc(50% - 50vw) 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
